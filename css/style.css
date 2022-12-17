@@ -1,0 +1,921 @@
+/* Start Global Rules */
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:root {
+  --main-color: #e60033;
+  --section-color: #020d18;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  /* font-family: "Dosis", sans-serif; */
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Small */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+/* Medium */
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+/* Large */
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+.li.action {
+  background-color: #f5b50a;
+}
+li.advanture {
+  background-color: #ec5a1a;
+}
+li.animation {
+  background-color: #ac0638;
+}
+li.comedy {
+  background-color: #a6bb16;
+}
+li.crime {
+  background-color: #074558;
+}
+li.documentary {
+  background-color: #2b6d36;
+}
+li.sci-fi {
+  background-color: #1692bb;
+}
+/* End Global Rules */
+
+/* Start Header */
+header {
+  background-image: url(../images/header-background.jpg);
+  background-position: top;
+  /* min-height: 50vh; */
+  padding-top: 15px;
+  padding-bottom: 50px;
+}
+header .container {
+}
+header .container nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  /* padding: 15px 0; */
+}
+@media (max-width: 425px) {
+  header .container nav {
+    flex-direction: column;
+  }
+}
+header .container nav img {
+  width: 100px;
+}
+header .container nav ul {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+@media (max-width: 425px) {
+  header .container nav ul {
+    flex-direction: column;
+  }
+}
+header .container nav ul.menu-left {
+  margin-left: 30px;
+  flex: 1;
+}
+@media (max-width: 425px) {
+  header .container nav ul.menu-left {
+    margin-left: 0;
+  }
+}
+
+header .container nav ul li a {
+  color: white;
+  font-family: "Dosis", sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+}
+header .container nav ul li a:hover {
+  color: var(--main-color);
+}
+header .container nav ul li.active a {
+  color: var(--main-color);
+}
+header .container nav ul.menu-right li:last-of-type a {
+  background-color: var(--main-color);
+  padding: 11px 25px;
+  border-radius: 20px;
+}
+header .container nav ul.menu-right li:hover:last-of-type a {
+  background-color: rgba(230, 56, 56, 0.842);
+  padding: 11px 25px;
+  color: white;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+header .container .Welcome-text {
+  color: white;
+  font-family: "Dosis", sans-serif;
+}
+header .container .Welcome-text h1 {
+  font-size: 50px;
+}
+header .container .Welcome-text p {
+  font-size: 25px;
+  text-transform: capitalize;
+}
+@media (max-width: 425px) {
+  header .container .Welcome-text h1 {
+    font-size: 30px;
+  }
+  header .container .Welcome-text p {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+}
+header .container .search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+@media (max-width: 425px) {
+  header .container .search-bar {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+header .container .search-bar select {
+  outline: none;
+  padding: 8.2px 20px;
+  border: none;
+  border-right: 1px solid #020d18;
+  background-color: #233a50;
+  border-radius: 20px 0 0 20px;
+  -webkit-border-radius: 20px 0 0 20px;
+  -moz-border-radius: 20px 0 0 20px;
+  -ms-border-radius: 20px 0 0 20px;
+  -o-border-radius: 20px 0 0 20px;
+  color: white;
+  text-transform: uppercase;
+  font-family: "Dosis", sans-serif;
+}
+@media (max-width: 425px) {
+  header .container .search-bar select {
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    width: 100%;
+  }
+}
+header .container .search-bar input {
+  padding: 10px 20px;
+  border: none;
+  background-color: #233a50;
+  color: white;
+  outline: none;
+  font-family: "Dosis", sans-serif;
+}
+@media (max-width: 425px) {
+  header .container .search-bar input {
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    width: 100%;
+  }
+}
+header .container .search-bar input[type="text"] {
+  flex: 1;
+}
+header .container .search-bar input::placeholder {
+  color: white;
+  font-size: 17px;
+  font-family: "Dosis", sans-serif;
+}
+header .container .search-bar input[type="submit"] {
+  border-radius: 0 20px 20px 0;
+  -webkit-border-radius: 0 20px 20px 0;
+  -moz-border-radius: 0 20px 20px 0;
+  -ms-border-radius: 0 20px 20px 0;
+  -o-border-radius: 0 20px 20px 0;
+  border-left: 1px solid #020d18;
+  background-color: var(--main-color);
+  cursor: pointer;
+}
+@media (max-width: 425px) {
+  header .container .search-bar input[type="submit"] {
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+  }
+}
+/* End Header */
+
+/* Start What's Popular Section */
+.Section {
+  background-color: var(--section-color);
+  margin-top: -20px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.Section .container {
+}
+.Section .filtering {
+  font-family: "Dosis", sans-serif;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  gap: 20px;
+}
+.Section .filtering .title {
+  text-transform: uppercase;
+  font-size: 24px;
+  color: #ffffff;
+  font-weight: bold;
+}
+.Section .filtering .filter {
+  display: flex;
+  /* border: 1px solid var(--main-color); */
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  /* overflow: hidden; */
+}
+.Section .filtering .filter li {
+  color: white;
+  padding: 5px 15px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  transition-duration: 0.5s;
+}
+.Section .filtering .filter li.active {
+  background-color: var(--main-color);
+}
+
+.Section .filter-boxs {
+  display: flex;
+  gap: 20px;
+  overflow: auto;
+  margin-top: 20px;
+}
+
+.Section .filter-boxs::-webkit-scrollbar {
+  height: 6px;
+}
+.Section .filter-boxs::-webkit-scrollbar-thumb {
+  background: var(--main-color);
+  border-radius: 10px;
+}
+
+.Section .box .img {
+  position: relative;
+  width: 200px;
+}
+.Section .box .img::after {
+  position: absolute;
+  box-shadow: inset -5px -50px 100px 15px #000000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  content: "";
+}
+.Section .box .img::before {
+  transition-duration: 0.3s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  content: "";
+}
+
+.Section .box img {
+  width: 100%;
+}
+.Section .box .info {
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  color: white;
+  z-index: 2;
+}
+.Section .box .info .category {
+  display: flex;
+  gap: 5px;
+}
+.Section .box .info .category li {
+  font-family: "Dosis", sans-serif;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: white;
+  font-weight: 700;
+  width: fit-content;
+  padding: 3px 5px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
+.Section .box .info .title {
+  font-family: "Dosis", sans-serif;
+  text-transform: uppercase;
+  font-size: 15px;
+}
+.Section .box .info .rating {
+  text-transform: uppercase;
+  font-size: 15px;
+}
+.Section .box .info .rating span {
+  font-size: 20px;
+}
+.Section .box .info .rating i {
+  color: #f5b50a;
+  font-size: 20px;
+}
+.Section .box .img a {
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  background-color: var(--main-color);
+  color: white;
+  font-family: "Dosis", sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  padding: 8px 15px;
+  font-weight: bold;
+  width: 120px;
+  height: 38px;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  transition-duration: 0.3s;
+  transition-delay: 0.1s;
+  opacity: 0;
+}
+.Section .box .img a i {
+  font-size: 10px;
+  margin-left: 5px;
+}
+
+.Section .box .img:hover::after {
+  box-shadow: inset -5px -50px 100px -200px rgba(0, 0, 0, 0.808);
+}
+.Section .box .img:hover::before {
+  box-shadow: inset -5px -50px 100px 200px rgba(0, 0, 0, 0.808);
+  z-index: 1;
+}
+.Section .box .img:hover a {
+  opacity: 1;
+}
+.Section .box .img:hover .info {
+  z-index: 0;
+}
+
+/* End What's Popular Section */
+
+/* Start Footer */
+footer {
+  background-color: var(--section-color);
+  border-top: 1px solid #333;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+footer .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+footer .copyright {
+  display: flex;
+  align-items: center;
+}
+
+footer .copyright img {
+  width: 100px;
+}
+footer .copyright p {
+  color: white;
+  font-family: "Dosis", sans-serif;
+  font-weight: 500;
+}
+@media (max-width: 425px) {
+  footer .container {
+    flex-direction: column;
+  }
+  footer .copyright {
+    flex-direction: column;
+  }
+  footer .copyright p {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+}
+footer .social-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+footer .social-media li {
+  color: white;
+}
+/* End Footer */
+
+/**************************** Start Single-page *************************/
+
+/* Start Shortcut Bar */
+
+.shortcut-bar {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.shortcut-bar .container {
+}
+.shortcut-bar .container ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.shortcut-bar .container ul li {
+  font-family: "Dosis", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* End Shortcut Bar */
+
+/* Start Movie Detail */
+.movie-detail {
+  background-image: url(../images/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg);
+  background-size: cover;
+  position: relative;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.movie-detail::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: #020d18d2;
+  top: 0;
+}
+.movie-detail .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  color: white;
+  position: relative;
+}
+@media (max-width: 768px) {
+  .movie-detail .container {
+    flex-direction: column;
+  }
+}
+.movie-detail .container img {
+  width: 330px;
+}
+@media (max-width: 375px) {
+  .movie-detail .container img {
+    width: 100%;
+  }
+}
+
+.movie-detail .box-detail {
+}
+.movie-detail .box-detail .info {
+  font-weight: 600;
+}
+.movie-detail .box-detail .box-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.movie-detail .box-detail .info .box-title .title {
+  font-family: "Dosis", sans-serif;
+  font-size: 36px;
+  color: #ffffff;
+  font-weight: 700;
+  text-transform: none;
+  margin-bottom: 25px;
+}
+.movie-detail .box-detail .info .box-title span {
+  font-family: "Dosis", sans-serif;
+  font-size: 24px;
+  color: #4f5b68;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-top: 5px;
+}
+.movie-detail .box-detail .text-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+@media (max-width: 425px) {
+  .movie-detail .box-detail .info .box-title {
+    margin: 0 auto;
+    width: fit-content;
+  }
+  .movie-detail .box-detail .text-box {
+    flex-direction: column;
+  }
+  .movie-detail .box-detail .text-box i {
+    display: none;
+  }
+}
+.movie-detail .box-detail .text-box .cert {
+  font-family: "Dosis", sans-serif;
+  display: inline-flex;
+  white-space: nowrap;
+  align-items: center;
+  align-content: center;
+  padding: 0.06em 4px 0.15em 4px !important;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1;
+  border-radius: 2px;
+}
+.movie-detail .box-detail .text-box .relaes-date {
+  text-transform: capitalize;
+  font-family: "Dosis", sans-serif;
+}
+.movie-detail .box-detail .text-box i {
+  font-size: 4px;
+}
+.movie-detail .box-detail .text-box .category {
+  display: flex;
+  align-items: center;
+  margin-left: -5px;
+  margin-right: -5px;
+  gap: 3px;
+}
+.movie-detail .box-detail .text-box .category li {
+  text-transform: capitalize;
+  font-family: "Dosis", sans-serif;
+}
+.movie-detail .box-detail .text-box .category li:not(:last-of-type)::after {
+  content: "  ,";
+}
+.movie-detail .box-detail .text-box .run-time {
+  font-family: "Dosis", sans-serif;
+}
+.rat-trailer {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+@media (max-width: 425px) {
+  .rat-trailer {
+    justify-content: center;
+  }
+}
+@media (max-width: 320px) {
+  .rat-trailer {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+.rat-trailer .rating {
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 300;
+}
+.rat-trailer .rating i {
+  font-size: 20px;
+  color: #f5b50a;
+}
+.rat-trailer .rating span {
+  font-size: 20px;
+}
+.rat-trailer .trailer {
+}
+.rat-trailer .trailer a {
+  font-family: "Dosis", sans-serif;
+  font-size: 18px;
+  color: white;
+  transition-duration: 0.3s;
+  cursor: pointer;
+}
+.rat-trailer .trailer a:hover {
+  color: #999;
+}
+.rat-trailer .trailer a i {
+  font-size: 20px;
+}
+.movie-detail .box-detail .overview-box {
+}
+.movie-detail .box-detail .overview-box .description {
+  font-family: "Dosis", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+}
+@media (max-width: 425px) {
+  .movie-detail .box-detail .overview-box .description {
+    line-height: 1.5;
+  }
+}
+.movie-detail .box-detail .overview-box .movie-over {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+}
+@media (max-width: 425px) {
+  .movie-detail .box-detail .overview-box .movie-over {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+.movie-detail .box-detail .overview-box .movie-over .director {
+}
+.movie-detail .box-detail .overview-box .movie-over .director .dir {
+  font-family: "Dosis", sans-serif;
+  margin-bottom: -10px;
+  font-weight: 300;
+}
+.movie-detail .box-detail .overview-box .movie-over .director .dir-name {
+  font-family: "Dosis", sans-serif;
+  font-size: 18px;
+}
+.movie-detail .box-detail .overview-box .movie-over .writer {
+}
+
+.movie-detail .box-detail .overview-box .movie-over .writer .wri {
+  font-family: "Dosis", sans-serif;
+  margin-top: -2px;
+  margin-bottom: 5px;
+  font-weight: 300;
+}
+.movie-detail .box-detail .overview-box .movie-over .writer .wri-name li {
+  font-family: "Dosis", sans-serif;
+  display: flex;
+  gap: 5px;
+  font-size: 18px;
+  font-weight: 600;
+}
+.movie-detail .movie-over .writer .wri-name {
+  font-family: "Dosis", sans-serif;
+  display: flex;
+  gap: 5px;
+  font-weight: 300;
+}
+.movie-detail .movie-over .writer .wri-name li:not(:last-of-type)::after {
+  content: " , ";
+}
+@media (max-width: 425px) {
+  .movie-detail .box-detail .overview-box .movie-over .writer .wri-name {
+    flex-direction: column;
+  }
+  .movie-detail .movie-over .writer .wri-name li:not(:last-of-type)::after {
+    content: "";
+  }
+}
+.video-trailer {
+  background-color: #000000;
+  min-width: 90px;
+  min-height: 50px;
+  width: 890px;
+  height: 500px;
+  color: white;
+  top: 20px;
+  left: 228px;
+  position: fixed;
+  z-index: 10004;
+  opacity: 1;
+  border: none;
+  display: none;
+  animation-duration: 0.3s;
+}
+.video-trailer h1 {
+  font-size: 18px;
+  /* font-family: "Dosis", sans-serif; */
+  padding: 10px;
+  font-weight: 500;
+}
+.video-trailer i {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20px;
+  cursor: pointer;
+  font-size: 18px;
+}
+.video-trailer iframe {
+  border: none;
+}
+
+/* End Movie Detail */
+
+/* Start Cast */
+.cast-info {
+  background-color: var(--section-color);
+  margin-top: -30px;
+  padding-top: 100px;
+  padding-bottom: 50px;
+}
+.cast-info .container {
+  display: flex;
+  gap: 30px;
+}
+@media (max-width: 425px) {
+  .cast-info .container {
+    flex-direction: column-reverse;
+  }
+}
+.cast-info .cast-box {
+  flex-basis: 60%;
+}
+
+.cast-info .cast-box .cast-box-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(153, 153, 153, 0.603);
+}
+.cast-info .cast-box .title {
+  color: white;
+  font-family: "Dosis", sans-serif;
+  text-transform: uppercase;
+  font-size: 15px;
+}
+.cast-info .cast-box .cast-box-head a {
+  display: flex;
+  align-items: center;
+}
+.cast-info .cast-box .cast-box-head i {
+  color: white;
+  font-size: 20px;
+  transition-duration: 0.2s;
+}
+.cast-info .cast-box .cast-box-head a:hover i {
+  transform: translateX(5px);
+  -webkit-transform: translateX(5px);
+  -moz-transform: translateX(5px);
+  -ms-transform: translateX(5px);
+  -o-transform: translateX(5px);
+}
+.cast-info .cast-box .more-cast {
+  color: white;
+  font-family: "Dosis", sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+.cast-info .cast-box .casts {
+}
+.cast-info .cast-box .casts .cast {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+.cast-info .cast-box .casts .cast img {
+  width: 60px;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  margin-right: 10px;
+}
+.cast-info .cast-box .casts .cast .name {
+  color: white;
+  font-family: "Dosis", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  flex: 1;
+}
+.cast-info .cast-box .casts .cast .character {
+  color: #999;
+  font-family: "Dosis", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+@media (max-width: 375px) {
+  .cast-info .cast-box .casts {
+  }
+  .cast-info .cast-box .casts .cast {
+    flex-wrap: wrap;
+  }
+  .cast-info .cast-box .casts .cast .name {
+    flex-basis: 150%;
+    margin-bottom: -10px;
+  }
+  .cast-info .cast-box .casts .cast .character {
+  }
+}
+
+.cast-info .info-box {
+  flex-basis: 40%;
+}
+@media (max-width: 425px) {
+  .cast-info .info-box {
+    text-align: center;
+  }
+}
+.cast-info .info-box .info-box-head {
+  margin-bottom: 20px;
+}
+
+.cast-info .info-box .info-box-head ul {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+@media (max-width: 425px) {
+  .cast-info .info-box .info-box-head ul.social-media {
+    margin: 0 auto;
+    width: fit-content;
+  }
+}
+.cast-info .info-box .info-box-head ul li i {
+  font-size: 20px;
+  color: white;
+}
+.cast-info .info-box .info-box-head ul li:last-of-type i {
+  font-size: 30px;
+  color: white;
+  border-left: 1px solid white;
+  padding-left: 10px;
+}
+.cast-info .info-box .status {
+  margin-top: 20px;
+}
+.cast-info .info-box .status .lable {
+  color: white;
+  font-family: "Dosis", sans-serif;
+  margin-top: 10px;
+}
+.cast-info .info-box .status .value {
+  color: white;
+  font-family: "Dosis", sans-serif;
+  font-weight: 600;
+  margin-top: -12px;
+}
+
+/* End Cast */
+
+/**************************** End Single-page *************************/
