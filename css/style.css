@@ -250,6 +250,9 @@ header .container .search-bar input[type="submit"] {
 }
 /* End Header */
 
+section {
+  /* display: none; */
+}
 /* Start What's Popular Section */
 .Section {
   background-color: var(--section-color);
@@ -486,8 +489,7 @@ footer .social-media li {
 /* Start Shortcut Bar */
 
 .shortcut-bar {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 50px;
 }
 .shortcut-bar .container {
 }
@@ -501,6 +503,22 @@ footer .social-media li {
   font-family: "Dosis", sans-serif;
   font-weight: 600;
   cursor: pointer;
+  font-size: 25px;
+  transition-duration: 0.3s;
+  padding-bottom: 10px;
+}
+.shortcut-bar .container ul li:hover {
+  color: #dcf836;
+  border-bottom: 3px solid #dcf836;
+}
+.shortcut-bar .container ul li.active {
+  color: #dcf836;
+  border-bottom: 3px solid #dcf836;
+}
+@media (max-width: 425px) {
+  .shortcut-bar .container ul {
+    flex-direction: column;
+  }
 }
 
 /* End Shortcut Bar */
@@ -511,7 +529,7 @@ footer .social-media li {
   background-size: cover;
   position: relative;
   padding-top: 50px;
-  padding-bottom: 50px;
+  padding-bottom: 10px;
 }
 .movie-detail::before {
   position: absolute;
@@ -523,7 +541,7 @@ footer .social-media li {
 }
 .movie-detail .container {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   gap: 30px;
   color: white;
@@ -732,7 +750,7 @@ footer .social-media li {
     content: "";
   }
 }
-.video-trailer {
+.videos-section {
   background-color: #000000;
   min-width: 90px;
   min-height: 50px;
@@ -748,13 +766,13 @@ footer .social-media li {
   display: none;
   animation-duration: 0.3s;
 }
-.video-trailer h1 {
+.videos-section h1 {
   font-size: 18px;
   /* font-family: "Dosis", sans-serif; */
   padding: 10px;
   font-weight: 500;
 }
-.video-trailer i {
+.videos-section i {
   position: absolute;
   top: 0;
   right: 0;
@@ -762,75 +780,79 @@ footer .social-media li {
   cursor: pointer;
   font-size: 18px;
 }
-.video-trailer iframe {
+.videos-section iframe {
   border: none;
 }
 
 /* End Movie Detail */
 
-/* Start Cast */
-.cast-info {
+/* Start Information */
+.information {
   background-color: var(--section-color);
   margin-top: -30px;
-  padding-top: 100px;
+  padding-top: 60px;
   padding-bottom: 50px;
 }
-.cast-info .container {
+.information .container {
   display: flex;
   gap: 30px;
 }
 @media (max-width: 425px) {
-  .cast-info .container {
+  .information .container {
     flex-direction: column-reverse;
   }
 }
-.cast-info .cast-box {
+.information .section {
   flex-basis: 60%;
 }
 
-.cast-info .cast-box .cast-box-head {
+.information .section .title {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
   border-bottom: 1px solid rgba(153, 153, 153, 0.603);
 }
-.cast-info .cast-box .title {
+.information .section .title h1 {
   color: white;
   font-family: "Dosis", sans-serif;
   text-transform: uppercase;
   font-size: 15px;
 }
-.cast-info .cast-box .cast-box-head a {
+.information .section .title a {
   display: flex;
   align-items: center;
 }
-.cast-info .cast-box .cast-box-head i {
+.information .section .title i {
   color: white;
   font-size: 20px;
   transition-duration: 0.2s;
 }
-.cast-info .cast-box .cast-box-head a:hover i {
+.information .section .title a:hover i {
   transform: translateX(5px);
   -webkit-transform: translateX(5px);
   -moz-transform: translateX(5px);
   -ms-transform: translateX(5px);
   -o-transform: translateX(5px);
 }
-.cast-info .cast-box .more-cast {
+.information .section .title .show-more {
   color: white;
   font-family: "Dosis", sans-serif;
   text-transform: uppercase;
   font-size: 14px;
 }
-.cast-info .cast-box .casts {
+.information .cast-box {
+  /* margin-bottom: 50px; */
+  display: none;
 }
-.cast-info .cast-box .casts .cast {
+.information .cast-box .casts {
+}
+.information .cast-box .casts .cast {
   display: flex;
   align-items: center;
   margin-top: 20px;
 }
-.cast-info .cast-box .casts .cast img {
+.information .cast-box .casts .cast img {
   width: 60px;
   border-radius: 8px;
   -webkit-border-radius: 8px;
@@ -839,7 +861,7 @@ footer .social-media li {
   -o-border-radius: 8px;
   margin-right: 10px;
 }
-.cast-info .cast-box .casts .cast .name {
+.information .cast-box .casts .cast .name {
   color: white;
   font-family: "Dosis", sans-serif;
   font-size: 15px;
@@ -847,7 +869,7 @@ footer .social-media li {
   text-transform: uppercase;
   flex: 1;
 }
-.cast-info .cast-box .casts .cast .character {
+.information .cast-box .casts .cast .character {
   color: #999;
   font-family: "Dosis", sans-serif;
   font-weight: 500;
@@ -855,67 +877,167 @@ footer .social-media li {
 }
 
 @media (max-width: 375px) {
-  .cast-info .cast-box .casts {
+  .information .cast-box .casts {
   }
-  .cast-info .cast-box .casts .cast {
+  .information .cast-box .casts .cast {
     flex-wrap: wrap;
   }
-  .cast-info .cast-box .casts .cast .name {
+  .information .cast-box .casts .cast .name {
     flex-basis: 150%;
     margin-bottom: -10px;
   }
-  .cast-info .cast-box .casts .cast .character {
+}
+
+.information .media-box {
+}
+.information .media-box .images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.information .media-box .images img {
+  width: 200px;
+}
+@media (max-width: 425px) {
+  .information .media-box .images img {
+    width: 100%;
+  }
+}
+.information .media-box .videos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.information .media-box .videos .vd-item {
+  /* margin-bottom: 30px; */
+  width: 200px;
+}
+@media (max-width: 425px) {
+  .information .media-box .videos .vd-item {
+    width: 100%;
+  }
+}
+.information .media-box .videos .vd-item:hover h6 a {
+  color: #dcf836;
+}
+
+.information .media-box .videos .vd-item .vd-it {
+  position: relative;
+}
+.information .media-box .videos .vd-item .vd-it a {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-justify-content: center;
+}
+.information .media-box .videos .vd-item .vd-it img {
+  width: 100%;
+}
+.information .media-box .videos .vd-item .vd-it a img {
+  width: initial;
+}
+.information .media-box .videos .vd-item .vd-infor {
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+.information .media-box .videos .vd-item .vd-infor h6 a {
+  font-family: "Dosis", sans-serif;
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: bold;
+  text-transform: none;
+}
+.information .media-box .videos .vd-item .vd-infor h6 {
+  margin: -5px 0;
+}
+.information .media-box .videos .vd-item .vd-infor p.time {
+  font-family: "Dosis", sans-serif;
+  font-size: 12px;
+  color: #abb7c4;
+  font-weight: 400;
+  text-transform: none;
+}
+.information .media-box .videos .vd-item:hover h6 a {
+  color: #dcf836;
+}
+
+.information .media-box .posters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.information .media-box .posters img {
+  width: 150px;
+}
+@media (max-width: 425px) {
+  .information .media-box .posters {
+    justify-content: center;
+  }
+}
+@media (max-width: 320px) {
+  .information .media-box .posters img {
+    width: 100%;
   }
 }
 
-.cast-info .info-box {
+.information .info-box {
   flex-basis: 40%;
 }
 @media (max-width: 425px) {
-  .cast-info .info-box {
+  .information .info-box {
     text-align: center;
   }
 }
-.cast-info .info-box .info-box-head {
+.information .info-box .info-box-head {
   margin-bottom: 20px;
 }
 
-.cast-info .info-box .info-box-head ul {
+.information .info-box .info-box-head ul {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 @media (max-width: 425px) {
-  .cast-info .info-box .info-box-head ul.social-media {
+  .information .info-box .info-box-head ul.social-media {
     margin: 0 auto;
     width: fit-content;
   }
 }
-.cast-info .info-box .info-box-head ul li i {
+.information .info-box .info-box-head ul li i {
   font-size: 20px;
   color: white;
 }
-.cast-info .info-box .info-box-head ul li:last-of-type i {
+.information .info-box .info-box-head ul li:last-of-type i {
   font-size: 30px;
   color: white;
   border-left: 1px solid white;
   padding-left: 10px;
 }
-.cast-info .info-box .status {
+.information .info-box .status {
   margin-top: 20px;
 }
-.cast-info .info-box .status .lable {
+.information .info-box .status .lable {
   color: white;
   font-family: "Dosis", sans-serif;
   margin-top: 10px;
 }
-.cast-info .info-box .status .value {
+.information .info-box .status .value {
   color: white;
   font-family: "Dosis", sans-serif;
   font-weight: 600;
   margin-top: -12px;
 }
 
-/* End Cast */
+/* End Information */
 
 /**************************** End Single-page *************************/

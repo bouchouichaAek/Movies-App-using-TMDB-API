@@ -23,43 +23,51 @@ var writers = document.querySelector(
   ".movie-detail .box-detail .overview-box .movie-over .writer .wri-name"
 );
 var actorPhoto = document.querySelectorAll(
-  ".cast-info .cast-box .casts .cast img"
+  ".information .cast-box .casts .cast img"
 );
 var actorName = document.querySelectorAll(
-  ".cast-info .cast-box .casts .cast .name"
+  ".information .cast-box .casts .cast .name"
 );
 var actorCharacter = document.querySelectorAll(
-  ".cast-info .cast-box .casts .cast .character"
+  ".information .cast-box .casts .cast .character"
 );
 var movieLinkHomePage = document.querySelector(
-  ".cast-info .info-box .info-box-head ul .home-page a"
+  ".information .info-box .info-box-head ul .home-page a"
 );
 var movieFacebookPage = document.querySelector(
-  ".cast-info .info-box .info-box-head ul .facebook a"
+  ".information .info-box .info-box-head ul .facebook a"
 );
 var movieTwitterPage = document.querySelector(
-  ".cast-info .info-box .info-box-head ul .twitter a"
+  ".information .info-box .info-box-head ul .twitter a"
 );
 var movieInstgramPage = document.querySelector(
-  ".cast-info .info-box .info-box-head ul .instagram a"
+  ".information .info-box .info-box-head ul .instagram a"
 );
-var statusValue = document.querySelector(".cast-info .info-box .status .value");
+var statusValue = document.querySelector(
+  ".information .info-box .status .value"
+);
 var originalLanguageValue = document.querySelector(
-  ".cast-info .info-box .status.original-language .value"
+  ".information .info-box .status.original-language .value"
 );
 var budgetValue = document.querySelector(
-  ".cast-info .info-box .status.budget .value"
+  ".information .info-box .status.budget .value"
 );
 var revenueValue = document.querySelector(
-  ".cast-info .info-box .status.revenue .value"
+  ".information .info-box .status.revenue .value"
 );
+var imagesMedia = document.querySelector(".information .media-box .images");
+var videosMedia = document.querySelector(".information .media-box .videos");
+var postersMedia = document.querySelector(".information .media-box .posters");
 
 var id = window.location.search.slice(4);
+
+var shortLi = document.querySelectorAll(".shortcut-bar .container ul li");
 
 var api_key = "ee9ddd028297c7c00ad6168b72365519";
 var Moviesimage = "https://image.tmdb.org/t/p/original";
 var moviesTrilar = "https://www.youtube.com/embed/";
 var catImage = "https://www.themoviedb.org/t/p/w66_and_h66_face";
+// var imageVideo = "https://i.ytimg.com/vi/o-0hcF97wy0/hqdefault.jpg";
 
 var video = document.querySelector(".video-trailer");
 var closVideo = document.querySelector(".video-trailer i");
@@ -107,8 +115,27 @@ fetch(movies_api)
     } else {
       revenueValue.textContent = "Unkown";
     }
-    console.log(response);
-    console.log(revenueValue);
+    for (let i = 0; i < 6; i++) {
+      const { key, name } = response.videos.results[i];
+      var v_item = document.createElement("div");
+      v_item.classList.add("vd-item");
+      v_item.innerHTML = `
+      <div class="vd-it">
+        <img class="vd-img" src="${
+          "https://i.ytimg.com/vi/" + key + "/hqdefault.jpg"
+        }" alt="">
+        <a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0"
+          rel="playlist"><img src="images/play-vd.png" alt=""></a>
+      </div>
+      <div class="vd-infor">
+        <h6> <a href="#">${name}</a></h6>
+        <!--  <p class="time"> 1: 31</p> -->
+      </div>
+  `;
+      videosMedia.append(v_item);
+    }
+
+    // console.log(response.videos.results);
   });
 fetch(
   "https://api.themoviedb.org/3/movie/" +
@@ -191,15 +218,33 @@ fetch(
     // console.log(response);
   });
 
-// fetch(
-//   "https://api.themoviedb.org/3/movie/" +
-//     id +
-//     "/external_ids?api_key=ee9ddd028297c7c00ad6168b72365519"
-// )
-//   .then((response) => response.json())
-//   .then(function (response) {
-//     // console.log(response);
-//   });
+fetch(
+  "https://api.themoviedb.org/3/movie/" +
+    id +
+    "/images?api_key=ee9ddd028297c7c00ad6168b72365519"
+)
+  .then((response) => response.json())
+  .then(function (response) {
+    for (let i = 0; i < 9; i++) {
+      var img = document.createElement("img");
+      var anchor = document.createElement("a");
+      img.src = Moviesimage + response.backdrops[i].file_path;
+      anchor.href = Moviesimage + response.backdrops[i].file_path;
+      anchor.target = "_blank";
+      anchor.append(img);
+      imagesMedia.append(anchor);
+    }
+    for (let i = 0; i < 8; i++) {
+      var poster = document.createElement("img");
+      var anchor = document.createElement("a");
+      poster.src = Moviesimage + response.posters[i].file_path;
+      anchor.href = Moviesimage + response.posters[i].file_path;
+      anchor.target = "_blank";
+      anchor.append(poster);
+      postersMedia.append(anchor);
+    }
+    // console.log(postersMedia);
+  });
 
 playTrilar.addEventListener("click", function (e) {
   video.style.display = "block";
@@ -211,6 +256,16 @@ closVideo.addEventListener("click", function (e) {
     var iframeSrc = trilarContent.src;
     trilarContent.src = iframeSrc;
   }
+});
+
+shortLi.forEach((el) => {
+  el.addEventListener("click", function (e) {
+    shortLi.forEach((el) => {
+      el.classList.remove("active");
+    });
+    e.target.classList.add("active");
+    // console.log(e.target.dataset.bar);
+  });
 });
 
 function getFormattedDate(date) {
