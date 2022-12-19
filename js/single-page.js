@@ -124,7 +124,9 @@ fetch(movies_api)
         <img class="vd-img" src="${
           "https://i.ytimg.com/vi/" + key + "/hqdefault.jpg"
         }" alt="">
-        <a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0"
+        <a class="fancybox-media hvr-grow" href="${
+          "https://www.youtube.com/embed/" + key
+        }"
           rel="playlist"><img src="images/play-vd.png" alt=""></a>
       </div>
       <div class="vd-infor">
