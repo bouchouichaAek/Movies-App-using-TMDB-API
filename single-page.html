@@ -16,6 +16,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap"
+        rel="stylesheet">
 </head>
 
 <body class="blur overlay">
@@ -129,9 +134,10 @@
         <div class="container">
             <!-- Start Cast  -->
             <div class="section">
-                <div class="cast-box">
+                <div class="box cast-box" id="cast">
                     <div class="title cast-box-head">
                         <h1>Cast</h1>
+                        <h1 class="total"><span>56</span></h1>
                         <a href="">
                             <h1 class="show-more">Full Cast & Crew </h1>
                             <i class="bi bi-arrow-right-short"></i>
@@ -186,10 +192,13 @@
                     </div>
                 </div>
                 <!-- End Cast  -->
-                <div class="media-box">
+
+                <!-- Start Media -->
+                <div class="box media-box hide" id="media">
                     <div class="image-box">
                         <div class="title media-box-head">
                             <h1>Image</h1>
+                            <h1 class="total"><span>56</span></h1>
                             <a href="">
                                 <h1 class="show-more">show All Images </h1>
                                 <i class="bi bi-arrow-right-short"></i>
@@ -201,6 +210,7 @@
                     <div class="videos-box">
                         <div class="title media-box-head">
                             <h1>Videos</h1>
+                            <h1 class="total"><span>56</span></h1>
                             <a href="">
                                 <h1 class="show-more">show All Videos </h1>
                                 <i class="bi bi-arrow-right-short"></i>
@@ -223,6 +233,8 @@
                     <div class="poster-box">
                         <div class="title poster-box-head">
                             <h1>Poster</h1>
+                            <h1 class="total"><span>56</span></h1>
+
                             <a href="">
                                 <h1 class="show-more">show All Poster </h1>
                                 <i class="bi bi-arrow-right-short"></i>
@@ -232,6 +244,86 @@
                         </div>
                     </div>
                 </div>
+                <!-- End Media -->
+
+                <!-- Start Review -->
+                <div class="box review-box hide" id="reviews">
+                    <div class="title media-box-head">
+                        <h1>Review</h1>
+                        <h1 class="total"><span>56</span></h1>
+                        <a href="">
+                            <h1 class="show-more">show All Review </h1>
+                            <i class="bi bi-arrow-right-short"></i>
+                        </a>
+                    </div>
+                    <div class="reviews">
+                        <!-- <div class="review">
+                            <div class="user-infor">
+                                <img src="images/e158a9a4352c90f00b85051896c53f70.jpeg" alt="">
+                                <div>
+                                    <h3>Best Marvel movie in my opinion</h3>
+                                    <div class="no-star">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill last"></i>
+                                    </div>
+                                    <p class="time">
+                                        17 December 2016 by <a href="#"> hawaiipierson</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <p>This is by far one of my favorite movies from the MCU. The introduction of new
+                                Characters both good and bad also makes the movie more exciting. giving the
+                                characters more of a back story can also help audiences relate more to different
+                                characters better, and it connects a bond between the audience and actors or
+                                characters. Having seen the movie three times does not bother me here as it is as
+                                thrilling and exciting every time I am watching it. In other words, the movie is by
+                                far better than previous movies (and I do love everything Marvel), the plotting is
+                                splendid (they really do out do themselves in each film, there are no problems
+                                watching it more than once.</p>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- End Review -->
+
+                <!-- Start Related Movies -->
+                <div class="box related-movies-box hide" id="related-movies">
+                    <div class="title related-movies-box-head">
+                        <h1>Review</h1>
+                        <h1 class="total"><span>56</span></h1>
+                        <a href="">
+                            <h1 class="show-more">show All Related Movies </h1>
+                            <i class="bi bi-arrow-right-short"></i>
+                        </a>
+                    </div>
+                    <div class="related-movies">
+                        <!-- <div class="related-movie">
+                            <img src="images/3zXceNTtyj5FLjwQXuPvLYK5YYL.jpg" alt="">
+                            <div class="mv-item-infor">
+                                <h6><a href="#">oblivion <span>(2012)</span></a></h6>
+                                <p class="rate"> <i class="bi bi-star-fill"></i><span>8.1</span> /10</p>
+                                <p class="describe">Earth's mightiest heroes must come together and learn to fight
+                                    as a team if they are to stop the mischievous Loki and his alien army from
+                                    enslaving humanity...</p>
+                                <p class="run-time"> Run Time: 2h21’ . <span>MMPA: PG-13 </span> . <span>Release: 1
+                                        May 2015</span></p>
+                                <p>Director: <a href="#">Joss Whedon</a></p>
+                                <p>Stars: <a href="#">Robert Downey Jr.,</a> <a href="#">Chris Evans,</a> <a href="#">
+                                        Chris Hemsworth</a></p>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+
+
+                <!-- Start Related Movies -->
 
             </div>
             <div class="info-box">

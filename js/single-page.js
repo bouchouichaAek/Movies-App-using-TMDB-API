@@ -58,6 +58,18 @@ var revenueValue = document.querySelector(
 var imagesMedia = document.querySelector(".information .media-box .images");
 var videosMedia = document.querySelector(".information .media-box .videos");
 var postersMedia = document.querySelector(".information .media-box .posters");
+var rewiews = document.querySelector(".information .review-box .reviews");
+var relatedMovies = document.querySelector(
+  ".information .related-movies-box .related-movies"
+);
+var rewiewsTotal = document.querySelector(
+  ".information .review-box .total span"
+);
+var relatedMoviesTotal = document.querySelector(
+  ".information .related-movies-box .total span"
+);
+
+var filterSection = document.querySelectorAll(".information .section .box");
 
 var id = window.location.search.slice(4);
 
@@ -76,7 +88,7 @@ var playTrilar = document.querySelector(".rat-trailer .trailer a");
 var movies_api =
   "https://api.themoviedb.org/3/movie/" +
   id +
-  "?api_key=ee9ddd028297c7c00ad6168b72365519&language=en-US&append_to_response=external_ids,videos,reviews";
+  "?api_key=ee9ddd028297c7c00ad6168b72365519&language=en-US&append_to_response=external_ids,videos,reviews,similar,recommendations";
 
 fetch(movies_api)
   .then((response) => response.json())
@@ -136,9 +148,90 @@ fetch(movies_api)
   `;
       videosMedia.append(v_item);
     }
+    rewiewsTotal.textContent = response.reviews.total_results;
 
-    // console.log(response.videos.results);
+    for (let i = 0; i < 5; i++) {
+      var { author, content, author_details, created_at } =
+        response.reviews.results[i];
+      // console.log(author_details.avatar_path);
+      var rewiew = document.createElement("div");
+      rewiew.classList.add("review");
+      rewiew.innerHTML = `
+      <div class="user-infor">
+      <img src="${showAuthorPicture(author_details.avatar_path)}" alt="">
+      <div>
+          <h3>A review by ${author}</h3>
+          <div class="no-star">
+     
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill last"></i>
+      
+          </div>
+          <p class="time">
+              Written on ${getFormattedDate(created_at)}
+          </p>
+      </div>
+  </div>
+  <p>${content.length < 400 ? content : content.substring(0, 400) + "..."}</p>
+      `;
+
+      // console.log(rewiew);
+      // console.log(showAuthorPicture(author_details.avatar_path));
+      rewiews.append(rewiew);
+    }
+    relatedMoviesTotal.textContent = response.similar.results.length;
+    var ids = [];
+    for (let i = 0; i < 5; i++) {
+      var {
+        original_title,
+        overview,
+        poster_path,
+        release_date,
+        vote_average,
+        id,
+      } = response.similar.results[i];
+      ids.push(id);
+      var relatedMovie = document.createElement("div");
+      relatedMovie.classList.add("related-movie");
+      relatedMovie.innerHTML = `
+        <img src="${Moviesimage + poster_path}" alt="">
+          <div class="mv-item-infor">
+            <h6><a href="#">${original_title} <span>(${getYerar(
+        release_date
+      )})</span></a></h6>
+            <p class="rate"> <i class="bi bi-star-fill"></i><span>${vote_average.toFixed(
+              1
+            )}</span> /10</p>
+            <p class="describe">${overview}</p>
+            <p class="run-time"> Run Time: 2h21’ . <span>MMPA: PG-13 </span> . <span>Release: 1
+               May 2015</span></p>
+            <p>Director: <a href="#">Joss Whedon</a></p>
+            <p>Stars: <a href="#">Robert Downey Jr.,</a> <a href="#">Chris Evans,</a> <a href="#">
+            Chris Hemsworth</a></p>
+          </div>
+      `;
+
+      relatedMovies.append(relatedMovie);
+    }
+    // console.log(response);
   });
+
+// fetch(
+//   "https://api.themoviedb.org/3/movie/" +
+//     id +
+//     "?api_key=ee9ddd028297c7c00ad6168b72365519&append_to_response=release_dates"
+// )
+//   .then((response) => response.json())
+//   .then(function (response) {});
+
 fetch(
   "https://api.themoviedb.org/3/movie/" +
     id +
@@ -265,8 +358,13 @@ shortLi.forEach((el) => {
     shortLi.forEach((el) => {
       el.classList.remove("active");
     });
+    filterSection.forEach((el) => {
+      el.classList.add("hide");
+      if (el.id == e.target.dataset.bar) {
+        el.classList.remove("hide");
+      }
+    });
     e.target.classList.add("active");
-    // console.log(e.target.dataset.bar);
   });
 });
 
@@ -299,3 +397,16 @@ const formatter = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
 });
+
+function showAuthorPicture(src) {
+  if (src != null) {
+    src = src.slice(1);
+    if (src.startsWith("http")) {
+      return `${src}`;
+    } else {
+      return `https://www.themoviedb.org/t/p/original/${src}`;
+    }
+  } else {
+    return `images/no-image.jpg`;
+  }
+}

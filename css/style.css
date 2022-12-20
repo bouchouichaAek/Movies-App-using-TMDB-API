@@ -841,9 +841,23 @@ footer .social-media li {
   text-transform: uppercase;
   font-size: 14px;
 }
+.information .section .title .total {
+  color: #4f5b68;
+  font-family: "Dosis", sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  flex: 1;
+  margin-top: 11px;
+  margin-left: 5px;
+}
+.box.hide {
+  display: none;
+}
+
+/* Start Cast */
+
 .information .cast-box {
   /* margin-bottom: 50px; */
-  display: none;
 }
 .information .cast-box .casts {
 }
@@ -887,16 +901,26 @@ footer .social-media li {
     margin-bottom: -10px;
   }
 }
+/* End Cast */
+
+/* Start Media */
 
 .information .media-box {
+  /* display: none; */
 }
+
 .information .media-box .images {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 15px;
 }
 .information .media-box .images img {
-  width: 200px;
+  width: 210px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 @media (max-width: 425px) {
   .information .media-box .images img {
@@ -906,11 +930,11 @@ footer .social-media li {
 .information .media-box .videos {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 15px;
 }
 .information .media-box .videos .vd-item {
-  /* margin-bottom: 30px; */
-  width: 200px;
+  /*margin-bottom: 30px; */
+  width: 210px;
 }
 @media (max-width: 425px) {
   .information .media-box .videos .vd-item {
@@ -942,6 +966,11 @@ footer .social-media li {
 }
 .information .media-box .videos .vd-item .vd-it img {
   width: 100%;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 .information .media-box .videos .vd-item .vd-it a img {
   width: initial;
@@ -974,10 +1003,15 @@ footer .social-media li {
 .information .media-box .posters {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 15px;
 }
 .information .media-box .posters img {
-  width: 150px;
+  width: 155px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 @media (max-width: 425px) {
   .information .media-box .posters {
@@ -989,6 +1023,160 @@ footer .social-media li {
     width: 100%;
   }
 }
+
+/* End Media */
+
+/* Start Review */
+
+.information .reviews .review {
+  border-bottom: 1px solid #233a50;
+  padding: 20px 20px 20px 0;
+}
+.information .reviews .review .user-infor {
+  display: flex;
+  align-items: center;
+}
+.information .reviews .review .user-infor img {
+  margin-right: 30px;
+  margin-top: 20px;
+  align-self: flex-start;
+  width: 50px;
+}
+.information .reviews .review .user-infor .no-star {
+  margin-right: 10px;
+}
+.information .reviews .review .user-infor .no-star .bi {
+  font-size: 12px;
+}
+.information .reviews .review .user-infor .no-star .bi-star-fill {
+  color: #f5b50a;
+}
+.information .reviews .review .user-infor .no-star i.bi-star-fill.last {
+  color: #abb7c4;
+}
+.information .reviews .review .user-infor h3 {
+  font-family: "Dosis", sans-serif;
+  font-size: 18px;
+  color: #abb7c4;
+  font-weight: bold;
+  text-transform: none;
+  margin-bottom: 15px;
+}
+.information .reviews .review .user-infor .time {
+  font-family: "Nunito", sans-serif;
+  font-size: 12px;
+  color: #abb7c4;
+  font-weight: 300;
+  text-transform: none;
+}
+.information .reviews .review .user-infor .time a {
+  color: #4280bf;
+}
+
+.information .reviews .review p {
+  font-family: "Nunito", sans-serif;
+  font-size: 14px;
+  color: #abb7c4;
+  font-weight: 300;
+  text-transform: none;
+  line-height: 24px !important;
+}
+
+/* End Review */
+
+/* Start Review */
+.related-movies {
+}
+.related-movies .related-movie {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+.related-movies .related-movie:not(:last-of-type) {
+  border-bottom: 1px solid #233a50;
+  padding-bottom: 30px;
+}
+@media (max-width: 768px) {
+  .related-movies .related-movie {
+    flex-direction: column;
+    padding-bottom: 30px;
+  }
+}
+.related-movies .related-movie img {
+  width: 200px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+@media (max-width: 425px) {
+  .related-movies .related-movie img {
+    width: 100%;
+  }
+}
+.related-movies .related-movie .mv-item-infor {
+  /* margin-top: -50px; */
+  align-self: flex-start;
+}
+@media (max-width: 425px) {
+  .related-movies .related-movie .mv-item-infor {
+    text-align: center;
+  }
+}
+.related-movies .related-movie:hover .mv-item-infor h6 a {
+  color: #dcf836;
+}
+.related-movies .related-movie .mv-item-infor h6 {
+  margin-bottom: 10px;
+}
+.related-movies .related-movie .mv-item-infor h6 a {
+  font-family: "Dosis", sans-serif;
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.related-movies .related-movie .mv-item-infor h6 span {
+  color: #abb7c4;
+}
+.related-movies .related-movie .mv-item-infor .rate {
+  font-size: 12px;
+}
+.related-movies .related-movie .mv-item-infor p {
+  font-family: "Nunito", sans-serif;
+  font-size: 14px;
+  color: #abb7c4;
+  font-weight: 300;
+  text-transform: none;
+  line-height: 24px !important;
+  margin-bottom: -10px;
+}
+
+.related-movies .related-movie .mv-item-infor .rate i {
+  color: #f5b50a;
+  font-size: 22px;
+  margin-right: 5px;
+}
+.related-movies .related-movie .mv-item-infor .rate span {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 400;
+}
+.related-movies .related-movie .mv-item-infor .describe {
+  padding-bottom: 25px;
+  border-bottom: 1px solid #405266;
+  margin-bottom: 25px;
+}
+.related-movies .related-movie .mv-item-infor .run-time span {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.related-movies .related-movie .mv-item-infor p a {
+  color: #4280bf;
+}
+/* End Review */
 
 .information .info-box {
   flex-basis: 40%;
