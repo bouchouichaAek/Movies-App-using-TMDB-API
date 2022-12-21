@@ -227,17 +227,64 @@ fetch(movies_api)
             <p class="rate"> <i class="bi bi-star-fill"></i><span>${vote_average.toFixed(
               1
             )}</span> /10</p>
-            <p class="describe">${overview}</p>
-            <p class="run-time"> Run Time: 2h21’ . <span>MMPA: PG-13 </span> . <span>Release: 1
-            May 2015</span></p>
-            <p>Director: <a href="#">Joss Whedon</a></p>
-            <p>Stars: <a href="#">Robert Downey Jr.,</a> <a href="#">Chris Evans,</a> <a href="#">
-            Chris Hemsworth</a></p>
+            <p class="describe">${overview.substring(0, 200)}</p>
+            <div id="${id}"></div>
           </div>
       `;
 
       relatedMovies.append(relatedMovie);
     }
+    for (let i = 0; i < ids.length; i++) {
+      // console.log(ids[i]);
+      fetch(
+        "https://api.themoviedb.org/3/movie/" +
+          ids[i] +
+          "?api_key=ee9ddd028297c7c00ad6168b72365519&append_to_response=release_dates,credits"
+      )
+        .then((response) => response.json())
+        .then(function (response) {
+          var info = document.querySelectorAll(
+            ".related-movies .related-movie .mv-item-infor div"
+          );
+          info.forEach((ele, index, array) => {
+            var cert = "";
+            var director = "";
+            var stars = [];
+            if (response.id == ele.id) {
+              for (let i = 0; i < response.release_dates.results.length; i++) {
+                if (response.release_dates.results[i].iso_3166_1 == "US") {
+                  cert =
+                    response.release_dates.results[i].release_dates[0]
+                      .certification;
+                }
+              }
+              for (let i = 0; i < response.credits.crew.length; i++) {
+                if (response.credits.crew[i].job == "Director") {
+                  director = response.credits.crew[i].name;
+                }
+              }
+              for (let i = 0; i < 3; i++) {
+                console.log();
+                stars.push(response.credits.cast[i].name);
+              }
+              console.log(stars);
+
+              ele.innerHTML = `<p class="run-time"> Run Time: ${timeConvert(
+                response.runtime
+              )} . <span>MMPA: ${cert} </span> . <span>Release: ${getFormattedDateSimilar(
+                response.release_date
+              )}</span></p>
+                <p>Director: <a href="#">${director}</a></p>
+                <p>Stars: <a href="#">${stars[0]},</a> <a href="#">${
+                stars[1]
+              },</a> <a href="#">${stars[2]}</a></p>`;
+            }
+          });
+
+          // console.log(info);
+        });
+    }
+    // console.log(response);
   });
 fetch(
   "https://api.themoviedb.org/3/movie/" +
@@ -406,6 +453,15 @@ function getFormattedDate(date) {
   month = date.toLocaleString("default", { month: "short" });
 
   return month + " " + day + ", " + year;
+}
+function getFormattedDateSimilar(date) {
+  var date = new Date(date);
+  let year = date.getFullYear();
+  let month = (1 + date.getMonth()).toString();
+  let day = date.getDate().toString();
+  month = date.toLocaleString("default", { month: "long" });
+
+  return day + " " + month + " " + year;
 }
 function getYerar(date) {
   var date = new Date(date);
