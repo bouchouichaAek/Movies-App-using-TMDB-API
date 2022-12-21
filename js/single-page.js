@@ -149,11 +149,15 @@ fetch(movies_api)
       videosMedia.append(v_item);
     }
     rewiewsTotal.textContent = response.reviews.total_results;
+    // console.log(response);
 
-    for (let i = 0; i < 5; i++) {
+    var maxDisplay = 5;
+    if (response.reviews.results.length < 5) {
+      maxDisplay = response.reviews.results.length;
+    }
+    for (let i = 0; i < maxDisplay; i++) {
       var { author, content, author_details, created_at } =
         response.reviews.results[i];
-      // console.log(author_details.avatar_path);
       var rewiew = document.createElement("div");
       rewiew.classList.add("review");
       rewiew.innerHTML = `
@@ -182,11 +186,9 @@ fetch(movies_api)
   </div>
   <p>${content.length < 400 ? content : content.substring(0, 400) + "..."}</p>
       `;
-
-      // console.log(rewiew);
-      // console.log(showAuthorPicture(author_details.avatar_path));
       rewiews.append(rewiew);
     }
+
     relatedMoviesTotal.textContent = response.similar.results.length;
     var ids = [];
     for (let i = 0; i < 5; i++) {
@@ -212,7 +214,7 @@ fetch(movies_api)
             )}</span> /10</p>
             <p class="describe">${overview}</p>
             <p class="run-time"> Run Time: 2h21’ . <span>MMPA: PG-13 </span> . <span>Release: 1
-               May 2015</span></p>
+            May 2015</span></p>
             <p>Director: <a href="#">Joss Whedon</a></p>
             <p>Stars: <a href="#">Robert Downey Jr.,</a> <a href="#">Chris Evans,</a> <a href="#">
             Chris Hemsworth</a></p>
@@ -221,17 +223,7 @@ fetch(movies_api)
 
       relatedMovies.append(relatedMovie);
     }
-    // console.log(response);
   });
-
-// fetch(
-//   "https://api.themoviedb.org/3/movie/" +
-//     id +
-//     "?api_key=ee9ddd028297c7c00ad6168b72365519&append_to_response=release_dates"
-// )
-//   .then((response) => response.json())
-//   .then(function (response) {});
-
 fetch(
   "https://api.themoviedb.org/3/movie/" +
     id +
