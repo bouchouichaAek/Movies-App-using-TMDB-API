@@ -105,7 +105,7 @@ fetch(movies_api)
     // console.log(response.created_by);
     date.textContent = getFormattedDate(response.first_air_date);
     year.textContent = getYerar(response.first_air_date);
-    // runTime.textContent = timeConvert(response.runtime);
+    runTime.textContent = response.number_of_episodes + " Episodes";
     description.textContent = response.overview;
     rating.textContent = response.vote_average.toFixed(1);
     for (let i = 0; i < response.genres.length; i++) {

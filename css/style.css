@@ -506,6 +506,7 @@ footer .social-media li {
   font-size: 25px;
   transition-duration: 0.3s;
   padding-bottom: 10px;
+  text-transform: uppercase;
 }
 .shortcut-bar .container ul li:hover {
   color: #dcf836;
