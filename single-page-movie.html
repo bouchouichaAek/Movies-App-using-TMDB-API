@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Page</title>
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="blur overlay">
+    <!-- Start Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <img src="images/logo1.png" alt="">
+                <ul class="nav-bar menu-left">
+                    <li>Movies</li>
+                    <li>TV Shows</li>
+                </ul>
+                <ul class="nav-bar menu-right">
+                    <li><i class="bi bi-search"></i></li>
+                    <li>log in</li>
+                    <li>sign up</li>
+                </ul>
+            </nav>
+            <div class="Welcome-text">
+                <h1>Welcome.</h1>
+                <p>Millions of movies, TV shows and people to discover. Explore now.</p>
+            </div>
+            <div class="search-bar">
+                <select name="movies-type" id="movies-type">
+                    <option value="movies">Movies</option>
+                    <option value="tv-shows">TV Shows</option>
+                </select>
+                <input type="text" name="" id="" placeholder="Search for a movie, tv show, person......">
+                <input type="submit" value="Search">
+            </div>
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- Start Shortcut Bar  -->
+    <!-- <div class="shortcut-bar">
+        <div class="container">
+            <ul>
+                <li>Overview</li>
+                <li>Media</li>
+                <li>Fandom</li>
+                <li>Share</li>
+            </ul>
+        </div>
+    </div> -->
+    <!-- end Shortcut Bar  -->
+
+    <!-- Start Movie Detail -->
+    <div class="movie-detail">
+        <div class="container">
+            <img src="" alt="">
+            <div class="box-detail">
+                <div class="info">
+                    <div class="box-title">
+                        <h1 class="title"> </h1><span></span>
+                    </div>
+                    <div class="text-box">
+                        <p class="cert"></p>
+                        <p class="relaes-date"></p>
+                        <i class="bi bi-circle-fill"></i>
+                        <ul class="category">
+
+                        </ul>
+                        <i class="bi bi-circle-fill"></i>
+                        <p class="run-time"></p>
+                    </div>
+                    <div class="rat-trailer">
+                        <div class="rating">
+                            <i class="bi bi-star-fill star"></i>
+                            <span>7.4</span>/10
+                        </div>
+                        <div class="trailer">
+                            <a><i class="bi bi-play-fill"></i>
+                                Play Trailer</a>
+                        </div>
+                    </div>
+                    <div class="overview-box">
+                        <p class="description">
+                        </p>
+                        <div class="movie-over">
+                            <div class="director">
+                                <p class="dir">Director</p>
+                                <p class="dir-name"></p>
+                            </div>
+                            <div class="writer">
+                                <p class="wri">Writer</p>
+                                <ul class="wri-name">
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="shortcut-bar">
+            <div class="container">
+                <ul class="">
+                    <li class="active" data-bar="cast">Cast</li>
+                    <li data-bar="media">Media</li>
+                    <li data-bar="reviews">Reviews</li>
+                    <li data-bar="related-movies">Related Movies</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- End Movie Detail -->
+
+    <div class="information">
+        <div class="container">
+            <!-- Start Cast  -->
+            <div class="section">
+                <div class="box cast-box" id="cast">
+                    <div class="title cast-box-head">
+                        <h1>Cast</h1>
+                        <h1 class="total"><span>56</span></h1>
+                        <a href="">
+                            <h1 class="show-more">Full Cast & Crew </h1>
+                            <i class="bi bi-arrow-right-short"></i>
+                        </a>
+                    </div>
+                    <div class="casts">
+                        <div class="cast">
+                            <img src="images/cgoy7t5Ve075naBPcewZrc08qGw.jpg" alt="" srcset="">
+                            <p class="name">Dwayne Johnson</p>
+                            <p class="character">Black Adam / Teth Adam</p>
+                        </div>
+                        <div class="cast">
+                            <img src="images/cgoy7t5Ve075naBPcewZrc08qGw.jpg" alt="" srcset="">
+                            <p class="name">Dwayne Johnson</p>
+                            <p class="character">Black Adam / Teth Adam</p>
+                        </div>
+                        <div class="cast">
+                            <img src="images/cgoy7t5Ve075naBPcewZrc08qGw.jpg" alt="" srcset="">
+                            <p class="name">Dwayne Johnson</p>
+                            <p class="character">Black Adam / Teth Adam</p>
+                        </div>
+                        <div class="cast">
+                            <img src="images/cgoy7t5Ve075naBPcewZrc08qGw.jpg" alt="" srcset="">
+                            <p class="name">Dwayne Johnson</p>
+                            <p class="character">Black Adam / Teth Adam</p>
+                        </div>
+                        <div class="cast">
+                            <img src="images/cgoy7t5Ve075naBPcewZrc08qGw.jpg" alt="" srcset="">
+                            <p class="name">Dwayne Johnson</p>
+                            <p class="character">Black Adam / Teth Adam</p>
+                        </div>
+                        <div class="cast">
+                            <img src="images/cgoy7t5Ve075naBPcewZrc08qGw.jpg" alt="" srcset="">
+                            <p class="name">Dwayne Johnson</p>
+                            <p class="character">Black Adam / Teth Adam</p>
+                        </div>
+                        <div class="cast">
+                            <img src="images/cgoy7t5Ve075naBPcewZrc08qGw.jpg" alt="" srcset="">
+                            <p class="name">Dwayne Johnson</p>
+                            <p class="character">Black Adam / Teth Adam</p>
+                        </div>
+                        <div class="cast">
+                            <img src="images/cgoy7t5Ve075naBPcewZrc08qGw.jpg" alt="" srcset="">
+                            <p class="name">Dwayne Johnson</p>
+                            <p class="character">Black Adam / Teth Adam</p>
+                        </div>
+                        <div class="cast">
+                            <img src="images/cgoy7t5Ve075naBPcewZrc08qGw.jpg" alt="" srcset="">
+                            <p class="name">Dwayne Johnson</p>
+                            <p class="character">Black Adam / Teth Adam</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Cast  -->
+
+                <!-- Start Media -->
+                <div class="box media-box hide" id="media">
+                    <div class="image-box">
+                        <div class="title media-box-head">
+                            <h1>Image</h1>
+                            <h1 class="total"><span>56</span></h1>
+                            <a href="">
+                                <h1 class="show-more">show All Images </h1>
+                                <i class="bi bi-arrow-right-short"></i>
+                            </a>
+                        </div>
+                        <div class="images">
+                        </div>
+                    </div>
+                    <div class="videos-box">
+                        <div class="title media-box-head">
+                            <h1>Videos</h1>
+                            <h1 class="total"><span>56</span></h1>
+                            <a href="">
+                                <h1 class="show-more">show All Videos </h1>
+                                <i class="bi bi-arrow-right-short"></i>
+                            </a>
+                        </div>
+                        <div class="videos">
+                            <!-- <div class="vd-item">
+                                <div class="vd-it">
+                                    <img class="vd-img" src="" alt="">
+                                    <a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0"
+                                        rel="playlist"><img src="images/play-vd.png" alt=""></a>
+                                </div>
+                                <div class="vd-infor">
+                                    <h6> <a href="#"></a></h6>
+                                    <p class="time"> 1: 31</p>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="poster-box">
+                        <div class="title poster-box-head">
+                            <h1>Poster</h1>
+                            <h1 class="total"><span>56</span></h1>
+
+                            <a href="">
+                                <h1 class="show-more">show All Poster </h1>
+                                <i class="bi bi-arrow-right-short"></i>
+                            </a>
+                        </div>
+                        <div class="posters">
+                        </div>
+                    </div>
+                </div>
+                <!-- End Media -->
+
+                <!-- Start Review -->
+                <div class="box review-box hide" id="reviews">
+                    <div class="title media-box-head">
+                        <h1>Review</h1>
+                        <h1 class="total"><span>56</span></h1>
+                        <a href="">
+                            <h1 class="show-more">show All Review </h1>
+                            <i class="bi bi-arrow-right-short"></i>
+                        </a>
+                    </div>
+                    <div class="reviews">
+                        <!-- <div class="review">
+                            <div class="user-infor">
+                                <img src="images/e158a9a4352c90f00b85051896c53f70.jpeg" alt="">
+                                <div>
+                                    <h3>Best Marvel movie in my opinion</h3>
+                                    <div class="no-star">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill last"></i>
+                                    </div>
+                                    <p class="time">
+                                        17 December 2016 by <a href="#"> hawaiipierson</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <p>This is by far one of my favorite movies from the MCU. The introduction of new
+                                Characters both good and bad also makes the movie more exciting. giving the
+                                characters more of a back story can also help audiences relate more to different
+                                characters better, and it connects a bond between the audience and actors or
+                                characters. Having seen the movie three times does not bother me here as it is as
+                                thrilling and exciting every time I am watching it. In other words, the movie is by
+                                far better than previous movies (and I do love everything Marvel), the plotting is
+                                splendid (they really do out do themselves in each film, there are no problems
+                                watching it more than once.</p>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- End Review -->
+
+                <!-- Start Related Movies -->
+                <div class="box related-movies-box hide" id="related-movies">
+                    <div class="title related-movies-box-head">
+                        <h1>Review</h1>
+                        <h1 class="total"><span>56</span></h1>
+                        <a href="">
+                            <h1 class="show-more">show All Related Movies </h1>
+                            <i class="bi bi-arrow-right-short"></i>
+                        </a>
+                    </div>
+                    <div class="related-movies">
+                        <!-- <div class="related-movie">
+                            <img src="images/3zXceNTtyj5FLjwQXuPvLYK5YYL.jpg" alt="">
+                            <div class="mv-item-infor">
+                                <h6><a href="#">oblivion <span>(2012)</span></a></h6>
+                                <p class="rate"> <i class="bi bi-star-fill"></i><span>8.1</span> /10</p>
+                                <p class="describe">Earth's mightiest heroes must come together and learn to fight
+                                    as a team if they are to stop the mischievous Loki and his alien army from
+                                    enslaving humanity...</p>
+                                <p class="run-time"> Run Time: 2h21’ . <span>MMPA: PG-13 </span> . <span>Release: 1
+                                        May 2015</span></p>
+                                <p>Director: <a href="#">Joss Whedon</a></p>
+                                <p>Stars: <a href="#">Robert Downey Jr.,</a> <a href="#">Chris Evans,</a> <a href="#">
+                                        Chris Hemsworth</a></p>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+
+
+                <!-- Start Related Movies -->
+
+            </div>
+            <div class="info-box">
+                <div class="info-box-head">
+                    <ul class="social-media">
+                        <li class="facebook"><a href="" target="_blank"><i class="bi bi-facebook"></i></a></li>
+                        <li class="twitter"><a href="" target="_blank"><i class="bi bi-twitter"></i></a></li>
+                        <li class="instagram"><a href="" target="_blank"><i class="bi bi-instagram"></i></a></li>
+                        <li class="home-page"><a href="" target="_blank"><i class="bi bi-link"></i></a></li>
+                    </ul>
+                </div>
+                <div class="status">
+                    <p class="lable">Status</p>
+                    <p class="value">Released</p>
+                </div>
+                <div class="status original-language">
+                    <p class="lable">Original Language</p>
+                    <p class="value">English</p>
+                </div>
+                <div class="status budget">
+                    <p class="lable">Budget</p>
+                    <p class="value">$200,000,000.00</p>
+                </div>
+                <div class="status revenue">
+                    <p class="lable">Revenue</p>
+                    <p class="value">$389,000,000.00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Start Footer -->
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                <img src="images/logo1.png" alt="">
+                <p>&copy; 2022 <span>Retro</span> Movie, Inc</p>
+            </div>
+
+            <ul class="social-media">
+                <li><i class="bi bi-twitter"></i></li>
+                <li><i class="bi bi-instagram"></i></li>
+                <li><i class="bi bi-facebook"></i></li>
+            </ul>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+
+    <div class="videos-section video-media">
+        <h1>Play Trailer</h1>
+        <i class="bi bi-x-lg"></i>
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/mkomfZHG5q4"></iframe>
+    </div>
+    <div class="videos-section video-trailer">
+        <h1>Play Trailer</h1>
+        <i class="bi bi-x-lg"></i>
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/mkomfZHG5q4"></iframe>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/single-page-movie.js"></script>
+
+</body>
+
+</html>

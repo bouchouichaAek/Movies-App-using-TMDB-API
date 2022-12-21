@@ -179,7 +179,11 @@ function showPopular(popular) {
         el.textContent = listRating[index];
       });
       singlePageLinkPopular.forEach((el, index, array) => {
-        el.href = "single-page.html?id=" + listIds[index];
+        if (!popular.includes("tv")) {
+          el.href = "single-page-movie.html?id=" + listIds[index];
+        } else {
+          el.href = "single-page-serie.html?id=" + listIds[index];
+        }
         el.setAttribute("target", "_blank");
       });
     });
@@ -215,7 +219,11 @@ function showCommingSoon(comming_soon) {
         el.textContent = listRating[index];
       });
       singlePageLinkCoomingSoon.forEach((el, index, array) => {
-        el.href = "single-page.html?id=" + listIds[index];
+        if (!comming_soon.includes("tv")) {
+          el.href = "single-page-movie.html?id=" + listIds[index];
+        } else {
+          el.href = "single-page-serie.html?id=" + listIds[index];
+        }
         el.setAttribute("target", "_blank");
       });
     });
@@ -249,7 +257,11 @@ function showTopRated(top_rated) {
         el.textContent = listRating[index];
       });
       singlePageLinkTopRated.forEach((el, index, array) => {
-        el.href = "single-page.html?id=" + listIds[index];
+        if (!top_rated.includes("tv")) {
+          el.href = "single-page-movie.html?id=" + listIds[index];
+        } else {
+          el.href = "single-page-serie.html?id=" + listIds[index];
+        }
         el.setAttribute("target", "_blank");
       });
     });

@@ -91,7 +91,7 @@ var closVideo = document.querySelector(".video-trailer i");
 var playTrilar = document.querySelector(".rat-trailer .trailer a");
 
 var movies_api =
-  "https://api.themoviedb.org/3/movie/" +
+  "https://api.themoviedb.org/3/tv/" +
   id +
   "?api_key=ee9ddd028297c7c00ad6168b72365519&language=en-US&append_to_response=external_ids,videos,reviews,similar,recommendations";
 
@@ -100,11 +100,12 @@ fetch(movies_api)
   .then(function (response) {
     movieDetail.style.backgroundImage =
       "url(" + Moviesimage + response.backdrop_path + ")";
-    title.textContent = response.title;
+    title.textContent = response.name;
     poster.src = Moviesimage + response.poster_path;
-    date.textContent = getFormattedDate(response.release_date);
-    year.textContent = getYerar(response.release_date);
-    runTime.textContent = timeConvert(response.runtime);
+    // console.log(response.created_by);
+    date.textContent = getFormattedDate(response.first_air_date);
+    year.textContent = getYerar(response.first_air_date);
+    // runTime.textContent = timeConvert(response.runtime);
     description.textContent = response.overview;
     rating.textContent = response.vote_average.toFixed(1);
     for (let i = 0; i < response.genres.length; i++) {
@@ -207,22 +208,16 @@ fetch(movies_api)
     relatedMoviesTotal.textContent = response.similar.results.length;
     var ids = [];
     for (let i = 0; i < 5; i++) {
-      var {
-        original_title,
-        overview,
-        poster_path,
-        release_date,
-        vote_average,
-        id,
-      } = response.similar.results[i];
+      var { name, overview, poster_path, first_air_date, vote_average, id } =
+        response.similar.results[i];
       ids.push(id);
       var relatedMovie = document.createElement("div");
       relatedMovie.classList.add("related-movie");
       relatedMovie.innerHTML = `
         <img src="${Moviesimage + poster_path}" alt="">
           <div class="mv-item-infor">
-            <h6><a href="single-page.html?id=${id}" target="_blank">${original_title} <span>(${getYerar(
-        release_date
+            <h6><a href="single-page.html?id=${id}" target="_blank">${name} <span>(${getYerar(
+        first_air_date
       )})</span></a></h6>
             <p class="rate"> <i class="bi bi-star-fill"></i><span>${vote_average.toFixed(
               1
@@ -237,9 +232,9 @@ fetch(movies_api)
     for (let i = 0; i < ids.length; i++) {
       // console.log(ids[i]);
       fetch(
-        "https://api.themoviedb.org/3/movie/" +
+        "https://api.themoviedb.org/3/tv/" +
           ids[i] +
-          "?api_key=ee9ddd028297c7c00ad6168b72365519&append_to_response=release_dates,credits"
+          "?api_key=ee9ddd028297c7c00ad6168b72365519&append_to_response=content_ratings,credits"
       )
         .then((response) => response.json())
         .then(function (response) {
@@ -251,28 +246,31 @@ fetch(movies_api)
             var director = "";
             var stars = [];
             if (response.id == ele.id) {
-              for (let i = 0; i < response.release_dates.results.length; i++) {
-                if (response.release_dates.results[i].iso_3166_1 == "US") {
-                  cert =
-                    response.release_dates.results[i].release_dates[0]
-                      .certification;
+              console.log(response);
+              for (
+                let i = 0;
+                i < response.content_ratings.results.length;
+                i++
+              ) {
+                if (response.content_ratings.results[i].iso_3166_1 == "US") {
+                  cert = response.content_ratings.results[i].rating;
                 }
               }
+
               for (let i = 0; i < response.credits.crew.length; i++) {
                 if (response.credits.crew[i].job == "Director") {
                   director = response.credits.crew[i].name;
                 }
               }
               for (let i = 0; i < 3; i++) {
-                console.log();
                 stars.push(response.credits.cast[i].name);
               }
-              console.log(stars);
+              //   console.log(stars);
 
-              ele.innerHTML = `<p class="run-time"> Run Time: ${timeConvert(
-                response.runtime
-              )} . <span>MMPA: ${cert} </span> . <span>Release: ${getFormattedDateSimilar(
-                response.release_date
+              ele.innerHTML = `<p class="run-time"> Number Of Episodes: ${
+                response.number_of_episodes
+              } . <span>MMPA: ${cert} </span> . <span>Release: ${getFormattedDateSimilar(
+                response.first_air_date
               )}</span></p>
                 <p>Director: <a href="#">${director}</a></p>
                 <p>Stars: <a href="#">${stars[0]},</a> <a href="#">${
@@ -287,29 +285,20 @@ fetch(movies_api)
     // console.log(response);
   });
 fetch(
-  "https://api.themoviedb.org/3/movie/" +
+  "https://api.themoviedb.org/3/tv/" +
     id +
-    "/release_dates?api_key=ee9ddd028297c7c00ad6168b72365519"
+    "/content_ratings?api_key=ee9ddd028297c7c00ad6168b72365519"
 )
   .then((response) => response.json())
   .then(function (response) {
     for (let i = 0; i < response.results.length; i++) {
       if (response.results[i].iso_3166_1 === "US") {
-        for (
-          let index = 0;
-          index < response.results[i].release_dates.length;
-          index++
-        ) {
-          if (!response.results[i].release_dates[index].certification == "") {
-            cert.textContent =
-              response.results[i].release_dates[index].certification;
-          }
-        }
+        cert.textContent = response.results[i].rating;
       }
     }
   });
 fetch(
-  "https://api.themoviedb.org/3/movie/" +
+  "https://api.themoviedb.org/3/tv/" +
     id +
     "/videos?api_key=ee9ddd028297c7c00ad6168b72365519"
 )
@@ -329,11 +318,10 @@ fetch(
         listTrilar[Math.floor(Math.random() * listTrilar.length)].key;
     } else {
       playTrilar.style.display = "none";
-      console.log();
     }
   });
 fetch(
-  "https://api.themoviedb.org/3/movie/" +
+  "https://api.themoviedb.org/3/tv/" +
     id +
     "/credits?api_key=ee9ddd028297c7c00ad6168b72365519&language=en-US"
 )
@@ -347,20 +335,20 @@ fetch(
     // console.log(response.cast.length);
     // console.log(castTotal.textContent);
 
-    for (let i = 0; i < response.crew.length; i++) {
-      if (response.crew[i].job == "Director") {
-        director.textContent = response.crew[i].name;
-      }
-    }
-    for (let i = 0; i < response.crew.length; i++) {
-      if (response.crew[i].job == "Writer") {
-        var li = document.createElement("li");
-        li.append(document.createTextNode(response.crew[i].name));
+    // for (let i = 0; i < response.crew.length; i++) {
+    //   if (response.crew[i].job == "Director") {
+    //     director.textContent = response.crew[i].name;
+    //   }
+    // }
+    // for (let i = 0; i < response.crew.length; i++) {
+    //   if (response.crew[i].job == "Writer") {
+    //     var li = document.createElement("li");
+    //     li.append(document.createTextNode(response.crew[i].name));
 
-        writers.append(li);
-        // console.log(response.crew[i].name);
-      }
-    }
+    //     writers.append(li);
+    //     // console.log(response.crew[i].name);
+    //   }
+    // }
     for (let i = 0; i < response.cast.length; i++) {
       actImage.push(catImage + response.cast[i].profile_path);
       actName.push(response.cast[i].name);
@@ -379,7 +367,7 @@ fetch(
   });
 
 fetch(
-  "https://api.themoviedb.org/3/movie/" +
+  "https://api.themoviedb.org/3/tv/" +
     id +
     "/images?api_key=ee9ddd028297c7c00ad6168b72365519"
 )
