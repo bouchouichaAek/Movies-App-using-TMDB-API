@@ -62,6 +62,11 @@ var rewiews = document.querySelector(".information .review-box .reviews");
 var relatedMovies = document.querySelector(
   ".information .related-movies-box .related-movies"
 );
+
+var castTotal = document.querySelector(".information .cast-box .total span");
+var mediaTotal = document.querySelectorAll(
+  ".information .media-box .total span"
+);
 var rewiewsTotal = document.querySelector(
   ".information .review-box .total span"
 );
@@ -129,13 +134,16 @@ fetch(movies_api)
     }
     // console.log(response.videos.results.length);
 
-    var maxDisplayVideos = 5;
-    if (response.reviews.results.length < 6) {
+    var maxDisplayVideos = 6;
+    if (response.videos.results.length < 6) {
       maxDisplayVideos = response.videos.results.length;
     }
-
+    // console.log(response.videos.results.length);
+    // console.log(maxDisplayVideos);
     for (let i = 0; i < maxDisplayVideos; i++) {
-      const { key, name } = response.videos.results[i];
+      // console.log(response.videos.results[i].key);
+      // console.log(response.videos.results[i].name);
+      var { key, name } = response.videos.results[i];
       var v_item = document.createElement("div");
       v_item.classList.add("vd-item");
       v_item.innerHTML = `
@@ -156,7 +164,7 @@ fetch(movies_api)
       videosMedia.append(v_item);
     }
     rewiewsTotal.textContent = response.reviews.total_results;
-    console.log(response);
+    // console.log(response);
 
     var maxDisplayReviews = 5;
     if (response.reviews.results.length < 5) {
@@ -213,7 +221,7 @@ fetch(movies_api)
       relatedMovie.innerHTML = `
         <img src="${Moviesimage + poster_path}" alt="">
           <div class="mv-item-infor">
-            <h6><a href="#">${original_title} <span>(${getYerar(
+            <h6><a href="single-page.html?id=${id}" target="_blank">${original_title} <span>(${getYerar(
         release_date
       )})</span></a></h6>
             <p class="rate"> <i class="bi bi-star-fill"></i><span>${vote_average.toFixed(
@@ -260,16 +268,22 @@ fetch(
 )
   .then((response) => response.json())
   .then(function (response) {
-    var listTrilar = [];
-    for (let i = 0; i < response.results.length; i++) {
-      if (response.results[i].type == "Trailer") {
-        listTrilar.push(response.results[i]);
+    var videosTotal = mediaTotal[1];
+    videosTotal.textContent = response.results.length;
+    if (response.results.length > 0) {
+      var listTrilar = [];
+      for (let i = 0; i < response.results.length; i++) {
+        if (response.results[i].type == "Trailer") {
+          listTrilar.push(response.results[i]);
+        }
       }
+      trilarContent.src =
+        moviesTrilar +
+        listTrilar[Math.floor(Math.random() * listTrilar.length)].key;
+    } else {
+      playTrilar.style.display = "none";
+      console.log();
     }
-    trilarContent.src =
-      moviesTrilar +
-      listTrilar[Math.floor(Math.random() * listTrilar.length)].key;
-    // console.log(listTrilar);
   });
 fetch(
   "https://api.themoviedb.org/3/movie/" +
@@ -278,9 +292,14 @@ fetch(
 )
   .then((response) => response.json())
   .then(function (response) {
+    castTotal.textContent = response.cast.length;
     var actImage = [];
     var actName = [];
     var actCharacter = [];
+
+    // console.log(response.cast.length);
+    // console.log(castTotal.textContent);
+
     for (let i = 0; i < response.crew.length; i++) {
       if (response.crew[i].job == "Director") {
         director.textContent = response.crew[i].name;
@@ -319,7 +338,19 @@ fetch(
 )
   .then((response) => response.json())
   .then(function (response) {
-    for (let i = 0; i < 9; i++) {
+    // console.log(response.backdrops.length);
+    var imageTotal = mediaTotal[0];
+    imageTotal.textContent = response.backdrops.length;
+
+    // console.log(response.posters.length);
+    var posterTotal = mediaTotal[2];
+    posterTotal.textContent = response.posters.length;
+
+    var maxDisplaybackdrops = 9;
+    if (response.backdrops.length < 9) {
+      maxDisplaybackdrops = response.backdrops.length;
+    }
+    for (let i = 0; i < maxDisplaybackdrops; i++) {
       var img = document.createElement("img");
       var anchor = document.createElement("a");
       img.src = Moviesimage + response.backdrops[i].file_path;

@@ -1029,8 +1029,10 @@ footer .social-media li {
 /* Start Review */
 
 .information .reviews .review {
-  border-bottom: 1px solid #233a50;
   padding: 20px 20px 20px 0;
+}
+.information .reviews .review:not(:last-of-type) {
+  border-bottom: 1px solid #233a50;
 }
 .information .reviews .review .user-infor {
   display: flex;
