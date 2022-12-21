@@ -127,7 +127,14 @@ fetch(movies_api)
     } else {
       revenueValue.textContent = "Unkown";
     }
-    for (let i = 0; i < 6; i++) {
+    // console.log(response.videos.results.length);
+
+    var maxDisplayVideos = 5;
+    if (response.reviews.results.length < 6) {
+      maxDisplayVideos = response.videos.results.length;
+    }
+
+    for (let i = 0; i < maxDisplayVideos; i++) {
       const { key, name } = response.videos.results[i];
       var v_item = document.createElement("div");
       v_item.classList.add("vd-item");
@@ -149,13 +156,13 @@ fetch(movies_api)
       videosMedia.append(v_item);
     }
     rewiewsTotal.textContent = response.reviews.total_results;
-    // console.log(response);
+    console.log(response);
 
-    var maxDisplay = 5;
+    var maxDisplayReviews = 5;
     if (response.reviews.results.length < 5) {
-      maxDisplay = response.reviews.results.length;
+      maxDisplayReviews = response.reviews.results.length;
     }
-    for (let i = 0; i < maxDisplay; i++) {
+    for (let i = 0; i < maxDisplayReviews; i++) {
       var { author, content, author_details, created_at } =
         response.reviews.results[i];
       var rewiew = document.createElement("div");
