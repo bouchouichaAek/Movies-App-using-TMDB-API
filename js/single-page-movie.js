@@ -1,6 +1,8 @@
 var movieDetail = document.querySelector(".movie-detail");
 var poster = document.querySelector(".movie-detail img");
-var title = document.querySelector(".movie-detail .info .box-title .title");
+var Moviestitle = document.querySelector(
+  ".movie-detail .info .box-title .title"
+);
 var year = document.querySelector(".movie-detail .info .box-title span");
 var cert = document.querySelector(".movie-detail .info .text-box .cert");
 var date = document.querySelector(".movie-detail .info .text-box .relaes-date");
@@ -100,7 +102,7 @@ fetch(movies_api)
   .then(function (response) {
     movieDetail.style.backgroundImage =
       "url(" + Moviesimage + response.backdrop_path + ")";
-    title.textContent = response.title;
+    Moviestitle.textContent = response.title;
     poster.src = Moviesimage + response.poster_path;
     date.textContent = getFormattedDate(response.release_date);
     year.textContent = getYerar(response.release_date);
@@ -204,24 +206,18 @@ fetch(movies_api)
       rewiews.append(rewiew);
     }
 
-    relatedMoviesTotal.textContent = response.similar.results.length;
+    relatedMoviesTotal.textContent = response.recommendations.results.length;
     var ids = [];
     for (let i = 0; i < 5; i++) {
-      var {
-        original_title = title,
-        overview,
-        poster_path,
-        release_date,
-        vote_average,
-        id,
-      } = response.similar.results[i];
+      var { title, overview, poster_path, release_date, vote_average, id } =
+        response.recommendations.results[i];
       ids.push(id);
       var relatedMovie = document.createElement("div");
       relatedMovie.classList.add("related-movie");
       relatedMovie.innerHTML = `
         <img src="${Moviesimage + poster_path}" alt="">
           <div class="mv-item-infor">
-            <h6><a href="single-page.html?id=${id}" target="_blank">${original_title} <span>(${getYerar(
+            <h6><a href="single-page.html?id=${id}" target="_blank">${title} <span>(${getYerar(
         release_date
       )})</span></a></h6>
             <p class="rate"> <i class="bi bi-star-fill"></i><span>${vote_average.toFixed(

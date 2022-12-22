@@ -907,7 +907,6 @@ footer .social-media li {
 /* Start Media */
 
 .information .media-box {
-  /* display: none; */
 }
 
 .information .media-box .images {
@@ -1087,7 +1086,7 @@ footer .social-media li {
 
 /* End Review */
 
-/* Start Review */
+/* Start Related Movie */
 .related-movies {
 }
 .related-movies .related-movie {
@@ -1179,7 +1178,77 @@ footer .social-media li {
 .related-movies .related-movie .mv-item-infor p a {
   color: #4280bf;
 }
-/* End Review */
+/* End Related  */
+
+/* Start Season */
+
+.seasons {
+}
+.seasons .season {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 30px;
+}
+.seasons .season:hover div a {
+  color: #dcf836;
+}
+.seasons .season img {
+  width: 120px;
+  border-radius: 5px;
+  margin-right: 15px;
+}
+.seasons .season div {
+  border: 0;
+  font-family: inherit;
+  font-size: 100%;
+  font-style: inherit;
+  font-weight: inherit;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+.seasons .season div a {
+  font-family: "Dosis", sans-serif;
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-right: 100px;
+}
+.seasons .season div p {
+  padding-right: 20px;
+  font-family: "Nunito", sans-serif;
+  font-size: 14px;
+  color: #abb7c4;
+  font-weight: 300;
+  text-transform: none;
+  line-height: 24px !important;
+}
+.seasons .season div p:last-of-type {
+  width: 60%;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .seasons .season div p:last-of-type {
+    width: 100%;
+    text-align: left;
+  }
+}
+@media (max-width: 320px) {
+  .seasons .season div a {
+    font-size: 12px;
+    /* font-weight: 500; */
+  }
+  .seasons .season div p {
+    font-size: 11px;
+  }
+}
+
+/* End Season */
 
 .information .info-box {
   flex-basis: 40%;
@@ -1227,6 +1296,9 @@ footer .social-media li {
   font-family: "Dosis", sans-serif;
   font-weight: 600;
   margin-top: -12px;
+}
+.information .info-box .status .value img {
+  width: 100px;
 }
 
 /* End Information */

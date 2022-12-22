@@ -43,17 +43,20 @@ var movieTwitterPage = document.querySelector(
 var movieInstgramPage = document.querySelector(
   ".information .info-box .info-box-head ul .instagram a"
 );
-var statusValue = document.querySelector(
-  ".information .info-box .status .value"
+
+var originalName = document.querySelector(
+  ".information .info-box .original-name .value"
 );
-var originalLanguageValue = document.querySelector(
-  ".information .info-box .status.original-language .value"
+var statusInfo = document.querySelector(
+  ".information .info-box .status-status .value"
 );
-var budgetValue = document.querySelector(
-  ".information .info-box .status.budget .value"
+var networksInfo = document.querySelector(
+  ".information .info-box .networks .value"
 );
-var revenueValue = document.querySelector(
-  ".information .info-box .status.revenue .value"
+var typeInfo = document.querySelector(".information .info-box .type .value");
+
+var originalLanguage = document.querySelector(
+  ".information .info-box .original-language .value"
 );
 var imagesMedia = document.querySelector(".information .media-box .images");
 var videosMedia = document.querySelector(".information .media-box .videos");
@@ -62,6 +65,7 @@ var rewiews = document.querySelector(".information .review-box .reviews");
 var relatedMovies = document.querySelector(
   ".information .related-movies-box .related-movies"
 );
+var seasons = document.querySelector(".information .season-box .seasons");
 
 var castTotal = document.querySelector(".information .cast-box .total span");
 var mediaTotal = document.querySelectorAll(
@@ -72,6 +76,9 @@ var rewiewsTotal = document.querySelector(
 );
 var relatedMoviesTotal = document.querySelector(
   ".information .related-movies-box .total span"
+);
+var seasonTotal = document.querySelector(
+  ".information .season-box .total span"
 );
 
 var filterSection = document.querySelectorAll(".information .section .box");
@@ -93,7 +100,7 @@ var playTrilar = document.querySelector(".rat-trailer .trailer a");
 var movies_api =
   "https://api.themoviedb.org/3/tv/" +
   id +
-  "?api_key=ee9ddd028297c7c00ad6168b72365519&language=en-US&append_to_response=external_ids,videos,reviews,similar,recommendations";
+  "?api_key=ee9ddd028297c7c00ad6168b72365519&language=en-US&append_to_response=external_ids,videos,reviews,recommendations";
 
 fetch(movies_api)
   .then((response) => response.json())
@@ -102,9 +109,14 @@ fetch(movies_api)
       "url(" + Moviesimage + response.backdrop_path + ")";
     title.textContent = response.name;
     poster.src = Moviesimage + response.poster_path;
-    // console.log(response.created_by);
     date.textContent = getFormattedDate(response.first_air_date);
-    year.textContent = getYerar(response.first_air_date);
+    if (response.in_production) {
+      year.textContent = `${getYerar(response.first_air_date)} - CURRENT`;
+    } else {
+      year.textContent = `${getYerar(response.first_air_date)} - ${getYerar(
+        response.last_air_date
+      )}`;
+    }
     runTime.textContent = response.number_of_episodes + " Episodes";
     description.textContent = response.overview;
     rating.textContent = response.vote_average.toFixed(1);
@@ -120,30 +132,30 @@ fetch(movies_api)
       "https://twitter.com/" + response.external_ids.twitter_id;
     movieInstgramPage.href =
       "https://www.instagram.com/" + response.external_ids.instagram_id;
-    statusValue.textContent = response.status;
-    originalLanguageValue.textContent =
-      response.spoken_languages[0].english_name;
-    if (response.budget != 0) {
-      budgetValue.textContent = formatter.format(response.budget);
-    } else {
-      budgetValue.textContent = "Unkown";
+    originalName.textContent = response.original_name;
+    statusInfo.textContent = response.status;
+    for (let i = 0; i < response.networks.length; i++) {
+      var { name, logo_path } = response.networks[i];
+      var liLogo = document.createElement("li");
+      var anchor = document.createElement("a");
+      var logo = document.createElement("img");
+      logo.src = "https://www.themoviedb.org/t/p/h30" + logo_path;
+      logo.alt = name;
+      anchor.href = "#";
+      liLogo.append(anchor);
+      anchor.append(logo);
+      networksInfo.append(liLogo);
     }
-    if (response.revenue != 0) {
-      revenueValue.textContent = formatter.format(response.revenue);
-    } else {
-      revenueValue.textContent = "Unkown";
+    typeInfo.textContent = response.type;
+    for (let i = 0; i < response.spoken_languages.length; i++) {
+      originalLanguage.textContent = response.spoken_languages[i].english_name;
     }
-    // console.log(response.videos.results.length);
 
     var maxDisplayVideos = 6;
     if (response.videos.results.length < 6) {
       maxDisplayVideos = response.videos.results.length;
     }
-    // console.log(response.videos.results.length);
-    // console.log(maxDisplayVideos);
     for (let i = 0; i < maxDisplayVideos; i++) {
-      // console.log(response.videos.results[i].key);
-      // console.log(response.videos.results[i].name);
       var { key, name } = response.videos.results[i];
       var v_item = document.createElement("div");
       v_item.classList.add("vd-item");
@@ -165,7 +177,6 @@ fetch(movies_api)
       videosMedia.append(v_item);
     }
     rewiewsTotal.textContent = response.reviews.total_results;
-    // console.log(response);
 
     var maxDisplayReviews = 5;
     if (response.reviews.results.length < 5) {
@@ -205,18 +216,18 @@ fetch(movies_api)
       rewiews.append(rewiew);
     }
 
-    relatedMoviesTotal.textContent = response.similar.results.length;
+    relatedMoviesTotal.textContent = response.recommendations.results.length;
     var ids = [];
     for (let i = 0; i < 5; i++) {
       var { name, overview, poster_path, first_air_date, vote_average, id } =
-        response.similar.results[i];
+        response.recommendations.results[i];
       ids.push(id);
       var relatedMovie = document.createElement("div");
       relatedMovie.classList.add("related-movie");
       relatedMovie.innerHTML = `
         <img src="${Moviesimage + poster_path}" alt="">
           <div class="mv-item-infor">
-            <h6><a href="single-page.html?id=${id}" target="_blank">${name} <span>(${getYerar(
+            <h6><a href="single-page-serie.html?id=${id}" target="_blank">${name} <span>(${getYerar(
         first_air_date
       )})</span></a></h6>
             <p class="rate"> <i class="bi bi-star-fill"></i><span>${vote_average.toFixed(
@@ -230,7 +241,6 @@ fetch(movies_api)
       relatedMovies.append(relatedMovie);
     }
     for (let i = 0; i < ids.length; i++) {
-      // console.log(ids[i]);
       fetch(
         "https://api.themoviedb.org/3/tv/" +
           ids[i] +
@@ -241,12 +251,12 @@ fetch(movies_api)
           var info = document.querySelectorAll(
             ".related-movies .related-movie .mv-item-infor div"
           );
+
           info.forEach((ele, index, array) => {
             var cert = "";
             var director = "";
             var stars = [];
             if (response.id == ele.id) {
-              console.log(response);
               for (
                 let i = 0;
                 i < response.content_ratings.results.length;
@@ -258,31 +268,66 @@ fetch(movies_api)
               }
 
               for (let i = 0; i < response.credits.crew.length; i++) {
-                if (response.credits.crew[i].job == "Director") {
+                if (
+                  response.credits.crew[i].known_for_department == "Directing"
+                ) {
                   director = response.credits.crew[i].name;
                 }
               }
-              for (let i = 0; i < 3; i++) {
-                stars.push(response.credits.cast[i].name);
+
+              if (response.credits.cast.length != 0) {
+                for (let i = 0; i < 3; i++) {
+                  stars.push(
+                    "<a href='#'>" + response.credits.cast[i].name + "</a>"
+                  );
+                }
               }
-              //   console.log(stars);
 
               ele.innerHTML = `<p class="run-time"> Number Of Episodes: ${
                 response.number_of_episodes
               } . <span>MMPA: ${cert} </span> . <span>Release: ${getFormattedDateSimilar(
                 response.first_air_date
               )}</span></p>
-                <p>Director: <a href="#">${director}</a></p>
-                <p>Stars: <a href="#">${stars[0]},</a> <a href="#">${
-                stars[1]
-              },</a> <a href="#">${stars[2]}</a></p>`;
+                <p>Director: ${
+                  director != ""
+                    ? "<a href='#'>" + director + "</a>"
+                    : "Unknow Name Director "
+                }</p>
+                <p>Stars: ${
+                  stars.length != 0 ? stars.join(" , ") : "Unknow Name Stars"
+                } `;
             }
           });
-
-          // console.log(info);
         });
     }
-    // console.log(response);
+    seasonTotal.textContent = response.number_of_seasons;
+
+    var maxDisplaySeason = 11;
+    if (response.seasons.length < 11) {
+      maxDisplaySeason = response.seasons.length;
+    }
+
+    for (let i = 0; i < maxDisplaySeason; i++) {
+      var { name, episode_count, poster_path, air_date } = response.seasons[i];
+      if (response.seasons[i].name != "Specials") {
+        var season = document.createElement("div");
+        season.classList.add("season");
+        season.innerHTML = `
+        <img src="https://image.tmdb.org/t/p/original${poster_path}" alt="">
+        <div>
+            <a href="#">${name}</a>
+            <p>${episode_count} Episodes</p>
+            <p>${name} of ${response.name} 
+                ${
+                  air_date != null
+                    ? "premiered on " + getFormattedDateSeasons(air_date)
+                    : " comming song "
+                }.</p>
+        </div>
+        `;
+        seasons.append(season);
+      }
+    }
   });
 fetch(
   "https://api.themoviedb.org/3/tv/" +
@@ -332,9 +377,6 @@ fetch(
     var actName = [];
     var actCharacter = [];
 
-    // console.log(response.cast.length);
-    // console.log(castTotal.textContent);
-
     // for (let i = 0; i < response.crew.length; i++) {
     //   if (response.crew[i].job == "Director") {
     //     director.textContent = response.crew[i].name;
@@ -346,16 +388,20 @@ fetch(
     //     li.append(document.createTextNode(response.crew[i].name));
 
     //     writers.append(li);
-    //     // console.log(response.crew[i].name);
     //   }
     // }
     for (let i = 0; i < response.cast.length; i++) {
-      actImage.push(catImage + response.cast[i].profile_path);
+      actImage.push(response.cast[i].profile_path);
       actName.push(response.cast[i].name);
       actCharacter.push(response.cast[i].character);
     }
     actorPhoto.forEach((el, index, array) => {
-      el.src = actImage[index];
+      if (actImage[index] != null) {
+        el.src = catImage + actImage[index];
+      } else {
+        el.src = "images/no-image.jpg";
+        console.log("No Image");
+      }
     });
     actorName.forEach((el, index, array) => {
       el.textContent = actName[index];
@@ -363,7 +409,6 @@ fetch(
     actorCharacter.forEach((el, index, array) => {
       el.textContent = actCharacter[index];
     });
-    // console.log(response);
   });
 
 fetch(
@@ -373,11 +418,9 @@ fetch(
 )
   .then((response) => response.json())
   .then(function (response) {
-    // console.log(response.backdrops.length);
     var imageTotal = mediaTotal[0];
     imageTotal.textContent = response.backdrops.length;
 
-    // console.log(response.posters.length);
     var posterTotal = mediaTotal[2];
     posterTotal.textContent = response.posters.length;
 
@@ -403,7 +446,6 @@ fetch(
       anchor.append(poster);
       postersMedia.append(anchor);
     }
-    // console.log(postersMedia);
   });
 
 playTrilar.addEventListener("click", function (e) {
@@ -439,6 +481,15 @@ function getFormattedDate(date) {
   let month = (1 + date.getMonth()).toString().padStart(2, "0");
   let day = date.getDate().toString().padStart(2, "0");
   month = date.toLocaleString("default", { month: "short" });
+
+  return month + " " + day + ", " + year;
+}
+function getFormattedDateSeasons(date) {
+  var date = new Date(date);
+  let year = date.getFullYear();
+  let month = (1 + date.getMonth()).toString().padStart(2, "0");
+  let day = date.getDate().toString().padStart(2, "0");
+  month = date.toLocaleString("default", { month: "long" });
 
   return month + " " + day + ", " + year;
 }
