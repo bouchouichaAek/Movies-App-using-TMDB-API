@@ -105,7 +105,7 @@ fetch(movies_api)
       ? (movieDetail.style.backgroundImage =
           "url(" + Moviesimage + response.backdrop_path + ")")
       : (movieDetail.style.backgroundImage =
-          "url(/images/header-background.jpg)");
+          "url(../images/header-background.jpg)");
     if (response.content_ratings.results.length > 0) {
       for (let i = 0; i < response.content_ratings.results.length; i++) {
         if (response.content_ratings.results[i].iso_3166_1 === "US") {
