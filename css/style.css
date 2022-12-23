@@ -860,6 +860,20 @@ footer .social-media li {
 .information .cast-box {
   /* margin-bottom: 50px; */
 }
+.information .cast-box p {
+  color: white;
+  font-family: "Dosis", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  /* margin: -20px 0 30px; */
+}
+
+@media (max-width: 425px) {
+  .information .cast-box p {
+    font-size: 12px;
+  }
+}
 .information .cast-box .casts {
 }
 .information .cast-box .casts .cast {
@@ -908,6 +922,20 @@ footer .social-media li {
 
 .information .media-box {
 }
+.information .media-box p {
+  color: white;
+  font-family: "Dosis", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0 0 30px;
+}
+
+@media (max-width: 425px) {
+  .information .media-box p {
+    font-size: 12px;
+  }
+}
 
 .information .media-box .images {
   display: flex;
@@ -935,6 +963,9 @@ footer .social-media li {
 .information .media-box .videos .vd-item {
   /*margin-bottom: 30px; */
   width: 210px;
+}
+.information .media-box .videos .vd-item .vd-it a {
+  cursor: pointer;
 }
 @media (max-width: 425px) {
   .information .media-box .videos .vd-item {
@@ -1031,6 +1062,22 @@ footer .social-media li {
 .information .reviews .review {
   padding: 20px 20px 20px 0;
 }
+
+.information .reviews p {
+  color: white;
+  font-family: "Dosis", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0 0 30px;
+}
+
+@media (max-width: 425px) {
+  .information .reviews p {
+    font-size: 12px;
+  }
+}
+
 .information .reviews .review:not(:last-of-type) {
   border-bottom: 1px solid #233a50;
 }
