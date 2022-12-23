@@ -105,7 +105,7 @@ fetch(movies_api)
       ? (movieDetail.style.backgroundImage =
           "url(" + Moviesimage + response.backdrop_path + ")")
       : (movieDetail.style.backgroundImage =
-          "url(../images/header-background.jpg)");
+          "url(/images/header-background.jpg)");
     if (response.content_ratings.results.length > 0) {
       for (let i = 0; i < response.content_ratings.results.length; i++) {
         if (response.content_ratings.results[i].iso_3166_1 === "US") {
@@ -376,14 +376,19 @@ fetch(movies_api)
     if (response.seasons.length < 11) {
       maxDisplaySeason = response.seasons.length;
     }
-
+    // No-Image-Placeholder.svg
     for (let i = 0; i < maxDisplaySeason; i++) {
+      console.log(response.seasons[i]);
       var { name, episode_count, poster_path, air_date } = response.seasons[i];
       if (response.seasons[i].name != "Specials") {
         var season = document.createElement("div");
         season.classList.add("season");
         season.innerHTML = `
-        <img src="https://image.tmdb.org/t/p/original${poster_path}" alt="">
+        <img src="${
+          poster_path != null
+            ? "https://image.tmdb.org/t/p/original" + poster_path
+            : "images/No-Image-Placeholder.svg"
+        }" alt="">
         <div>
             <a href="#">${name}</a>
             <p>${episode_count} Episodes</p>
