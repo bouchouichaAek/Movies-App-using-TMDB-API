@@ -1,24 +1,13 @@
-var originalTitlePopular = document.querySelectorAll(
-  ".what-is-popular .filter-boxs .title"
+var listPopular = document.querySelector(
+  ".Section.what-is-popular .filter-boxs"
 );
-var posterPopular = document.querySelectorAll(
-  ".what-is-popular .filter-boxs img"
-);
-var ratingPopular = document.querySelectorAll(
-  ".what-is-popular .filter-boxs .info .rating span"
-);
-var categoryPopular = document.querySelectorAll(
-  ".what-is-popular .filter-boxs .info ul.category"
-);
+
 var filterListPopular = document.querySelectorAll(
   ".what-is-popular .filtering .filter li"
 );
 
 var listTypePopular = document.querySelectorAll(
   ".what-is-popular .filtering .filter li"
-);
-var singlePageLinkPopular = document.querySelectorAll(
-  ".what-is-popular .filter-boxs .img a"
 );
 // ###############################################################
 var originalTitleCoomingSoon = document.querySelectorAll(
@@ -76,9 +65,11 @@ var comming_soon =
 var top_rated =
   "https://api.themoviedb.org/3/movie/top_rated?api_key=ee9ddd028297c7c00ad6168b72365519&language=en-US&page=1";
 
-showPopular(popular);
-showCommingSoon(comming_soon);
-showTopRated(top_rated);
+// showPopular(popular);
+// showCommingSoon(comming_soon);
+// showTopRated(top_rated);
+
+getData(popular);
 
 filterListPopular.forEach((el) => {
   el.addEventListener("click", function (e) {
@@ -89,180 +80,172 @@ filterListPopular.forEach((el) => {
     listTypePopular.forEach((ele) => {
       if (ele.classList.contains("active")) {
         console.log(ele.dataset["filter"]);
-        if (ele.dataset["filter"] == "movies") {
-          showPopular(
-            "https://api.themoviedb.org/3/movie/popular?api_key=ee9ddd028297c7c00ad6168b72365519&language=en-US&page=1"
-          );
-        } else {
-          showPopular(
-            "https://api.themoviedb.org/3/tv/popular?api_key=ee9ddd028297c7c00ad6168b72365519&language=en-US&page=1"
-          );
-        }
+        getData(
+          "https://api.themoviedb.org/3/" +
+            ele.dataset["filter"] +
+            "/top_rated?api_key=ee9ddd028297c7c00ad6168b72365519&language=en-US&page=1"
+        );
       }
     });
   });
 });
 
-filterListCoomingSoon.forEach((el) => {
-  el.addEventListener("click", function (e) {
-    filterListCoomingSoon.forEach((el) => {
-      el.classList.remove("active");
-      e.target.classList.add("active");
-    });
-    listTypeCoomingSoon.forEach((ele) => {
-      if (ele.classList.contains("active")) {
-        console.log(ele.dataset["filter"]);
-        if (ele.dataset["filter"] == "movies") {
-          showCommingSoon(
-            "https://api.themoviedb.org/3/movie/upcoming?api_key=ee9ddd028297c7c00ad6168b72365519&language=en-US&page=1"
-          );
-        } else {
-          showCommingSoon(
-            "https://api.themoviedb.org/3/tv/on_the_air?api_key=ee9ddd028297c7c00ad6168b72365519&language=en-US&page=1"
-          );
-        }
-      }
-    });
-  });
-});
+// filterListCoomingSoon.forEach((el) => {
+//   el.addEventListener("click", function (e) {
+//     filterListCoomingSoon.forEach((el) => {
+//       el.classList.remove("active");
+//       e.target.classList.add("active");
+//     });
+//     listTypeCoomingSoon.forEach((ele) => {
+//       if (ele.classList.contains("active")) {
+//         console.log(ele.dataset["filter"]);
+//         if (ele.dataset["filter"] == "movies") {
+//           showCommingSoon(
+//             "https://api.themoviedb.org/3/movie/upcoming?api_key=ee9ddd028297c7c00ad6168b72365519&language=en-US&page=1"
+//           );
+//         } else {
+//           showCommingSoon(
+//             "https://api.themoviedb.org/3/tv/on_the_air?api_key=ee9ddd028297c7c00ad6168b72365519&language=en-US&page=1"
+//           );
+//         }
+//       }
+//     });
+//   });
+// });
 
-filterListTopRated.forEach((el) => {
-  el.addEventListener("click", function (e) {
-    filterListTopRated.forEach((el) => {
-      el.classList.remove("active");
-      e.target.classList.add("active");
-    });
-    listTypeTopRated.forEach((ele) => {
-      if (ele.classList.contains("active")) {
-        console.log(ele.dataset["filter"]);
-        if (ele.dataset["filter"] == "movies") {
-          showTopRated(
-            "https://api.themoviedb.org/3/movie/top_rated?api_key=ee9ddd028297c7c00ad6168b72365519&language=en-US&page=1"
-          );
-        } else {
-          showTopRated(
-            "https://api.themoviedb.org/3/tv/top_rated?api_key=ee9ddd028297c7c00ad6168b72365519&language=en-US&page=1"
-          );
-        }
-      }
-    });
-  });
-});
+// filterListTopRated.forEach((el) => {
+//   el.addEventListener("click", function (e) {
+//     filterListTopRated.forEach((el) => {
+//       el.classList.remove("active");
+//       e.target.classList.add("active");
+//     });
+//     listTypeTopRated.forEach((ele) => {
+//       if (ele.classList.contains("active")) {
+//         console.log(ele.dataset["filter"]);
+//         if (ele.dataset["filter"] == "movies") {
+//           showTopRated(
+//             "https://api.themoviedb.org/3/movie/top_rated?api_key=ee9ddd028297c7c00ad6168b72365519&language=en-US&page=1"
+//           );
+//         } else {
+//           showTopRated(
+//             "https://api.themoviedb.org/3/tv/top_rated?api_key=ee9ddd028297c7c00ad6168b72365519&language=en-US&page=1"
+//           );
+//         }
+//       }
+//     });
+//   });
+// });
 
-function showPopular(popular) {
-  fetch(popular)
-    .then((response) => response.json())
-    .then((response) => response["results"])
-    .then(function (response) {
-      var listName = [];
-      var listIamge = [];
-      var listRating = [];
-      var listIds = [];
-      for (let i = 0; i < response.length; i++) {
-        if (!popular.includes("tv")) {
-          listName.push(response[i].title);
-        } else {
-          listName.push(response[i].name);
-        }
-        listIamge.push(Moviesimage + response[i].poster_path);
-        listRating.push(response[i].vote_average);
-        listIds.push(response[i].id);
-      }
-      // console.log(response);
-      originalTitlePopular.forEach((el, index, array) => {
-        el.textContent = listName[index];
-      });
-      posterPopular.forEach((el, index, array) => {
-        el.setAttribute("src", listIamge[index]);
-      });
-      ratingPopular.forEach((el, index, array) => {
-        el.textContent = listRating[index];
-      });
-      singlePageLinkPopular.forEach((el, index, array) => {
-        if (!popular.includes("tv")) {
-          el.href = "single-page-movie.html?id=" + listIds[index];
-        } else {
-          el.href = "single-page-serie.html?id=" + listIds[index];
-        }
-        el.setAttribute("target", "_blank");
-      });
-    });
+function showPopular(results, url) {
+  for (let i = 0; i < results.length; i++) {
+    var { id, vote_average, poster_path } = results[i];
+    var box = document.createElement("div");
+    box.classList.add("box");
+    box.innerHTML = `
+    <div class="img">
+      <img src="${"https://image.tmdb.org/t/p/original" + poster_path}" alt="">
+      <div class="info">
+          <ul class="category">
+              <li class="action">action</li>
+              <li class="crime">crime</li>
+          </ul>
+          <h2 class="title">${results[i].name}</h2>
+          <p class="rating">
+              <i class="bi bi-star-fill star"></i>
+              <span>${vote_average}</span>/10
+          </p>
+      </div>
+      <a href="">Read more
+          <i class="bi bi-caret-right-fill"></i>
+      </a>
+    </div>
+    `;
+    listPopular.append(box);
+  }
+  // console.log(listPopular);
+  console.log();
 }
 //
-function showCommingSoon(comming_soon) {
-  fetch(comming_soon)
-    .then((response) => response.json())
-    .then((response) => response["results"])
-    .then(function (response) {
-      var listName = [];
-      var listIamge = [];
-      var listRating = [];
-      var listIds = [];
+// function showCommingSoon(comming_soon) {
+//   fetch(comming_soon)
+//     .then((response) => response.json())
+//     .then((response) => response["results"])
+//     .then(function (response) {
+//       var listName = [];
+//       var listIamge = [];
+//       var listRating = [];
+//       var listIds = [];
 
-      for (let i = 0; i < response.length; i++) {
-        if (!comming_soon.includes("tv")) {
-          listName.push(response[i].title);
-        } else {
-          listName.push(response[i].name);
-        }
-        listIamge.push(Moviesimage + response[i].poster_path);
-        listRating.push(response[i].vote_average);
-        listIds.push(response[i].id);
-      }
-      originalTitleCoomingSoon.forEach((el, index, array) => {
-        el.textContent = listName[index];
-      });
-      posterCoomingSoon.forEach((el, index, array) => {
-        el.setAttribute("src", listIamge[index]);
-      });
-      ratingCoomingSoon.forEach((el, index, array) => {
-        el.textContent = listRating[index];
-      });
-      singlePageLinkCoomingSoon.forEach((el, index, array) => {
-        if (!comming_soon.includes("tv")) {
-          el.href = "single-page-movie.html?id=" + listIds[index];
-        } else {
-          el.href = "single-page-serie.html?id=" + listIds[index];
-        }
-        el.setAttribute("target", "_blank");
-      });
-    });
-}
-function showTopRated(top_rated) {
-  fetch(top_rated)
-    .then((response) => response.json())
-    .then((response) => response["results"])
-    .then(function (response) {
-      var listName = [];
-      var listIamge = [];
-      var listRating = [];
-      var listIds = [];
-      for (let i = 0; i < response.length; i++) {
-        if (!top_rated.includes("tv")) {
-          listName.push(response[i].title);
-        } else {
-          listName.push(response[i].name);
-        }
-        listIamge.push(Moviesimage + response[i].poster_path);
-        listRating.push(response[i].vote_average);
-        listIds.push(response[i].id);
-      }
-      originalTitleTopRated.forEach((el, index, array) => {
-        el.textContent = listName[index];
-      });
-      posterTopRated.forEach((el, index, array) => {
-        el.setAttribute("src", listIamge[index]);
-      });
-      ratingTopRated.forEach((el, index, array) => {
-        el.textContent = listRating[index];
-      });
-      singlePageLinkTopRated.forEach((el, index, array) => {
-        if (!top_rated.includes("tv")) {
-          el.href = "single-page-movie.html?id=" + listIds[index];
-        } else {
-          el.href = "single-page-serie.html?id=" + listIds[index];
-        }
-        el.setAttribute("target", "_blank");
-      });
-    });
+//       for (let i = 0; i < response.length; i++) {
+//         if (!comming_soon.includes("tv")) {
+//           listName.push(response[i].title);
+//         } else {
+//           listName.push(response[i].name);
+//         }
+//         listIamge.push(Moviesimage + response[i].poster_path);
+//         listRating.push(response[i].vote_average);
+//         listIds.push(response[i].id);
+//       }
+//       originalTitleCoomingSoon.forEach((el, index, array) => {
+//         el.textContent = listName[index];
+//       });
+//       posterCoomingSoon.forEach((el, index, array) => {
+//         el.setAttribute("src", listIamge[index]);
+//       });
+//       ratingCoomingSoon.forEach((el, index, array) => {
+//         el.textContent = listRating[index];
+//       });
+//       singlePageLinkCoomingSoon.forEach((el, index, array) => {
+//         if (!comming_soon.includes("tv")) {
+//           el.href = "single-page-movie.html?id=" + listIds[index];
+//         } else {
+//           el.href = "single-page-serie.html?id=" + listIds[index];
+//         }
+//         el.setAttribute("target", "_blank");
+//       });
+//     });
+// }
+// function showTopRated(top_rated) {
+//   fetch(top_rated)
+//     .then((response) => response.json())
+//     .then((response) => response["results"])
+//     .then(function (response) {
+//       var listName = [];
+//       var listIamge = [];
+//       var listRating = [];
+//       var listIds = [];
+//       for (let i = 0; i < response.length; i++) {
+//         if (!top_rated.includes("tv")) {
+//           listName.push(response[i].title);
+//         } else {
+//           listName.push(response[i].name);
+//         }
+//         listIamge.push(Moviesimage + response[i].poster_path);
+//         listRating.push(response[i].vote_average);
+//         listIds.push(response[i].id);
+//       }
+//       originalTitleTopRated.forEach((el, index, array) => {
+//         el.textContent = listName[index];
+//       });
+//       posterTopRated.forEach((el, index, array) => {
+//         el.setAttribute("src", listIamge[index]);
+//       });
+//       ratingTopRated.forEach((el, index, array) => {
+//         el.textContent = listRating[index];
+//       });
+//       singlePageLinkTopRated.forEach((el, index, array) => {
+//         if (!top_rated.includes("tv")) {
+//           el.href = "single-page-movie.html?id=" + listIds[index];
+//         } else {
+//           el.href = "single-page-serie.html?id=" + listIds[index];
+//         }
+//         el.setAttribute("target", "_blank");
+//       });
+//     });
+// }
+
+async function getData(url) {
+  const res = await fetch(url);
+  const data = await res.json();
+  showPopular(data.results, url);
 }
