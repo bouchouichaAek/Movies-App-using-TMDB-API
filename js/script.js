@@ -6,6 +6,8 @@ var listCoomingSoon = document.querySelector(
 );
 var listTopRated = document.querySelector(".Section.top-rated .filter-boxs");
 
+var home = document.querySelector("header .container nav img");
+
 var filterListPopular = document.querySelectorAll(
   ".what-is-popular .filtering .filter li"
 );
@@ -27,6 +29,16 @@ var filterListTopRated = document.querySelectorAll(
 var listTypeTopRated = document.querySelectorAll(
   ".top-rated .filtering .filter li"
 );
+
+var submit = document.querySelector("form");
+var select = document.querySelector("form select");
+
+var search = document.querySelector(".search .results");
+
+var searchSubmit = document.querySelector(
+  "header .container .search-bar input[type='text']"
+);
+
 var popular =
   "https://api.themoviedb.org/3/movie/popular?api_key=ee9ddd028297c7c00ad6168b72365519&language=en-US&page=1";
 var comming_soon =
@@ -107,10 +119,6 @@ function showPopular(results, url) {
     <div class="img">
       <img src="${"https://image.tmdb.org/t/p/original" + poster_path}" alt="">
       <div class="info">
-          <ul class="category">
-          <li class="action">${genre_ids}</li>
-
-          </ul>
           <h2 class="title">${url.includes("tv") ? name : title}</h2>
           <p class="rating">
               <i class="bi bi-star-fill star"></i>
@@ -141,10 +149,6 @@ function showCommingSoon(results, url) {
     <div class="img">
       <img src="${"https://image.tmdb.org/t/p/original" + poster_path}" alt="">
       <div class="info">
-          <ul class="category">
-              <li class="action">action</li>
-              <li class="crime">crime</li>
-          </ul>
           <h2 class="title">${url.includes("tv") ? name : title}</h2>
           <p class="rating">
               <i class="bi bi-star-fill star"></i>
@@ -174,10 +178,6 @@ function showTopRated(results, url) {
     <div class="img">
       <img src="${"https://image.tmdb.org/t/p/original" + poster_path}" alt="">
       <div class="info">
-          <ul class="category">
-              <li class="action">action</li>
-              <li class="crime">crime</li>
-          </ul>
           <h2 class="title">${url.includes("tv") ? name : title}</h2>
           <p class="rating">
               <i class="bi bi-star-fill star"></i>
@@ -208,5 +208,59 @@ async function getData(url) {
   }
   if (url.includes("top_rated")) {
     showTopRated(data.results, url);
+  }
+  if (url.includes("search")) {
+    showSearch(data.results, url);
+  }
+}
+
+home.addEventListener("click", () => {
+  window.location.reload();
+});
+
+// console.log(submit);
+
+submit.addEventListener("submit", (e) => {
+  e.preventDefault();
+  var section = document.querySelector("section");
+  var searchValue = searchSubmit.value;
+  console.log(select.value);
+  search.classList.remove("hide");
+  section.classList.add("hide");
+  searchSubmit.value = "";
+  getData(
+    "https://api.themoviedb.org/3/search/" +
+      select.value +
+      "?api_key=ee9ddd028297c7c00ad6168b72365519&query='" +
+      searchValue
+  );
+});
+
+function showSearch(results, url) {
+  search.innerHTML = "";
+  for (let i = 0; i < results.length; i++) {
+    var { id, title, name, vote_average, poster_path } = results[i];
+    var result = document.createElement("div");
+    result.classList.add("result");
+    result.innerHTML = `
+    <div class="img">
+      <img src="${"https://image.tmdb.org/t/p/original" + poster_path}" alt="">
+      <div class="info">
+          <h2 class="title">${url.includes("tv") ? name : title}</h2>
+          <p class="rating">
+              <i class="bi bi-star-fill star"></i>
+              <span>${vote_average}</span>/10
+          </p>
+      </div>
+      <a href="${
+        url.includes("tv")
+          ? "single-page-serie.html?id=" + id
+          : "single-page-movie.html?id=" + id
+      }" target="_blank">Read more
+          <i class="bi bi-caret-right-fill"></i>
+      </a>
+    </div>
+    `;
+    search.append(result);
   }
 }
