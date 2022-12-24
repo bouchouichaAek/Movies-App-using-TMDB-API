@@ -238,29 +238,38 @@ submit.addEventListener("submit", (e) => {
 
 function showSearch(results, url) {
   search.innerHTML = "";
-  for (let i = 0; i < results.length; i++) {
-    var { id, title, name, vote_average, poster_path } = results[i];
-    var result = document.createElement("div");
-    result.classList.add("result");
-    result.innerHTML = `
-    <div class="img">
-      <img src="${"https://image.tmdb.org/t/p/original" + poster_path}" alt="">
-      <div class="info">
-          <h2 class="title">${url.includes("tv") ? name : title}</h2>
-          <p class="rating">
-              <i class="bi bi-star-fill star"></i>
-              <span>${vote_average}</span>/10
-          </p>
+  if (results.length > 0) {
+    for (let i = 0; i < results.length; i++) {
+      var { id, title, name, vote_average, poster_path } = results[i];
+      var result = document.createElement("div");
+      result.classList.add("result");
+      result.innerHTML = `
+      <div class="img">
+        <img src="${
+          "https://image.tmdb.org/t/p/original" + poster_path
+        }" alt="">
+        <div class="info">
+            <h2 class="title">${url.includes("tv") ? name : title}</h2>
+            <p class="rating">
+                <i class="bi bi-star-fill star"></i>
+                <span>${vote_average}</span>/10
+            </p>
+        </div>
+        <a href="${
+          url.includes("tv")
+            ? "single-page-serie.html?id=" + id
+            : "single-page-movie.html?id=" + id
+        }" target="_blank">Read more
+            <i class="bi bi-caret-right-fill"></i>
+        </a>
       </div>
-      <a href="${
-        url.includes("tv")
-          ? "single-page-serie.html?id=" + id
-          : "single-page-movie.html?id=" + id
-      }" target="_blank">Read more
-          <i class="bi bi-caret-right-fill"></i>
-      </a>
-    </div>
-    `;
-    search.append(result);
+      `;
+      search.append(result);
+    }
+  } else {
+    var p = document.createElement("p");
+
+    p.innerHTML = `<p>There are no movies that matched your query.</p>`;
+    search.append(p);
   }
 }

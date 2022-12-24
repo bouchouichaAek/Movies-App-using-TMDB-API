@@ -185,6 +185,7 @@ fetch(movies_api)
       if (response.credits.cast.length < 10) {
         displayCast = response.credits.cast.length;
       }
+      console.log(response.credits.cast[i]);
       for (let i = 0; i < displayCast; i++) {
         var { name, profile_path, character } = response.credits.cast[i];
         var cast = document.createElement("div");

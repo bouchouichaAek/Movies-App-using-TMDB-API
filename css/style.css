@@ -442,6 +442,19 @@ section {
 
 .search {
 }
+.search .results p {
+  color: white;
+  font-family: "Dosis", sans-serif;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 600;
+}
+@media (max-width: 425px) {
+  .search .results p {
+    text-align: center;
+    font-size: 20px;
+  }
+}
 .search .results {
   display: flex;
   justify-content: center;
