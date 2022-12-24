@@ -100,7 +100,7 @@ filterListTopRated.forEach((el) => {
 function showPopular(results, url) {
   listPopular.innerHTML = "";
   for (let i = 0; i < results.length; i++) {
-    var { id, title, name, vote_average, poster_path } = results[i];
+    var { id, title, genre_ids, name, vote_average, poster_path } = results[i];
     var box = document.createElement("div");
     box.classList.add("box");
     box.innerHTML = `
@@ -108,8 +108,8 @@ function showPopular(results, url) {
       <img src="${"https://image.tmdb.org/t/p/original" + poster_path}" alt="">
       <div class="info">
           <ul class="category">
-              <li class="action">action</li>
-              <li class="crime">crime</li>
+          <li class="action">${genre_ids}</li>
+
           </ul>
           <h2 class="title">${url.includes("tv") ? name : title}</h2>
           <p class="rating">
@@ -126,9 +126,9 @@ function showPopular(results, url) {
       </a>
     </div>
     `;
+
     listPopular.append(box);
   }
-  console.log();
 }
 
 function showCommingSoon(results, url) {
