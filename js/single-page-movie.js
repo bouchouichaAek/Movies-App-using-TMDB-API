@@ -3,6 +3,7 @@ var movieDetailContainer = document.querySelector(".movie-detail .container");
 var trilarContent = document.querySelector(".video-trailer iframe");
 
 var information = document.querySelector(".information .info-box");
+var info = document.querySelector(".information ");
 
 var castInfo = document.querySelector(".information .cast-box .casts");
 var imagesMedia = document.querySelector(".information .media-box .images");
@@ -347,36 +348,42 @@ function showMoviesReviews(results) {
 function showMoviesRecommendations(results) {
   relatedMoviesTotal.textContent = results.recommendations.results.length;
   var ids = [];
-  for (let i = 0; i < 5; i++) {
-    var { title, overview, poster_path, release_date, vote_average, id } =
-      results.recommendations.results[i];
-    ids.push(id);
-    var relatedMovie = document.createElement("div");
-    relatedMovie.classList.add("related-movie");
-    relatedMovie.innerHTML = `
-          <img src="${
-            "https://image.tmdb.org/t/p/original" + poster_path
-          }" alt="">
-            <div class="mv-item-infor">
-              <h6><a href="single-page-movie.html?id=${id}" target="_blank">${title} <span>(${getYerar(
-      release_date
-    )})</span></a></h6>
-              <p class="rate"> <i class="bi bi-star-fill"></i><span>${vote_average.toFixed(
-                1
-              )}</span> /10</p>
-              <p class="describe">${overview.substring(0, 200)}</p>
-              <div id="${id}"></div>
-            </div>
-        `;
+  if (results.recommendations.results.length > 0) {
+    for (let i = 0; i < 5; i++) {
+      var { title, overview, poster_path, release_date, vote_average, id } =
+        results.recommendations.results[i];
+      ids.push(id);
+      var relatedMovie = document.createElement("div");
+      relatedMovie.classList.add("related-movie");
+      relatedMovie.innerHTML = `
+            <img src="${
+              "https://image.tmdb.org/t/p/original" + poster_path
+            }" alt="">
+              <div class="mv-item-infor">
+                <h6><a href="single-page-movie.html?id=${id}" target="_blank">${title} <span>(${getYerar(
+        release_date
+      )})</span></a></h6>
+                <p class="rate"> <i class="bi bi-star-fill"></i><span>${vote_average.toFixed(
+                  1
+                )}</span> /10</p>
+                <p class="describe">${overview.substring(0, 200)}</p>
+                <div id="${id}"></div>
+              </div>
+          `;
 
-    relatedMovies.append(relatedMovie);
-  }
-  for (let i = 0; i < ids.length; i++) {
-    getData(
-      "https://api.themoviedb.org/3/movie/" +
-        ids[i] +
-        "?api_key=ee9ddd028297c7c00ad6168b72365519&append_to_response=release_dates,credits"
-    );
+      relatedMovies.append(relatedMovie);
+    }
+    for (let i = 0; i < ids.length; i++) {
+      getData(
+        "https://api.themoviedb.org/3/movie/" +
+          ids[i] +
+          "?api_key=ee9ddd028297c7c00ad6168b72365519&append_to_response=release_dates,credits"
+      );
+    }
+  } else {
+    var p = document.createElement("div");
+    p.innerHTML = `<p>We don't have any Recommendation added to this Movie</p>`;
+    relatedMovies.append(p);
   }
 }
 function showMoviesRecommendationsInfo(results) {
@@ -511,6 +518,9 @@ async function getData(url) {
     showMoviesReviews(data);
     showMoviesRecommendations(data);
   }
+  if (url.includes("search")) {
+    showSearch(data.results, url);
+  }
 }
 
 function getRating(list) {
@@ -565,4 +575,58 @@ function getVideoTrailer(list) {
     }
   }
   return null;
+}
+
+submit.addEventListener("submit", (e) => {
+  e.preventDefault();
+  var searchValue = searchSubmit.value;
+  console.log(select.value);
+  search.classList.remove("hide");
+  info.classList.add("hide");
+  movieDetail.classList.add("hide");
+  searchSubmit.value = "";
+  getData(
+    "https://api.themoviedb.org/3/search/" +
+      select.value +
+      "?api_key=ee9ddd028297c7c00ad6168b72365519&query='" +
+      searchValue
+  );
+});
+
+function showSearch(results, url) {
+  search.innerHTML = "";
+  if (results.length > 0) {
+    for (let i = 0; i < results.length; i++) {
+      var { id, title, name, vote_average, poster_path } = results[i];
+      var result = document.createElement("div");
+      result.classList.add("result");
+      result.innerHTML = `
+      <div class="img">
+        <img src="${
+          "https://image.tmdb.org/t/p/original" + poster_path
+        }" alt="">
+        <div class="info">
+            <h2 class="title">${url.includes("tv") ? name : title}</h2>
+            <p class="rating">
+                <i class="bi bi-star-fill star"></i>
+                <span>${vote_average}</span>/10
+            </p>
+        </div>
+        <a href="${
+          url.includes("tv")
+            ? "single-page-serie.html?id=" + id
+            : "single-page-movie.html?id=" + id
+        }" target="_blank">Read more
+            <i class="bi bi-caret-right-fill"></i>
+        </a>
+      </div>
+      `;
+      search.append(result);
+    }
+  } else {
+    var p = document.createElement("p");
+
+    p.innerHTML = `<p>There are no movies that matched your query.</p>`;
+    search.append(p);
+  }
 }

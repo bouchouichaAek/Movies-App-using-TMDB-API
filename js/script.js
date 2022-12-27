@@ -218,8 +218,6 @@ home.addEventListener("click", () => {
   window.location.reload();
 });
 
-// console.log(submit);
-
 submit.addEventListener("submit", (e) => {
   e.preventDefault();
   var section = document.querySelector("section");

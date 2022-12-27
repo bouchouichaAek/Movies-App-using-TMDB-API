@@ -1268,6 +1268,14 @@ footer .social-media li {
 /* Start Related Movie */
 .related-movies {
 }
+.information .related-movies p {
+  color: white;
+  font-family: "Dosis", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0 0 30px;
+}
 .related-movies .related-movie {
   display: flex;
   align-items: center;
