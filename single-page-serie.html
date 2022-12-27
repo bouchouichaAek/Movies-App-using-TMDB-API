@@ -28,7 +28,7 @@
     <header>
         <div class="container">
             <nav>
-                <img src="images/logo1.png" alt="">
+                <a href="index.html"><img src="images/logo1.png" alt=""></a>
                 <ul class="nav-bar menu-left">
                     <li><a href="">Movies</a></li>
                     <li><a href="">TV Shows</a></li>
@@ -43,14 +43,16 @@
                 <h1>Welcome.</h1>
                 <p>Millions of movies, TV shows and people to discover. Explore now.</p>
             </div>
-            <div class="search-bar">
-                <select name="movies-type" id="movies-type">
-                    <option value="movies">Movies</option>
-                    <option value="tv-shows">TV Shows</option>
-                </select>
-                <input type="text" name="" id="" placeholder="Search for a movie, tv show, person......">
-                <input type="submit" value="Search">
-            </div>
+            <form action="">
+                <div class="search-bar">
+                    <select name="movies-type" id="movies-type">
+                        <option value="movie">Movies</option>
+                        <option value="tv">TV Shows</option>
+                    </select>
+                    <input type="text" name="" id="" placeholder="Search for a movie, tv show, person......">
+                    <input type="submit" value="Search">
+                </div>
+            </form>
         </div>
     </header>
     <!-- End Header -->
@@ -71,50 +73,52 @@
     <!-- Start Movie Detail -->
     <div class="movie-detail">
         <div class="container">
-            <img src="" alt="">
-            <div class="box-detail">
-                <div class="info">
-                    <div class="box-title">
-                        <h1 class="title"> </h1><span></span>
-                    </div>
-                    <div class="text-box">
-                        <p class="cert"></p>
-                        <p class="relaes-date"></p>
-                        <i class="bi bi-circle-fill"></i>
-                        <ul class="category">
-
-                        </ul>
-                        <i class="bi bi-circle-fill"></i>
-                        <p class="run-time"></p>
-                    </div>
-                    <div class="rat-trailer">
-                        <div class="rating">
-                            <i class="bi bi-star-fill star"></i>
-                            <span>7.4</span>/10
+            <!-- <div class="box">
+                <img src="" alt="">
+                <div class="box-detail">
+                    <div class="info">
+                        <div class="box-title">
+                            <h1 class="title"> </h1><span></span>
                         </div>
-                        <div class="trailer">
-                            <a><i class="bi bi-play-fill"></i>
-                                Play Trailer</a>
-                        </div>
-                    </div>
-                    <div class="overview-box">
-                        <p class="description">
-                        </p>
-                        <!-- <div class="movie-over">
-                            <div class="director">
-                                <p class="dir">Director</p>
-                                <p class="dir-name"></p>
-                            </div>
-                            <div class="writer">
-                                <p class="wri">Writer</p>
-                                <ul class="wri-name">
+                        <div class="text-box">
+                            <p class="cert"></p>
+                            <p class="relaes-date"></p>
+                            <i class="bi bi-circle-fill"></i>
+                            <ul class="category">
 
-                                </ul>
+                            </ul>
+                            <i class="bi bi-circle-fill"></i>
+                            <p class="run-time"></p>
+                        </div>
+                        <div class="rat-trailer">
+                            <div class="rating">
+                                <i class="bi bi-star-fill star"></i>
+                                <span>7.4</span>/10
                             </div>
-                        </div> -->
+                            <div class="trailer">
+                                <a><i class="bi bi-play-fill"></i>
+                                    Play Trailer</a>
+                            </div>
+                        </div>
+                        <div class="overview-box">
+                            <p class="description">
+                            </p>
+                            <div class="movie-over">
+                                <div class="director">
+                                    <p class="dir">Director</p>
+                                    <p class="dir-name"></p>
+                                </div>
+                                <div class="writer">
+                                    <p class="wri">Writer</p>
+                                    <ul class="wri-name">
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="shortcut-bar">
             <div class="container">
@@ -287,6 +291,7 @@
                 <!-- End Related Movies -->
 
                 <!-- Start Season -->
+
                 <div class="box season-box hide" id="season">
                     <div class="title season-box-head">
                         <h1>Seasons</h1>
@@ -309,42 +314,43 @@
                     </div>
                 </div>
 
-
-                <!-- Start Season -->
+                <!-- End Season -->
 
             </div>
             <div class="info-box">
-                <div class="info-box-head">
-                    <ul class="social-media">
-                        <li class="facebook"><a href="" target="_blank"><i class="bi bi-facebook"></i></a></li>
-                        <li class="twitter"><a href="" target="_blank"><i class="bi bi-twitter"></i></a></li>
-                        <li class="instagram"><a href="" target="_blank"><i class="bi bi-instagram"></i></a></li>
-                        <li class="home-page"><a href="" target="_blank"><i class="bi bi-link"></i></a></li>
-                    </ul>
-                </div>
-                <div class="status original-name">
-                    <p class="lable">Original Name</p>
-                    <p class="value">La Casa de Papel</p>
-                </div>
-                <div class="status status-status">
-                    <p class="lable">Status</p>
-                    <p class="value">Ended</p>
-                </div>
-                <div class="status networks">
-                    <p class="lable">Networks</p>
-                    <ul class="value">
-                        <!-- <li><a href=""><img src="images/wwemzKWzjKYJFfCeiB57q3r4Bcm.svg" alt=""></a></li>
-                        <li><a href=""><img src="images/l7MngINTyv0O6mNlwNsUlhQ9iwZ.svg" alt=""></a></li> -->
-                    </ul>
-                </div>
-                <div class="status type">
-                    <p class="lable">Type</p>
-                    <p class="value">Scripted</p>
-                </div>
-                <div class="status original-language">
-                    <p class="lable">Original Language</p>
-                    <p class="value">Spanish</p>
-                </div>
+                <!-- <div class="box">
+                    <div class="info-box-head">
+                        <ul class="social-media">
+                            <li class="facebook"><a href="" target="_blank"><i class="bi bi-facebook"></i></a></li>
+                            <li class="twitter"><a href="" target="_blank"><i class="bi bi-twitter"></i></a></li>
+                            <li class="instagram"><a href="" target="_blank"><i class="bi bi-instagram"></i></a></li>
+                            <li class="home-page"><a href="" target="_blank"><i class="bi bi-link"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="status original-name">
+                        <p class="lable">Original Name</p>
+                        <p class="value">La Casa de Papel</p>
+                    </div>
+                    <div class="status status-status">
+                        <p class="lable">Status</p>
+                        <p class="value">Ended</p>
+                    </div>
+                    <div class="status networks">
+                        <p class="lable">Networks</p>
+                        <ul class="value">
+                            <li><a href=""><img src="images/wwemzKWzjKYJFfCeiB57q3r4Bcm.svg" alt=""></a></li>
+                            <li><a href=""><img src="images/l7MngINTyv0O6mNlwNsUlhQ9iwZ.svg" alt=""></a></li>
+                        </ul>
+                    </div>
+                    <div class="status type">
+                        <p class="lable">Type</p>
+                        <p class="value">Scripted</p>
+                    </div>
+                    <div class="status original-language">
+                        <p class="lable">Original Language</p>
+                        <p class="value">Spanish</p>
+                    </div>
+                </div> -->
             </div>
         </div>
     </div>

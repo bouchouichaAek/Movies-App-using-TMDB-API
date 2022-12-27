@@ -1,55 +1,10 @@
 var movieDetail = document.querySelector(".movie-detail");
-var poster = document.querySelector(".movie-detail img");
-var Moviestitle = document.querySelector(
-  ".movie-detail .info .box-title .title"
-);
-var year = document.querySelector(".movie-detail .info .box-title span");
-var cert = document.querySelector(".movie-detail .info .text-box .cert");
-var date = document.querySelector(".movie-detail .info .text-box .relaes-date");
-var runTime = document.querySelector(".movie-detail .info .text-box .run-time");
-var category = document.querySelector(
-  ".movie-detail .info .text-box .category"
-);
-var description = document.querySelector(
-  ".movie-detail .info .overview-box .description"
-);
-var rating = document.querySelector(
-  ".movie-detail .info .rat-trailer .rating span"
-);
+var movieDetailContainer = document.querySelector(".movie-detail .container");
 var trilarContent = document.querySelector(".video-trailer iframe");
 
-var director = document.querySelector(
-  ".movie-detail .box-detail .overview-box .movie-over .director .dir-name"
-);
-var writers = document.querySelector(
-  ".movie-detail .box-detail .overview-box .movie-over .writer .wri-name"
-);
+var information = document.querySelector(".information .info-box");
 
-var movieLinkHomePage = document.querySelector(
-  ".information .info-box .info-box-head ul .home-page a"
-);
-var movieFacebookPage = document.querySelector(
-  ".information .info-box .info-box-head ul .facebook a"
-);
-var movieTwitterPage = document.querySelector(
-  ".information .info-box .info-box-head ul .twitter a"
-);
-var movieInstgramPage = document.querySelector(
-  ".information .info-box .info-box-head ul .instagram a"
-);
-var statusValue = document.querySelector(
-  ".information .info-box .status .value"
-);
-var originalLanguageValue = document.querySelector(
-  ".information .info-box .status.original-language .value"
-);
-var budgetValue = document.querySelector(
-  ".information .info-box .status.budget .value"
-);
-var revenueValue = document.querySelector(
-  ".information .info-box .status.revenue .value"
-);
-var casts = document.querySelector(".information .cast-box .casts");
+var castInfo = document.querySelector(".information .cast-box .casts");
 var imagesMedia = document.querySelector(".information .media-box .images");
 var videosMedia = document.querySelector(".information .media-box .videos");
 var postersMedia = document.querySelector(".information .media-box .posters");
@@ -88,308 +43,376 @@ var movies_api =
   id +
   "?api_key=ee9ddd028297c7c00ad6168b72365519&language=en-US&append_to_response=release_dates,credits,external_ids,videos,reviews,similar,recommendations";
 
-fetch(movies_api)
-  .then((response) => response.json())
-  .then(function (response) {
-    response.backdrop_path != null
-      ? (movieDetail.style.backgroundImage =
-          "url(" + Moviesimage + response.backdrop_path + ")")
-      : (movieDetail.style.backgroundImage =
-          "url(../images/header-background.jpg)");
-
-    if (response.release_dates.results.length > 0) {
-      for (let i = 0; i < response.release_dates.results.length; i++) {
-        if (response.release_dates.results[i].iso_3166_1 === "US") {
-          for (
-            let index = 0;
-            index < response.release_dates.results[i].release_dates.length;
-            index++
-          ) {
-            if (
-              !response.release_dates.results[i].release_dates[index]
-                .certification == ""
-            ) {
-              cert.textContent =
-                response.release_dates.results[i].release_dates[
-                  index
-                ].certification;
-            }
-          }
-        }
-      }
-    } else {
-      cert.style.display = "none";
-    }
-
-    Moviestitle.textContent = response.title;
-    poster.src = Moviesimage + response.poster_path;
-    date.textContent = getFormattedDate(response.release_date);
-    year.textContent = getYerar(response.release_date);
-    runTime.textContent = timeConvert(response.runtime);
-    response.overview != ""
-      ? (description.textContent = response.overview)
-      : (description.textContent =
-          "We don't have an overview translated in English.");
-
-    if (response.videos.results.length > 0) {
-      var listTrilar = [];
-      for (let i = 0; i < response.videos.results.length; i++) {
-        if (response.videos.results[i].type == "Trailer") {
-          listTrilar.push(response.videos.results[i]);
-        }
-      }
-      playTrilar.onclick = function () {
-        trilarContent.src =
-          moviesTrilar +
-          listTrilar[Math.floor(Math.random() * listTrilar.length)].key;
-      };
-    } else {
-      playTrilar.style.display = "none";
-    }
-
-    rating.textContent = response.vote_average.toFixed(1);
-    for (let i = 0; i < response.genres.length; i++) {
-      var li = document.createElement("li");
-      li.append(document.createTextNode(response.genres[i].name));
-      category.append(li);
-    }
-    movieLinkHomePage.href = response.homepage;
-    movieFacebookPage.href =
-      "https://www.facebook.com/" + response.external_ids.facebook_id;
-    movieTwitterPage.href =
-      "https://twitter.com/" + response.external_ids.twitter_id;
-    movieInstgramPage.href =
-      "https://www.instagram.com/" + response.external_ids.instagram_id;
-    statusValue.textContent = response.status;
-    originalLanguageValue.textContent =
-      response.spoken_languages[0].english_name;
-    if (response.budget != 0) {
-      budgetValue.textContent = formatter.format(response.budget);
-    } else {
-      budgetValue.textContent = "Unkown";
-    }
-    if (response.revenue != 0) {
-      revenueValue.textContent = formatter.format(response.revenue);
-    } else {
-      revenueValue.textContent = "Unkown";
-    }
-
-    castTotal.textContent = response.credits.cast.length;
-    if (response.credits.cast.length > 0) {
-      var maxDisplay = 10;
-      if (response.credits.cast.length < 10) {
-        maxDisplay = response.credits.cast.length;
-      }
-      for (let i = 0; i < maxDisplay; i++) {
-        var { name, profile_path, character } = response.credits.cast[i];
-        var cast = document.createElement("div");
-        cast.classList.add("cast");
-        cast.innerHTML = `
-        <img src="${
-          "https://www.themoviedb.org/t/p/w66_and_h66_face" + profile_path
-        }" alt="" srcset="">
-        <p class="name">${name}</p>
-        <p class="character">${character}</p>
-        `;
-        casts.append(cast);
-      }
-    } else {
-      var cast = document.createElement("div");
-      cast.classList.add("cast");
-      cast.innerHTML = `<p>We don't have any cast added to this Movie</p>`;
-      castInfo.append(cast);
-    }
-
-    var videosTotal = mediaTotal[1];
-    videosTotal.textContent = response.videos.results.length;
-
-    if (response.videos.results.length > 0) {
-      var maxDisplayVideos = 6;
-      if (response.videos.results.length < 6) {
-        maxDisplayVideos = response.videos.results.length;
-      }
-      for (let i = 0; i < maxDisplayVideos; i++) {
-        var { key, name } = response.videos.results[i];
-        var v_item = document.createElement("div");
-        v_item.classList.add("vd-item");
-        v_item.innerHTML = `
-          <div class="vd-it">
-            <img class="vd-img" src="${
-              "https://i.ytimg.com/vi/" + key + "/hqdefault.jpg"
-            }" alt="">
-            <a class="fancybox-media hvr-grow" onclick = display("https://www.youtube.com/embed/${key}")><img src="images/play-vd.png" alt=""></a>
-          </div>
-          <div class="vd-infor">
-            <h6> <a >${name}</a></h6>
-            <!--  <p class="time"> 1: 31</p> -->
-          </div>
-      `;
-        videosMedia.append(v_item);
-      }
-    } else {
-      var p = document.createElement("div");
-      p.innerHTML = `<p>We don't have any videos added to this Movie</p>`;
-      videosMedia.append(p);
-    }
-
-    rewiewsTotal.textContent = response.reviews.total_results;
-
-    var maxDisplayReviews = 5;
-    if (response.reviews.results.length < 5) {
-      maxDisplayReviews = response.reviews.results.length;
-    }
-    if (response.reviews.results.length > 0) {
-      for (let i = 0; i < maxDisplayReviews; i++) {
-        var { author, content, author_details, created_at } =
-          response.reviews.results[i];
-        var rewiew = document.createElement("div");
-        rewiew.classList.add("review");
-        rewiew.innerHTML = `
-            <div class="user-infor">
-            <img src="${showAuthorPicture(author_details.avatar_path)}" alt="">
-            <div>
-                <h3>A review by ${author}</h3>
-                <div class="no-star">
-           
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill last"></i>
-            
-                </div>
-                <p class="time">
-                    Written on ${getFormattedDate(created_at)}
-                </p>
-            </div>
-        </div>
-        <p>${
-          content.length < 400 ? content : content.substring(0, 400) + "..."
-        }</p>
-            `;
-        rewiews.append(rewiew);
-      }
-    } else {
-      var p = document.createElement("div");
-      p.innerHTML = `<p>We don't have any rewiews added to this TV Show</p>`;
-      rewiews.append(p);
-    }
-
-    relatedMoviesTotal.textContent = response.recommendations.results.length;
-    var ids = [];
-    for (let i = 0; i < 5; i++) {
-      var { title, overview, poster_path, release_date, vote_average, id } =
-        response.recommendations.results[i];
-      ids.push(id);
-      var relatedMovie = document.createElement("div");
-      relatedMovie.classList.add("related-movie");
-      relatedMovie.innerHTML = `
-        <img src="${Moviesimage + poster_path}" alt="">
-          <div class="mv-item-infor">
-            <h6><a href="single-page.html?id=${id}" target="_blank">${title} <span>(${getYerar(
-        release_date
-      )})</span></a></h6>
-            <p class="rate"> <i class="bi bi-star-fill"></i><span>${vote_average.toFixed(
-              1
-            )}</span> /10</p>
-            <p class="describe">${overview.substring(0, 200)}</p>
-            <div id="${id}"></div>
-          </div>
-      `;
-
-      relatedMovies.append(relatedMovie);
-    }
-    for (let i = 0; i < ids.length; i++) {
-      fetch(
-        "https://api.themoviedb.org/3/movie/" +
-          ids[i] +
-          "?api_key=ee9ddd028297c7c00ad6168b72365519&append_to_response=release_dates,credits"
-      )
-        .then((response) => response.json())
-        .then(function (response) {
-          var info = document.querySelectorAll(
-            ".related-movies .related-movie .mv-item-infor div"
-          );
-          info.forEach((ele, index, array) => {
-            var cert = "";
-            var director = "";
-            var stars = [];
-            if (response.id == ele.id) {
-              for (let i = 0; i < response.release_dates.results.length; i++) {
-                if (response.release_dates.results[i].iso_3166_1 == "US") {
-                  cert =
-                    response.release_dates.results[i].release_dates[0]
-                      .certification;
-                }
-              }
-              for (let i = 0; i < response.credits.crew.length; i++) {
-                if (response.credits.crew[i].job == "Director") {
-                  director = response.credits.crew[i].name;
-                }
-              }
-              for (let i = 0; i < 3; i++) {
-                stars.push(response.credits.cast[i].name);
-              }
-              ele.innerHTML = `<p class="run-time"> Run Time: ${timeConvert(
-                response.runtime
-              )} . <span>MMPA: ${cert} </span> . <span>Release: ${getFormattedDateSimilar(
-                response.release_date
-              )}</span></p>
-                <p>Director: <a href="#">${director}</a></p>
-                <p>Stars: <a href="#">${stars[0]},</a> <a href="#">${
-                stars[1]
-              },</a> <a href="#">${stars[2]}</a></p>`;
-            }
-          });
-        });
-    }
-  });
-
-fetch(
+getData(movies_api);
+getData(
   "https://api.themoviedb.org/3/movie/" +
     id +
     "/images?api_key=ee9ddd028297c7c00ad6168b72365519"
-)
-  .then((response) => response.json())
-  .then(function (response) {
-    var imageTotal = mediaTotal[0];
-    imageTotal.textContent = response.backdrops.length;
+);
 
-    var posterTotal = mediaTotal[2];
-    posterTotal.textContent = response.posters.length;
+function showMoviesDetail(results) {
+  var {
+    backdrop_path,
+    poster_path,
+    title,
+    release_date,
+    release_dates,
+    genres,
+    runtime,
+    vote_average,
+    videos,
+    overview,
+  } = results;
 
-    var maxDisplaybackdrops = 9;
-    if (response.backdrops.length < 9) {
-      maxDisplaybackdrops = response.backdrops.length;
+  var movieBackround = document.querySelector(".movie-detail");
+  movieBackround.style.backgroundImage = `url(${
+    backdrop_path != null
+      ? "https://image.tmdb.org/t/p/original" + backdrop_path
+      : "url(./images/header-background.jpg)"
+  })`;
+  var movie = document.createElement("div");
+  movie.classList.add("box");
+  movie.innerHTML = `
+  <img src="${
+    poster_path != null
+      ? "https://image.tmdb.org/t/p/original" + poster_path
+      : "images/No-Image-Placeholder.svg"
+  }" alt="">
+  <div class="box-detail">
+    <div class="info">
+      <div class="box-title"><h1 class="title">${title}</h1><span>${getYerar(
+    release_date
+  )}</span>
+      </div>
+      <div class="text-box">
+        ${
+          getRating(release_dates.results) != null
+            ? "<p class='cert'>" + getRating(release_dates.results) + "</p>"
+            : ""
+        }
+        <p class="relaes-date">${getFormattedDate(release_date)}</p>
+        <i class="bi bi-circle-fill"></i>
+        <ul class="category">
+        ${getCategoryList(genres)}
+        </ul>
+        <i class="bi bi-circle-fill"></i>
+        <p class="run-time">${timeConvert(runtime)}</p>
+      </div>
+      <div class="rat-trailer">
+        <div class="rating">
+          <i class="bi bi-star-fill star"></i>
+          <span>${vote_average.toFixed(1)}</span>/10
+        </div>
+        ${
+          getVideoTrailer(videos.results) != null
+            ? `<div class='trailer'><a onclick = display("https://www.youtube.com/embed/${getVideoTrailer(
+                videos.results
+              )}")><i class='bi bi-play-fill'></i>Play Trailer</a></div>`
+            : ``
+        }
+        </div>
+        <div class="overview-box">
+          <p class="description">${overview}</p>
+    </div>
+  </div>
+</div>
+  `;
+  movieDetailContainer.append(movie);
+}
+function showMoviesInformation(results) {
+  var { homepage, external_ids, spoken_languages, status, budget, revenue } =
+    results;
+  var box = document.createElement("div");
+  box.classList.add("box");
+  box.innerHTML = `
+  <div class="info-box-head">
+      <ul class="social-media">
+    ${
+      external_ids.facebook_id != null
+        ? "<li class='facebook'><a href='https://facebook.com/" +
+          external_ids.facebook_id +
+          "'target='_blank'><i class='bi bi-facebook'></i></a></li>"
+        : ""
+    }
+    ${
+      external_ids.twitter_id != null
+        ? "<li class='twitter'><a href='https://twitter.com/" +
+          external_ids.twitter_id +
+          "'target='_blank'><i class='bi bi-twitter'></i></a></li>"
+        : ""
+    }
+    ${
+      external_ids.instagram_id != null
+        ? "<li class='instagram'><a href='https://instagram.com/" +
+          external_ids.instagram_id +
+          "'target='_blank'><i class='bi bi-instagram'></i></a></li>"
+        : ""
+    }
+    ${
+      homepage != null
+        ? "<li class='home-page'><a href='" +
+          homepage +
+          "'target='_blank'><i class='bi bi-link'></i></a></li>"
+        : ""
+    }
+      </ul>
+  </div>
+  <div class="status">
+  <p class="lable">Status</p>
+  <p class="value">${status}</p>
+  </div>
+<div class="status original-language">
+  <p class="lable">Original Language</p>
+  <p class="value">${spoken_languages[0].english_name}</p>
+</div>
+<div class="status budget">
+  <p class="lable">Budget</p>
+  <p class="value">${formatter.format(budget)}</p>
+</div>
+<div class="status revenue">
+  <p class="lable">Revenue</p>
+  <p class="value">${formatter.format(revenue)}</p>
+</div>
+  `;
+  information.append(box);
+}
+
+function showMoviesCast(results) {
+  castTotal.textContent = results.credits.cast.length;
+
+  if (results.credits.cast.length != 0) {
+    var displayCast = 10;
+    if (results.credits.cast.length < 10) {
+      displayCast = results.credits.cast.length;
+    }
+    for (let i = 0; i < displayCast; i++) {
+      var { name, profile_path, character } = results.credits.cast[i];
+      var cast = document.createElement("div");
+      cast.classList.add("cast");
+      cast.innerHTML = `
+                  <img src="${
+                    profile_path != null
+                      ? "https://www.themoviedb.org/t/p/w66_and_h66_face" +
+                        profile_path
+                      : "images/no-image.jpg"
+                  }" alt="${name}">
+                  <p class="name">${name}</p>
+                  <p class="character">${character}</p>
+              `;
+      castInfo.append(cast);
+    }
+  } else {
+    var cast = document.createElement("div");
+    cast.classList.add("cast");
+    cast.innerHTML = `<p>We don't have any cast added to this TV Show</p>`;
+    castInfo.append(cast);
+  }
+}
+function showMoviesImage(results) {
+  var imageTotal = mediaTotal[0];
+  imageTotal.textContent = results.backdrops.length;
+
+  var posterTotal = mediaTotal[2];
+  posterTotal.textContent = results.posters.length;
+
+  var maxDisplaybackdrops = 9;
+  if (results.backdrops.length > 0) {
+    if (results.backdrops.length < 9) {
+      maxDisplaybackdrops = results.backdrops.length;
     }
     for (let i = 0; i < maxDisplaybackdrops; i++) {
       var img = document.createElement("img");
       var anchor = document.createElement("a");
-      img.src = Moviesimage + response.backdrops[i].file_path;
-      anchor.href = Moviesimage + response.backdrops[i].file_path;
+      img.src =
+        "https://image.tmdb.org/t/p/original" + results.backdrops[i].file_path;
+      anchor.href =
+        "https://image.tmdb.org/t/p/original" + results.backdrops[i].file_path;
       anchor.target = "_blank";
       anchor.append(img);
       imagesMedia.append(anchor);
     }
-    for (let i = 0; i < 8; i++) {
+  } else {
+    var p = document.createElement("div");
+    p.innerHTML = `<p class="name">We don't have any image added to this TV Show</p>`;
+    imagesMedia.append(p);
+  }
+
+  if (results.posters.length > 0) {
+    var maxDisplayPoster = 8;
+    if (results.posters.length < 8) {
+      maxDisplayPoster = results.posters.length;
+    }
+    for (let i = 0; i < maxDisplayPoster; i++) {
       var poster = document.createElement("img");
       var anchor = document.createElement("a");
-      poster.src = Moviesimage + response.posters[i].file_path;
-      anchor.href = Moviesimage + response.posters[i].file_path;
+      poster.src =
+        "https://image.tmdb.org/t/p/original" + results.posters[i].file_path;
+      anchor.href =
+        "https://image.tmdb.org/t/p/original" + results.posters[i].file_path;
       anchor.target = "_blank";
       anchor.append(poster);
       postersMedia.append(anchor);
     }
-  });
+  } else {
+    var p = document.createElement("div");
 
-playTrilar.addEventListener("click", function (e) {
-  video.style.display = "block";
-});
+    p.innerHTML = `<p>We don't have any poster added to this TV Show</p>`;
+    postersMedia.append(p);
+  }
+}
+function showMoviesVideos(results) {
+  var videosTotal = mediaTotal[1];
+  videosTotal.textContent = results.videos.results.length;
+
+  if (results.videos.results.length > 0) {
+    var maxDisplayVideos = 6;
+    if (results.videos.results.length < 6) {
+      maxDisplayVideos = results.videos.results.length;
+    }
+    for (let i = 0; i < maxDisplayVideos; i++) {
+      var { key, name } = results.videos.results[i];
+      var v_item = document.createElement("div");
+      v_item.classList.add("vd-item");
+      v_item.innerHTML = `
+            <div class="vd-it">
+              <img class="vd-img" src="${
+                "https://i.ytimg.com/vi/" + key + "/hqdefault.jpg"
+              }" alt="">
+              <a class="fancybox-media hvr-grow" onclick = display("https://www.youtube.com/embed/${key}")><img src="images/play-vd.png" alt=""></a>
+            </div>
+            <div class="vd-infor">
+              <h6> <a >${name}</a></h6>
+              <!--  <p class="time"> 1: 31</p> -->
+            </div>
+        `;
+      videosMedia.append(v_item);
+    }
+  } else {
+    var p = document.createElement("div");
+    p.innerHTML = `<p>We don't have any videos added to this TV Show</p>`;
+    videosMedia.append(p);
+  }
+}
+function showMoviesReviews(results) {
+  rewiewsTotal.textContent = results.reviews.total_results;
+
+  var maxDisplayReviews = 5;
+  if (results.reviews.results.length < 5) {
+    maxDisplayReviews = results.reviews.results.length;
+  }
+  if (results.reviews.results.length > 0) {
+    for (let i = 0; i < maxDisplayReviews; i++) {
+      var { author, content, author_details, created_at } =
+        results.reviews.results[i];
+      var rewiew = document.createElement("div");
+      rewiew.classList.add("review");
+      rewiew.innerHTML = `
+              <div class="user-infor">
+              <img src="${showAuthorPicture(
+                author_details.avatar_path
+              )}" alt="">
+              <div>
+                  <h3>A review by ${author}</h3>
+                  <div class="no-star">
+
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill last"></i>
+
+                  </div>
+                  <p class="time">
+                      Written on ${getFormattedDate(created_at)}
+                  </p>
+              </div>
+          </div>
+          <p>${
+            content.length < 400 ? content : content.substring(0, 400) + "..."
+          }</p>
+              `;
+      rewiews.append(rewiew);
+    }
+  } else {
+    var p = document.createElement("div");
+    p.innerHTML = `<p>We don't have any rewiews added to this TV Show</p>`;
+    rewiews.append(p);
+  }
+}
+function showMoviesRecommendations(results) {
+  relatedMoviesTotal.textContent = results.recommendations.results.length;
+  var ids = [];
+  for (let i = 0; i < 5; i++) {
+    var { title, overview, poster_path, release_date, vote_average, id } =
+      results.recommendations.results[i];
+    ids.push(id);
+    var relatedMovie = document.createElement("div");
+    relatedMovie.classList.add("related-movie");
+    relatedMovie.innerHTML = `
+          <img src="${
+            "https://image.tmdb.org/t/p/original" + poster_path
+          }" alt="">
+            <div class="mv-item-infor">
+              <h6><a href="single-page-movie.html?id=${id}" target="_blank">${title} <span>(${getYerar(
+      release_date
+    )})</span></a></h6>
+              <p class="rate"> <i class="bi bi-star-fill"></i><span>${vote_average.toFixed(
+                1
+              )}</span> /10</p>
+              <p class="describe">${overview.substring(0, 200)}</p>
+              <div id="${id}"></div>
+            </div>
+        `;
+
+    relatedMovies.append(relatedMovie);
+  }
+  for (let i = 0; i < ids.length; i++) {
+    getData(
+      "https://api.themoviedb.org/3/movie/" +
+        ids[i] +
+        "?api_key=ee9ddd028297c7c00ad6168b72365519&append_to_response=release_dates,credits"
+    );
+  }
+}
+function showMoviesRecommendationsInfo(results) {
+  var info = document.querySelectorAll(
+    ".related-movies .related-movie .mv-item-infor div"
+  );
+
+  info.forEach((ele, index, array) => {
+    var cert = "";
+    var director = "";
+    var stars = [];
+    if (results.id == ele.id) {
+      var { release_dates, release_date, credits } = results;
+
+      ele.innerHTML = `<p class="run-time"> Run Time: ${timeConvert(
+        results.runtime
+      )} . <span>MMPA: ${
+        getRating(release_dates.results) != null
+          ? getRating(release_dates.results)
+          : "rating"
+      } </span> . <span>Release: ${getFormattedDateSimilar(
+        release_date
+      )}</span></p>
+            <p>Director: ${
+              getDirector(credits.crew) != null
+                ? "<a href='#'>" + getDirector(credits.crew) + "</a>"
+                : "Unknow Name Director "
+            }</p>
+            <p>Stars: ${
+              getCasts(credits.cast) != null
+                ? getCasts(credits.cast)
+                : "Unknow Name Stars"
+            } `;
+    }
+  });
+}
 
 closVideo.addEventListener("click", function (e) {
   if (video.style.display === "block") {
@@ -469,4 +492,77 @@ function showAuthorPicture(src) {
 function display(source) {
   video.style.display = "block";
   trilarContent.src = source;
+}
+
+async function getData(url) {
+  const res = await fetch(url);
+  const data = await res.json();
+  if (url.includes("images")) {
+    showMoviesImage(data);
+  }
+  if (!url.includes("videos") && !url.includes("images")) {
+    showMoviesRecommendationsInfo(data);
+  }
+  if (!url.includes("images") && url.includes("videos")) {
+    showMoviesDetail(data);
+    showMoviesInformation(data);
+    showMoviesCast(data);
+    showMoviesVideos(data);
+    showMoviesReviews(data);
+    showMoviesRecommendations(data);
+  }
+}
+
+function getRating(list) {
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].iso_3166_1 == "US") {
+      for (let j = 0; j < list[i].release_dates.length; j++) {
+        if (list[i].release_dates[j].certification != "") {
+          return list[i].release_dates[j].certification;
+        }
+      }
+    }
+  }
+  return null;
+}
+
+function getDirector(list) {
+  if (list.length > 0) {
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].job == "Director") {
+        return list[i].name;
+      }
+    }
+  }
+  return null;
+}
+function getCasts(list) {
+  var listCast = [];
+  if (list.length > 0) {
+    for (let i = 0; i < 3; i++) {
+      listCast.push(list[i].name);
+    }
+    return "<a href='#'>" + listCast.join("</a> , <a href='#'>") + "</a>";
+  }
+  return null;
+}
+
+function getCategoryList(list) {
+  var listCate = [];
+  for (let i = 0; i < list.length; i++) {
+    listCate.push(list[i].name);
+  }
+  return "<li>" + listCate.join("</li> <li>") + "</li>";
+}
+
+function getVideoTrailer(list) {
+  var listTrailer = [];
+  if (list.length != 0) {
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].type == "Trailer") {
+        return list[i].key;
+      }
+    }
+  }
+  return null;
 }
