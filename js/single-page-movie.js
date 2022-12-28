@@ -15,6 +15,7 @@ var relatedMovies = document.querySelector(
 );
 
 var castTotal = document.querySelector(".information .cast-box .total span");
+
 var mediaTotal = document.querySelectorAll(
   ".information .media-box .total span"
 );
@@ -28,7 +29,6 @@ var relatedMoviesTotal = document.querySelector(
 var filterSection = document.querySelectorAll(".information .section .box");
 
 var id = window.location.search.slice(4);
-console.log(window.location);
 var shortLi = document.querySelectorAll(".shortcut-bar .container ul li");
 
 var api_key = "ee9ddd028297c7c00ad6168b72365519";
@@ -179,6 +179,17 @@ function showMoviesInformation(results) {
 }
 
 function showMoviesCast(results) {
+  var castLink = document.querySelector(
+    ".information .cast-box .cast-box-head a"
+  );
+  castLink.href =
+    `full-cast.html?id=` +
+    results.id +
+    "-" +
+    results.title
+      .replaceAll(/[(\s)]/g, "-")
+      .replaceAll(/[(:?=\s)|(,?=\s)]/g, "");
+
   castTotal.textContent = results.credits.cast.length;
 
   if (results.credits.cast.length != 0) {

@@ -90,6 +90,7 @@ header .container nav {
   align-items: center;
   gap: 20px;
   /* padding: 15px 0; */
+  padding-bottom: 30px;
 }
 @media (max-width: 425px) {
   header .container nav {
@@ -1491,3 +1492,122 @@ footer .social-media li {
 /* End Information */
 
 /**************************** End Single-page *************************/
+
+/**************************** Start Full-cast-page *************************/
+
+/* Start Header */
+header .movie-text-title {
+  margin-top: 50px;
+  display: flex;
+  gap: 20px;
+}
+@media (max-width: 425px) {
+  header .movie-text-title {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+header .movie-text-title img {
+  width: 100px;
+}
+header .movie-text-title .text-movie h1 {
+  color: white;
+  font-weight: 700;
+  font-family: "Dosis", sans-serif;
+}
+@media (max-width: 425px) {
+  header .movie-text-title .text-movie h1 {
+    text-align: center;
+  }
+}
+header .movie-text-title .text-movie span {
+  font-weight: 300;
+}
+header .movie-text-title .text-movie a {
+  color: white;
+  font-weight: 400;
+  font-family: "Dosis", sans-serif;
+}
+@media (max-width: 425px) {
+  header .movie-text-title .text-movie a {
+    text-align: center;
+  }
+}
+/* End Header */
+
+/* Start Credits */
+.credits-section {
+  background-color: var(--section-color);
+  padding-top: 30px;
+  padding-bottom: 50px;
+}
+.credits-section .container {
+}
+.credits-section .search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.credits-section .search .total {
+  color: white;
+  font-weight: 500;
+  font-size: 20px;
+  font-family: "Dosis", sans-serif;
+}
+.credits-section .search .total span {
+  color: var(--main-color);
+}
+.credits-section .search form {
+  color: white;
+  font-weight: 500;
+  font-family: "Dosis", sans-serif;
+}
+.credits-section .search form select {
+  outline: none;
+  padding: 5px 15px;
+  border: none;
+  border-right: 1px solid #020d18;
+  background-color: #233a50;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  color: white;
+  text-transform: uppercase;
+  font-family: "Dosis", sans-serif;
+}
+.credits-section .credits-box {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+.credits-section .credits-box .credit a {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: #091a2c;
+}
+.credits-section .credits-box .credit img {
+  width: 80px;
+}
+.credits-section .credits-box .credit .credit-info {
+}
+.credits-section .credits-box .credit .credit-info h1 {
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+  font-family: "Dosis", sans-serif;
+  margin-top: -15px;
+}
+.credits-section .credits-box .credit .credit-info p {
+  color: #999;
+  font-family: "Dosis", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+}
+/* End Credits */
+
+/**************************** End Full-cast-page *************************/
