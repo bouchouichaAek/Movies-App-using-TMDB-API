@@ -211,14 +211,14 @@ function showSerieCast(results) {
       var cast = document.createElement("div");
       cast.classList.add("cast");
       cast.innerHTML = `
-                  <img src="${
-                    profile_path != null
-                      ? "https://www.themoviedb.org/t/p/w66_and_h66_face" +
-                        profile_path
-                      : "images/no-image.jpg"
-                  }" alt="${name}">
-                  <p class="name">${name}</p>
-                  <p class="character">${character}</p>
+                <a href=""><img src="${
+                  profile_path != null
+                    ? "https://www.themoviedb.org/t/p/w66_and_h66_face" +
+                      profile_path
+                    : "images/no-image.jpg"
+                }" alt="${name}"></a>
+                <a href=""><p class="name">${name}</p></a>
+                <p class="character">${character}</p>
               `;
       castInfo.append(cast);
     }
@@ -380,7 +380,13 @@ function showSerieRecommendations(results) {
             "https://image.tmdb.org/t/p/original" + poster_path
           }" alt="">
             <div class="mv-item-infor">
-              <h6><a href="single-page-serie.html?id=${id}" target="_blank">${name} <span>(${getYerar(
+              <h6><a href="single-page-serie.html?id=${
+                id +
+                "-" +
+                name
+                  .replaceAll(/[(\s)]/g, "-")
+                  .replaceAll(/[(:?=\s)|(,?=\s)]/g, "")
+              }" target="_blank">${name} <span>(${getYerar(
         first_air_date
       )})</span></a></h6>
               <p class="rate"> <i class="bi bi-star-fill"></i><span>${vote_average.toFixed(

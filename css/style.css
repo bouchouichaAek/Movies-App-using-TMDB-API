@@ -1022,7 +1022,7 @@ footer .social-media li {
   -o-border-radius: 8px;
   margin-right: 10px;
 }
-.information .cast-box .casts .cast .name {
+.information .cast-box .casts .cast a:last-of-type {
   color: white;
   font-family: "Dosis", sans-serif;
   font-size: 15px;

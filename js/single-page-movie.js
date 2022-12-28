@@ -28,7 +28,7 @@ var relatedMoviesTotal = document.querySelector(
 var filterSection = document.querySelectorAll(".information .section .box");
 
 var id = window.location.search.slice(4);
-
+console.log(window.location);
 var shortLi = document.querySelectorAll(".shortcut-bar .container ul li");
 
 var api_key = "ee9ddd028297c7c00ad6168b72365519";
@@ -191,13 +191,13 @@ function showMoviesCast(results) {
       var cast = document.createElement("div");
       cast.classList.add("cast");
       cast.innerHTML = `
-                  <img src="${
-                    profile_path != null
-                      ? "https://www.themoviedb.org/t/p/w66_and_h66_face" +
-                        profile_path
-                      : "images/no-image.jpg"
-                  }" alt="${name}">
-                  <p class="name">${name}</p>
+                <a href=""><img src="${
+                  profile_path != null
+                    ? "https://www.themoviedb.org/t/p/w66_and_h66_face" +
+                      profile_path
+                    : "images/no-image.jpg"
+                }" alt="${name}"></a>
+                <a href=""><p class="name">${name}</p></a>
                   <p class="character">${character}</p>
               `;
       castInfo.append(cast);
@@ -360,7 +360,13 @@ function showMoviesRecommendations(results) {
               "https://image.tmdb.org/t/p/original" + poster_path
             }" alt="">
               <div class="mv-item-infor">
-                <h6><a href="single-page-movie.html?id=${id}" target="_blank">${title} <span>(${getYerar(
+                <h6><a href="single-page-movie.html?id=${
+                  id +
+                  "-" +
+                  title
+                    .replaceAll(/[(\s)]/g, "-")
+                    .replaceAll(/[(:?=\s)|(,?=\s)]/g, "")
+                }" target="_blank">${title} <span>(${getYerar(
         release_date
       )})</span></a></h6>
                 <p class="rate"> <i class="bi bi-star-fill"></i><span>${vote_average.toFixed(

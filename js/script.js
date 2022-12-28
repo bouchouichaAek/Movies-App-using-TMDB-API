@@ -127,8 +127,16 @@ function showPopular(results, url) {
       </div>
       <a href="${
         url.includes("tv")
-          ? "single-page-serie.html?id=" + id
-          : "single-page-movie.html?id=" + id
+          ? "single-page-serie.html?id=" +
+            id +
+            "-" +
+            name.replaceAll(/[(\s)]/g, "-").replaceAll(/[(:?=\s)|(,?=\s)]/g, "")
+          : "single-page-movie.html?id=" +
+            id +
+            "-" +
+            title
+              .replaceAll(/[(\s)]/g, "-")
+              .replaceAll(/[(:?=\s)|(,?=\s)]/g, "")
       }" target="_blank">Read more
           <i class="bi bi-caret-right-fill"></i>
       </a>
@@ -157,8 +165,16 @@ function showCommingSoon(results, url) {
       </div>
       <a href="${
         url.includes("tv")
-          ? "single-page-serie.html?id=" + id
-          : "single-page-movie.html?id=" + id
+          ? "single-page-serie.html?id=" +
+            id +
+            "-" +
+            name.replaceAll(/[(\s)]/g, "-").replaceAll(/[(:?=\s)|(,?=\s)]/g, "")
+          : "single-page-movie.html?id=" +
+            id +
+            "-" +
+            title
+              .replaceAll(/[(\s)]/g, "-")
+              .replaceAll(/[(:?=\s)|(,?=\s)]/g, "")
       }" target="_blank">Read more
           <i class="bi bi-caret-right-fill"></i>
       </a>
@@ -186,8 +202,16 @@ function showTopRated(results, url) {
       </div>
       <a href="${
         url.includes("tv")
-          ? "single-page-serie.html?id=" + id
-          : "single-page-movie.html?id=" + id
+          ? "single-page-serie.html?id=" +
+            id +
+            "-" +
+            name.replaceAll(/[(\s)]/g, "-").replaceAll(/[(:?=\s)|(,?=\s)]/g, "")
+          : "single-page-movie.html?id=" +
+            id +
+            "-" +
+            title
+              .replaceAll(/[(\s)]/g, "-")
+              .replaceAll(/[(:?=\s)|(,?=\s)]/g, "")
       }" target="_blank">Read more
           <i class="bi bi-caret-right-fill"></i>
       </a>
@@ -255,8 +279,18 @@ function showSearch(results, url) {
         </div>
         <a href="${
           url.includes("tv")
-            ? "single-page-serie.html?id=" + id
-            : "single-page-movie.html?id=" + id
+            ? "single-page-serie.html?id=" +
+              id +
+              "-" +
+              name
+                .replaceAll(/[(\s)]/g, "-")
+                .replaceAll(/[(:?=\s)|(,?=\s)]/g, "")
+            : "single-page-movie.html?id=" +
+              id +
+              "-" +
+              title
+                .replaceAll(/[(\s)]/g, "-")
+                .replaceAll(/[(:?=\s)|(,?=\s)]/g, "")
         }" target="_blank">Read more
             <i class="bi bi-caret-right-fill"></i>
         </a>
