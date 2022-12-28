@@ -199,6 +199,17 @@ function showSerieInformation(results) {
   information.append(box);
 }
 function showSerieCast(results) {
+  var castLink = document.querySelector(
+    ".information .cast-box .cast-box-head a"
+  );
+  castLink.href =
+    `credits-serie.html?id=` +
+    results.id +
+    "-" +
+    results.name
+      .replaceAll(/[(\s)]/g, "-")
+      .replaceAll(/[(:?=\s)|(,?=\s)]/g, "");
+
   castTotal.textContent = results.credits.cast.length;
 
   if (results.credits.cast.length != 0) {

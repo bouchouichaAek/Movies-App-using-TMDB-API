@@ -8,14 +8,14 @@ var submit = document.querySelector(".credits-section .search form");
 var select = document.querySelector(".credits-section .search form select");
 var id = window.location.search.slice(4);
 var movies_api =
-  "https://api.themoviedb.org/3/movie/" +
+  "https://api.themoviedb.org/3/tv/" +
   id +
   "?api_key=ee9ddd028297c7c00ad6168b72365519&language=en-US&append_to_response=credits";
 
 getData(movies_api, select.value);
 
 function showMovieInfo(results, url) {
-  var { id, name, title, poster_path, release_date } = results;
+  var { id, name, title, poster_path, first_air_date } = results;
   home.innerHTML = `
   <img src="${
     poster_path != null
@@ -33,8 +33,8 @@ function showMovieInfo(results, url) {
           id +
           "-" +
           title.replaceAll(/[(\s)]/g, "-").replaceAll(/[(:?=\s)|(,?=\s)]/g, "")
-    }" >
-        <h1>${title} <span>(${getYerar(release_date)})</span></h1>
+    }">
+        <h1>${name} <span>(${getYerar(first_air_date)})</span></h1>
     </a>
     <a href="${
       url.includes("tv")

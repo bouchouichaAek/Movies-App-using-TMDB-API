@@ -183,7 +183,7 @@ function showMoviesCast(results) {
     ".information .cast-box .cast-box-head a"
   );
   castLink.href =
-    `full-cast.html?id=` +
+    `credits-movie.html?id=` +
     results.id +
     "-" +
     results.title
