@@ -221,6 +221,15 @@ function showMoviesCast(results) {
   }
 }
 function showMoviesImage(results) {
+  var imagesLink = document.querySelector(
+    ".information .image-box .media-box-head a"
+  );
+  imagesLink.href = `images-movies.html?id=` + results.id + "&image";
+
+  var posterLink = document.querySelector(
+    ".information .poster-box .poster-box-head a"
+  );
+  posterLink.href = `images-movies.html?id=` + results.id + "&poster";
   var imageTotal = mediaTotal[0];
   imageTotal.textContent = results.backdrops.length;
 
@@ -273,6 +282,10 @@ function showMoviesImage(results) {
   }
 }
 function showMoviesVideos(results) {
+  var videosLink = document.querySelector(
+    ".information .videos-box .media-box-head a"
+  );
+  videosLink.href = `images-movies.html?id=` + results.id + "&video";
   var videosTotal = mediaTotal[1];
   videosTotal.textContent = results.videos.results.length;
 

@@ -268,7 +268,9 @@ function showSearch(results, url) {
       result.innerHTML = `
       <div class="img">
         <img src="${
-          "https://image.tmdb.org/t/p/original" + poster_path
+          poster_path != null
+            ? "https://image.tmdb.org/t/p/original" + poster_path
+            : "images/No-Image-Placeholder.svg"
         }" alt="">
         <div class="info">
             <h2 class="title">${url.includes("tv") ? name : title}</h2>

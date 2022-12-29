@@ -891,14 +891,31 @@ footer .social-media li {
   width: 890px;
   height: 500px;
   color: white;
-  top: 20px;
-  left: 228px;
+  top: 50%;
+  left: 50%;
   position: fixed;
   z-index: 10004;
   opacity: 1;
   border: none;
   display: none;
   animation-duration: 0.3s;
+  transform: translate(-50%, -55%);
+  -webkit-transform: translate(-50%, -55%);
+  -moz-transform: translate(-50%, -55%);
+  -ms-transform: translate(-50%, -55%);
+  -o-transform: translate(-50%, -55%);
+}
+@media (max-width: 1024px) {
+  .videos-section {
+    width: 690px;
+    height: 300px;
+  }
+}
+@media (max-width: 425px) {
+  .videos-section {
+    width: 100%;
+    height: 50%;
+  }
 }
 .videos-section h1 {
   font-size: 18px;
@@ -1608,6 +1625,95 @@ header .movie-text-title .text-movie a {
   font-weight: 500;
   font-size: 14px;
 }
+.credits-section .images-box {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+.credits-section .images-box .image {
+  width: 200px;
+}
+.credits-section .images-box .image img {
+  width: 100%;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  cursor: pointer;
+}
+.credits-section .images-box .vd-item {
+  /*margin-bottom: 30px; */
+  width: 210px;
+}
+.credits-section .images-box .vd-item .vd-it a {
+  cursor: pointer;
+}
+@media (max-width: 425px) {
+  .credits-section .images-box .vd-item {
+    width: 100%;
+  }
+}
+.credits-section .images-box .vd-item:hover h6 a {
+  color: #dcf836;
+}
+
+.credits-section .images-box .vd-item .vd-it {
+  position: relative;
+}
+.credits-section .images-box .vd-item .vd-it a {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-justify-content: center;
+}
+.credits-section .images-box .vd-item .vd-it img {
+  width: 100%;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.credits-section .images-box .vd-item .vd-it a img {
+  width: initial;
+}
+.credits-section .images-box .vd-item .vd-infor {
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+.credits-section .images-box .vd-item .vd-infor h6 a {
+  font-family: "Dosis", sans-serif;
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: bold;
+  text-transform: none;
+}
+.credits-section .images-box .vd-item .vd-infor h6 {
+  margin: -5px 0;
+}
+.credits-section .images-box .vd-item .vd-infor p.time {
+  font-family: "Dosis", sans-serif;
+  font-size: 12px;
+  color: #abb7c4;
+  font-weight: 400;
+  text-transform: none;
+}
+.credits-section .images-box .vd-item:hover h6 a {
+  color: #dcf836;
+}
+
 /* End Credits */
 
 /**************************** End Full-cast-page *************************/
