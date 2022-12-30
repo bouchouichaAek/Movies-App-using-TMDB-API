@@ -121,7 +121,11 @@ function showSerieDetail(results) {
         }
         </div>
         <div class="overview-box">
-          <p class="description">${overview}</p>
+          <p class="description">${
+            overview != ""
+              ? overview
+              : "We don't have an overview translated in English"
+          }</p>
     </div>
   </div>
 </div>
@@ -202,13 +206,18 @@ function showSerieCast(results) {
   var castLink = document.querySelector(
     ".information .cast-box .cast-box-head a"
   );
-  castLink.href =
-    `credits-serie.html?id=` +
-    results.id +
-    "-" +
-    results.name
-      .replaceAll(/[(\s)]/g, "-")
-      .replaceAll(/[(:?=\s)|(,?=\s)]/g, "");
+
+  if (results.credits.cast.length > 0) {
+    castLink.href =
+      `credits-serie.html?id=` +
+      results.id +
+      "-" +
+      results.name
+        .replaceAll(/[(\s)]/g, "-")
+        .replaceAll(/[(:?=\s)|(,?=\s)]/g, "");
+  } else {
+    castLink.style.display = "none";
+  }
 
   castTotal.textContent = results.credits.cast.length;
 
@@ -241,6 +250,24 @@ function showSerieCast(results) {
   }
 }
 function showSerieImage(results) {
+  var imagesLink = document.querySelector(
+    ".information .image-box .media-box-head a"
+  );
+
+  if (results.backdrops.length > 0) {
+    imagesLink.href = `images-series.html?id=` + results.id + "&image";
+  } else {
+    videosLink.style.display = "none";
+  }
+
+  var posterLink = document.querySelector(
+    ".information .poster-box .poster-box-head a"
+  );
+  if (results.posters.length > 0) {
+    posterLink.href = `images-series.html?id=` + results.id + "&poster";
+  } else {
+    videosLink.style.display = "none";
+  }
   var imageTotal = mediaTotal[0];
   imageTotal.textContent = results.backdrops.length;
 
@@ -293,6 +320,14 @@ function showSerieImage(results) {
   }
 }
 function showSerieVideos(results) {
+  var videosLink = document.querySelector(
+    ".information .videos-box .media-box-head a"
+  );
+  if (results.videos.results.length > 0) {
+    videosLink.href = `images-series.html?id=` + results.id + "&video";
+  } else {
+    videosLink.style.display = "none";
+  }
   var videosTotal = mediaTotal[1];
   videosTotal.textContent = results.videos.results.length;
 
@@ -326,6 +361,21 @@ function showSerieVideos(results) {
   }
 }
 function showSerieReviews(results) {
+  var reviewLink = document.querySelector(
+    ".information .review-box .media-box-head a"
+  );
+
+  if (results.reviews.total_results > 0) {
+    reviewLink.href =
+      `reviews-serie.html?id=` +
+      results.id +
+      "-" +
+      results.name
+        .replaceAll(/[(\s)]/g, "-")
+        .replaceAll(/[(:?=\s)|(,?=\s)]/g, "");
+  } else {
+    reviewLink.style.display = "none";
+  }
   rewiewsTotal.textContent = results.reviews.total_results;
 
   var maxDisplayReviews = 5;
@@ -334,7 +384,7 @@ function showSerieReviews(results) {
   }
   if (results.reviews.results.length > 0) {
     for (let i = 0; i < maxDisplayReviews; i++) {
-      var { author, content, author_details, created_at } =
+      var { author, content, author_details, created_at, url } =
         results.reviews.results[i];
       var rewiew = document.createElement("div");
       rewiew.classList.add("review");
@@ -346,18 +396,7 @@ function showSerieReviews(results) {
               <div>
                   <h3>A review by ${author}</h3>
                   <div class="no-star">
-
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill last"></i>
-
+                  ${getRatingAuthor(author_details.rating).outerHTML}
                   </div>
                   <p class="time">
                       Written on ${getFormattedDate(created_at)}
@@ -365,7 +404,14 @@ function showSerieReviews(results) {
               </div>
           </div>
           <p>${
-            content.length < 400 ? content : content.substring(0, 400) + "..."
+            content.length < 400
+              ? content
+              : content.substring(0, 400) +
+                "..." +
+                ` 
+              <a href="` +
+                url +
+                `" target="_blank">Go To Link</a>`
           }</p>
               `;
       rewiews.append(rewiew);
@@ -377,6 +423,21 @@ function showSerieReviews(results) {
   }
 }
 function showSerieRecommendations(results) {
+  var relatedMoviesLink = document.querySelector(
+    ".information .related-movies-box-head a "
+  );
+
+  if (results.reviews.total_results > 0) {
+    relatedMoviesLink.href =
+      `Recommendations-serie.html?id=` +
+      results.id +
+      "-" +
+      results.name
+        .replaceAll(/[(\s)]/g, "-")
+        .replaceAll(/[(:?=\s)|(,?=\s)]/g, "");
+  } else {
+    reviewLink.style.display = "none";
+  }
   relatedMoviesTotal.textContent = results.recommendations.results.length;
   var ids = [];
   if (results.recommendations.results.length > 0) {
@@ -651,6 +712,21 @@ function getCasts(list) {
     return "<a href='#'>" + listCast.join("</a> , <a href='#'>") + "</a>";
   }
   return null;
+}
+function getRatingAuthor(rating) {
+  var ul = document.createElement("ul");
+  console.log(rating);
+  for (let i = 0; i < 10; i++) {
+    var start = document.createElement("i");
+    start.classList.add("bi");
+    start.classList.add("bi-star-fill");
+    if (i < rating) {
+    } else {
+      start.classList.add("last");
+    }
+    ul.append(start);
+  }
+  return ul;
 }
 
 submit.addEventListener("submit", (e) => {

@@ -59,7 +59,7 @@ function pagination(data) {
                 <span>${vote_average}</span>/10
             </p>
         </div>
-        <a href="single-page-movie.html?id=${
+        <a href="single-page-serie.html?id=${
           id +
           "-" +
           name.replaceAll(/[(\s)]/g, "-").replaceAll(/[(:?=\s)|(,?=\s)]/g, "")
