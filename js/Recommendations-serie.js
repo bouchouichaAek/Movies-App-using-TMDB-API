@@ -56,7 +56,7 @@ function pagination(data) {
             <h2 class="title">${name}</h2>
             <p class="rating">
                 <i class="bi bi-star-fill star"></i>
-                <span>${vote_average}</span>/10
+                <span>${vote_average.toFixed(1)}</span>/10
             </p>
         </div>
         <a href="single-page-serie.html?id=${
