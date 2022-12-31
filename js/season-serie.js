@@ -11,6 +11,44 @@ var movies_api =
 
 getData(movies_api);
 
+function showSerieInfo(results, url) {
+  var { id, name, title, poster_path, first_air_date } = results;
+  home.innerHTML = `
+  <img src="${
+    poster_path != null
+      ? "https://image.tmdb.org/t/p/original" + poster_path
+      : "images/No-Image-Placeholder.svg"
+  }" alt="">
+  <div class="text-movie">
+    <a href="${
+      url.includes("tv")
+        ? "single-page-serie.html?id=" +
+          id +
+          "-" +
+          name.replaceAll(/[(\s)]/g, "-").replaceAll(/[(:?=\s)|(,?=\s)]/g, "")
+        : "single-page-movie.html?id=" +
+          id +
+          "-" +
+          title.replaceAll(/[(\s)]/g, "-").replaceAll(/[(:?=\s)|(,?=\s)]/g, "")
+    }">
+        <h1>${name} <span>(${getYerar(first_air_date)})</span></h1>
+    </a>
+    <a href="${
+      url.includes("tv")
+        ? "single-page-serie.html?id=" +
+          id +
+          "-" +
+          name.replaceAll(/[(\s)]/g, "-").replaceAll(/[(:?=\s)|(,?=\s)]/g, "")
+        : "single-page-movie.html?id=" +
+          id +
+          "-" +
+          title.replaceAll(/[(\s)]/g, "-").replaceAll(/[(:?=\s)|(,?=\s)]/g, "")
+    }">
+        <p><i class="bi bi-arrow-left"></i> Back to main.</p>
+    </a>
+  </div>`;
+}
+
 function showSeasonSerie(results) {
   seasonTotal.textContent = `${results.number_of_seasons} Season`;
   for (let i = 0; i < results.seasons.length; i++) {
@@ -44,6 +82,7 @@ function showSeasonSerie(results) {
 async function getData(url) {
   const res = await fetch(url);
   const data = await res.json();
+  showSerieInfo(data, url);
   showSeasonSerie(data);
 }
 
@@ -55,4 +94,11 @@ function getFormattedDateSeasons(date) {
   month = date.toLocaleString("default", { month: "long" });
 
   return month + " " + day + ", " + year;
+}
+
+function getYerar(date) {
+  var date = new Date(date);
+  let year = date.getFullYear();
+
+  return year;
 }

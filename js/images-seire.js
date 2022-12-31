@@ -24,33 +24,74 @@ getData(movies_api, urlLink);
 getData(
   "https://api.themoviedb.org/3/tv/" +
     id +
-    "/videos?api_key=ee9ddd028297c7c00ad6168b72365519",
+    "?api_key=ee9ddd028297c7c00ad6168b72365519&append_to_response=videos",
   urlLink
 );
 
+function showSerieInfo(results, url) {
+  var { id, name, title, poster_path, first_air_date } = results;
+  home.innerHTML = `
+  <img src="${
+    poster_path != null
+      ? "https://image.tmdb.org/t/p/original" + poster_path
+      : "images/No-Image-Placeholder.svg"
+  }" alt="">
+  <div class="text-movie">
+    <a href="${
+      url.includes("tv")
+        ? "single-page-serie.html?id=" +
+          id +
+          "-" +
+          name.replaceAll(/[(\s)]/g, "-").replaceAll(/[(:?=\s)|(,?=\s)]/g, "")
+        : "single-page-movie.html?id=" +
+          id +
+          "-" +
+          title.replaceAll(/[(\s)]/g, "-").replaceAll(/[(:?=\s)|(,?=\s)]/g, "")
+    }">
+        <h1>${name} <span>(${getYerar(first_air_date)})</span></h1>
+    </a>
+    <a href="${
+      url.includes("tv")
+        ? "single-page-serie.html?id=" +
+          id +
+          "-" +
+          name.replaceAll(/[(\s)]/g, "-").replaceAll(/[(:?=\s)|(,?=\s)]/g, "")
+        : "single-page-movie.html?id=" +
+          id +
+          "-" +
+          title.replaceAll(/[(\s)]/g, "-").replaceAll(/[(:?=\s)|(,?=\s)]/g, "")
+    }">
+        <p><i class="bi bi-arrow-left"></i> Back to main.</p>
+    </a>
+  </div>`;
+}
+
 function showSerieBackdrops(results) {
-  imagesTotal.textContent = results.backdrops.length + " backdrops";
-  for (let i = 0; i < results.backdrops.length; i++) {
-    var { file_path } = results.backdrops[i];
-    var image = document.createElement("div");
-    image.classList.add("image");
-    image.innerHTML = `<img src="${
-      "https://image.tmdb.org/t/p/original" + file_path
-    }" alt="backdrop">`;
-    imagesSection.append(image);
+  if (results.hasOwnProperty("backdrops")) {
+    imagesTotal.textContent = results.backdrops.length + " backdrops";
+    for (let i = 0; i < results.backdrops.length; i++) {
+      var { file_path } = results.backdrops[i];
+      var image = document.createElement("div");
+      image.classList.add("image");
+      image.innerHTML = `<img src="${
+        "https://image.tmdb.org/t/p/original" + file_path
+      }" alt="backdrop">`;
+      imagesSection.append(image);
+    }
   }
-  console.log(results);
 }
 function showSeriePoster(results) {
-  imagesTotal.textContent = results.posters.length + " posters";
-  for (let i = 0; i < results.posters.length; i++) {
-    var { file_path } = results.posters[i];
-    var image = document.createElement("div");
-    image.classList.add("image");
-    image.innerHTML = `<img src="${
-      "https://image.tmdb.org/t/p/original" + file_path
-    }" alt="backdrop">`;
-    imagesSection.append(image);
+  if (results.hasOwnProperty("posters")) {
+    imagesTotal.textContent = results.posters.length + " posters";
+    for (let i = 0; i < results.posters.length; i++) {
+      var { file_path } = results.posters[i];
+      var image = document.createElement("div");
+      image.classList.add("image");
+      image.innerHTML = `<img src="${
+        "https://image.tmdb.org/t/p/original" + file_path
+      }" alt="backdrop">`;
+      imagesSection.append(image);
+    }
   }
 }
 function showSerieVideo(res) {
@@ -81,6 +122,14 @@ function showSerieVideo(res) {
 async function getData(url, urlLink) {
   const res = await fetch(url);
   const data = await res.json();
+  if (
+    url.includes("videos") &&
+    (urlLink.search.includes("image") ||
+      urlLink.search.includes("poster") ||
+      urlLink.search.includes("video"))
+  ) {
+    showSerieInfo(data, url);
+  }
   if (urlLink.search.includes("image")) {
     showSerieBackdrops(data);
   }
@@ -103,4 +152,10 @@ closVideo.addEventListener("click", function (e) {
 function display(source) {
   video.style.display = "block";
   trilarContent.src = source;
+}
+function getYerar(date) {
+  var date = new Date(date);
+  let year = date.getFullYear();
+
+  return year;
 }
