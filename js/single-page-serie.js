@@ -516,7 +516,24 @@ function showSerieRecommendationsInfo(results) {
     }
   });
 }
+// Season-serie.html
+
 function showSerieSeasons(results) {
+  var seasonsMoviesLink = document.querySelector(
+    ".information .season-box-head a "
+  );
+
+  if (results.number_of_seasons > 0) {
+    seasonsMoviesLink.href =
+      `Season-serie.html?id=` +
+      results.id +
+      "-" +
+      results.name
+        .replaceAll(/[(\s)]/g, "-")
+        .replaceAll(/[(:?=\s)|(,?=\s)]/g, "");
+  } else {
+    seasonsMoviesLink.style.display = "none";
+  }
   seasonTotal.textContent = results.number_of_seasons;
 
   var maxDisplaySeason = 11;
@@ -715,7 +732,6 @@ function getCasts(list) {
 }
 function getRatingAuthor(rating) {
   var ul = document.createElement("ul");
-  console.log(rating);
   for (let i = 0; i < 10; i++) {
     var start = document.createElement("i");
     start.classList.add("bi");

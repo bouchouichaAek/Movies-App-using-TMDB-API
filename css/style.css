@@ -1361,6 +1361,8 @@ footer .social-media li {
 }
 .related-movies .related-movie .mv-item-infor .rate {
   font-size: 12px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .related-movies .related-movie .mv-item-infor p {
   font-family: "Nunito", sans-serif;
@@ -1369,7 +1371,7 @@ footer .social-media li {
   font-weight: 300;
   text-transform: none;
   line-height: 24px !important;
-  margin-bottom: -10px;
+  margin-bottom: 0px;
 }
 
 .related-movies .related-movie .mv-item-infor .rate i {
@@ -1449,7 +1451,7 @@ footer .social-media li {
 }
 
 @media (max-width: 768px) {
-  .seasons .season div p:last-of-type {
+  .information .seasons .season div p:last-of-type {
     width: 100%;
     text-align: left;
   }
@@ -1931,6 +1933,28 @@ header .movie-text-title .text-movie a {
 }
 .credits-section .recommendations-box .recommended-movie .img:hover .info {
   z-index: 0;
+}
+.credits-section .seasons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+.credits-section .seasons .season {
+  width: 100%;
+}
+@media (max-width: 320px) {
+  .credits-section .seasons .season {
+    width: 300px;
+  }
+  .credits-section .seasons .season div p {
+    width: 150px;
+    margin-right: 0;
+  }
+  .credits-section .seasons .season div a {
+    font-size: 13px;
+    margin-right: 0;
+  }
 }
 /* .credits-section .pagination {
   margin-top: 50px;
