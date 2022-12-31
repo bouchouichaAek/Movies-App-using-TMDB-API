@@ -142,6 +142,8 @@ function showSerieInformation(results) {
     type,
     spoken_languages,
   } = results;
+  console.log(getSerieNetwork(networks));
+  console.log(networks);
   var box = document.createElement("div");
   box.classList.add("box");
   box.innerHTML = `
@@ -187,9 +189,7 @@ function showSerieInformation(results) {
   </div>
   <div class="status networks">
       <p class="lable">Networks</p>
-      <ul class="value">
     ${getSerieNetwork(networks)}
-      </ul>
   </div>
   <div class="status type">
       <p class="lable">Type</p>
@@ -703,10 +703,23 @@ function getVideoTrailer(list) {
 }
 
 function getSerieNetwork(list) {
+  var ul = document.createElement("ul");
+  ul.classList.add("value");
   if (list.length > 0) {
-    for (let i = 0; i < list.length; i++) {
-      return `<li><a href=""><img src="https://www.themoviedb.org/t/p/h30${list[i].logo_path}" alt="${list[i].name}"></a></li>`;
+    for (var i = 0; i < list.length; i++) {
+      var li = document.createElement("li");
+      var anchor = document.createElement("a");
+      var img = document.createElement("img");
+      anchor.href =
+        "network-TV-Show.html?id=" + list[i].id + "&name=" + list[i].name;
+      anchor.target = "_blank";
+      img.src = `https://www.themoviedb.org/t/p/h30${list[i].logo_path}`;
+      img.alt = list[i].name;
+      li.append(anchor);
+      anchor.append(img);
+      ul.append(li);
     }
+    return ul.outerHTML;
   }
 }
 

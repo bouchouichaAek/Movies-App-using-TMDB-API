@@ -1515,6 +1515,9 @@ footer .social-media li {
   font-weight: 600;
   margin-top: -12px;
 }
+.information .info-box .status ul.value li {
+  margin-top: 10px;
+}
 .information .info-box .status .value img {
   width: 100px;
 }
@@ -1956,156 +1959,54 @@ header .movie-text-title .text-movie a {
     margin-right: 0;
   }
 }
-/* .credits-section .pagination {
-  margin-top: 50px;
-  text-align: center;
-}
-
-.credits-section .pagination a {
-  color: white;
-  padding: 8px 16px;
-  text-decoration: none;
-  border-radius: 60%;
-  -webkit-border-radius: 60%;
-  -moz-border-radius: 60%;
-  -ms-border-radius: 60%;
-  -o-border-radius: 60%;
-}
-
-.credits-section .pagination a.active {
-  background-color: var(--main-color);
-  color: white;
-}
-
-.credits-section .pagination a:hover:not(.active) {
-  background-color: #ddd;
-  color: black;
-} */
-/* 
-.credits-section .pagination ul {
-  margin-top: 50px;
-  font-family: "Dosis", sans-serif;
-
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  background-color: white;
-  border-radius: 50px;
-  padding: 1rem;
-  font-weight: semi-bold;
-}
-.credits-section .pagination ul li {
-  cursor: pointer;
-  padding: 5px 12px;
-  text-align: center;
-  transition: all 0.3s;
-  color: white;
-}
-.credits-section .pagination .dots {
-  cursor: default;
-  color: white;
-}
-.credits-section .pagination span {
-  display: block;
-}
-.credits-section .pagination .prev span,
-.credits-section .pagination .next span {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  color: white;
-}
-.credits-section .pagination span ion-icon {
-  font-size: 1.5rem;
-}
-.credits-section .pagination .prev,
-.credits-section .pagination .next {
-  background-color: var(--main-color);
-  padding: 5px 10px;
-}
-
-.credits-section .pagination ul .prev {
-  border-radius: 25px 5px 5px 25px;
-}
-.credits-section .pagination ul .next {
-  border-radius: 5px 25px 25px 5px;
-}
-.credits-section .pagination .num {
-  border-radius: 50%;
-  max-width: 50px;
-  max-height: 50px;
-}
-.credits-section .pagination ul .active,
-.credits-section .pagination ul .num:hover,
-.credits-section .pagination ul .btn:hover {
-  background-color: var(--main-color);
-  color: white;
-}
-
-.credits-section .pagination #par {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  height: 100vh;
-  z-index: -1;
-  overflow: hidden;
-} */
-
-/* .credits-section .pagination ul {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  background: #fff;
-  padding: 8px;
-  border-radius: 50px;
-  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
-}
-.credits-section .pagination ul li {
-  color: #20b2aa;
-  list-style: none;
-  line-height: 45px;
-  text-align: center;
-  font-size: 18px;
-  font-weight: 500;
-  cursor: pointer;
-  user-select: none;
-  transition: all 0.3s ease;
-}
-.credits-section .pagination ul li.numb {
-  list-style: none;
-  height: 45px;
-  width: 45px;
-  margin: 0 3px;
-  line-height: 45px;
-  border-radius: 50%;
-}
-.credits-section .pagination ul li.numb.first {
-  margin: 0px 3px 0 -5px;
-}
-.credits-section .pagination ul li.numb.last {
-  margin: 0px -5px 0 3px;
-}
-.credits-section .pagination ul li.dots {
-  font-size: 22px;
-  cursor: default;
-}
-.credits-section .pagination ul li.btn {
-  padding: 0 20px;
-  border-radius: 50px;
-}
-.credits-section .pagination li.active,
-.credits-section .pagination ul li.numb:hover,
-.credits-section .pagination ul li:first-child:hover,
-.credits-section .pagination ul li:last-child:hover {
-  color: #fff;
-  background: #20b2aa;
-} */
-
 /* End Credits */
 
 /**************************** End Full-cast-page *************************/
+
+/**************************** Start Network *************************/
+.network {
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 20px;
+}
+.network img {
+  width: 200px;
+  color: white;
+}
+.network ul.network-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  background-color: transparent;
+  padding: 10px;
+  /* border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px; */
+}
+@media (max-width: 425px) {
+  .network ul.network-info {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+.network ul.network-info li {
+  color: #fff;
+  font-weight: 700;
+  font-family: "Dosis", sans-serif;
+}
+.network ul.network-info li i {
+  margin-right: 10px;
+}
+.network ul.network-info li a {
+  color: #fff;
+}
+.network ul.network-info li a:hover {
+  text-decoration: underline;
+}
+/**************************** End Network *************************/
