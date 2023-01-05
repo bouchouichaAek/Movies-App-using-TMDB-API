@@ -338,16 +338,16 @@
   background-color: #eea135;
 }
 .paginationjs.paginationjs-theme-red .paginationjs-pages li {
-  border-color: var(--main-color);
+  border-color: var(--section-color);
 }
 .paginationjs.paginationjs-theme-red .paginationjs-pages li > a {
-  color: var(--main-color);
+  color: var(--section-color);
 }
 .paginationjs.paginationjs-theme-red .paginationjs-pages li > a:hover {
   background: #faeaea;
 }
 .paginationjs.paginationjs-theme-red .paginationjs-pages li.active > a {
-  background: var(--main-color);
+  background: var(--section-color);
   color: #fff;
 }
 .paginationjs.paginationjs-theme-red .paginationjs-pages li.disabled > a:hover {
@@ -357,13 +357,13 @@
   .paginationjs-go-input
   > input[type="text"],
 .paginationjs.paginationjs-theme-red .paginationjs-size-changer > select {
-  border-color: var(--main-color);
+  border-color: var(--section-color);
 }
 .paginationjs.paginationjs-theme-red
   .paginationjs-go-button
   > input[type="button"] {
-  background: var(--main-color);
-  border-color: var(--main-color);
+  background: var(--section-color);
+  border-color: var(--section-color);
   color: #fff;
 }
 .paginationjs.paginationjs-theme-red

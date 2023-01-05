@@ -253,6 +253,9 @@ header .container .search-bar input[type="submit"] {
 /* End Header */
 
 section {
+  background-color: var(--section-color);
+  padding-top: 50px;
+  padding-bottom: 20px;
 }
 .hide {
   display: none;
@@ -1611,6 +1614,7 @@ header .movie-text-title .text-movie a {
   text-transform: uppercase;
   font-family: "Dosis", sans-serif;
 }
+
 .credits-section .credits-box {
   margin-top: 30px;
   display: grid;
@@ -2009,4 +2013,286 @@ header .movie-text-title .text-movie a {
 .network ul.network-info li a:hover {
   text-decoration: underline;
 }
+
 /**************************** End Network *************************/
+
+/**************************** Start Credit Detail *************************/
+
+section {
+}
+section .container {
+}
+section .credits {
+  display: flex;
+  gap: 30px;
+}
+section .container .credit-info {
+}
+section .container .credit-info img.picture {
+  width: 300px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+section .container .credit-info .info {
+}
+section .container .credit-info .info ul.social-media {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+section .container .credit-info .info ul.social-media li {
+  padding: 20px 0 20px 0;
+}
+
+section .container .credit-info .info ul.social-media li i {
+  color: white;
+  font-size: 20px;
+}
+section .container .credit-info .info h1 {
+  color: white;
+  font-family: "Dosis", sans-serif;
+}
+section .container .credit-info .info .info-text {
+  color: white;
+  font-family: "Dosis", sans-serif;
+}
+section .container .credit-info .info .info-text .known {
+}
+section .container .credit-info .info .info-text .known .lable {
+  font-weight: 700;
+  font-size: 20px;
+}
+section .container .credit-info .info .info-text .known .value {
+}
+section .container .credit-feature {
+  margin-top: -20px;
+}
+section .container .credit-feature h1.name {
+  color: white;
+  font-family: "Dosis", sans-serif;
+}
+section .container .credit-feature .bio h2 {
+  color: white;
+  font-family: "Dosis", sans-serif;
+}
+section .container .credit-feature .bio .content {
+  color: white;
+  font-family: "Dosis", sans-serif;
+  line-height: 1.7;
+}
+section .container .credit-feature .shortcut-bar {
+  color: white;
+}
+
+section .container .credit-feature .images {
+  display: flex;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+section .container .credit-feature .images.hide {
+  display: none;
+}
+section .container .credit-feature .images img {
+  width: 150px;
+}
+section .container .credit-feature .movies {
+  display: flex;
+  justify-content: space-between;
+}
+section .container .credit-feature .movies-container {
+  display: flex;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+section .container .credit-feature .movies-box {
+  display: flex;
+  flex-direction: column;
+}
+section .container .credit-feature .movies-box .pagination {
+}
+
+section .container .credit-feature .movies.hide {
+  display: none;
+}
+
+section .container .credit-feature .movie {
+}
+
+section .container .credit-feature .movie .img {
+  position: relative;
+  width: 150px;
+}
+section .container .credit-feature .movie .img::after {
+  position: absolute;
+  box-shadow: inset -5px -50px 100px 15px #000000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  content: "";
+}
+section .container .credit-feature .movie .img::before {
+  transition-duration: 0.3s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  content: "";
+}
+
+section .container .credit-feature .movie img {
+  width: 100%;
+}
+section .container .credit-feature .movie .info {
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  color: white;
+  z-index: 2;
+}
+section .container .credit-feature .movie .info .category {
+  display: flex;
+  gap: 5px;
+}
+section .container .credit-feature .movie .info .category li {
+  font-family: "Dosis", sans-serif;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: white;
+  font-weight: 700;
+  width: fit-content;
+  padding: 3px 5px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
+section .container .credit-feature .movie .info .title {
+  font-family: "Dosis", sans-serif;
+  text-transform: uppercase;
+  font-size: 15px;
+}
+section .container .credit-feature .movie .info .rating {
+  text-transform: uppercase;
+  font-size: 15px;
+}
+section .container .credit-feature .movie .info .rating span {
+  font-size: 20px;
+}
+section .container .credit-feature .movie .info .rating i {
+  color: #f5b50a;
+  font-size: 20px;
+}
+section .container .credit-feature .movie .img a {
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  background-color: var(--main-color);
+  color: white;
+  font-family: "Dosis", sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  padding: 8px 15px;
+  font-weight: bold;
+  width: 120px;
+  height: 38px;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  transition-duration: 0.3s;
+  transition-delay: 0.1s;
+  opacity: 0;
+}
+section .container .credit-feature .movie .img a i {
+  font-size: 10px;
+  margin-left: 5px;
+}
+
+section .container .credit-feature .movie .img:hover::after {
+  box-shadow: inset -5px -50px 100px -200px rgba(0, 0, 0, 0.808);
+}
+section .container .credit-feature .movie .img:hover::before {
+  box-shadow: inset -5px -50px 100px 200px rgba(0, 0, 0, 0.808);
+  z-index: 1;
+}
+section .container .credit-feature .movie .img:hover a {
+  opacity: 1;
+}
+section .container .credit-feature .movie .img:hover .info {
+  z-index: 0;
+}
+
+section .container .credit-feature .shortcut-bar {
+  padding-top: 50px;
+}
+section .container .credit-feature .shortcut-bar ul {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  gap: 20px;
+}
+section .container .credit-feature .shortcut-bar ul li {
+  font-family: "Dosis", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 25px;
+  transition-duration: 0.3s;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+}
+section .container .credit-feature .shortcut-bar ul li:hover {
+  color: #dcf836;
+  border-bottom: 3px solid #dcf836;
+}
+section .container .credit-feature .shortcut-bar ul li.active {
+  color: #dcf836;
+  border-bottom: 3px solid #dcf836;
+}
+@media (max-width: 425px) {
+  section .container .credit-feature .shortcut-bar ul {
+    flex-direction: column;
+  }
+}
+section .container .credit-feature .movies .form {
+}
+section .container .credit-feature .movies form {
+  color: white;
+  font-weight: 500;
+  font-family: "Dosis", sans-serif;
+  margin-top: 20px;
+}
+section .container .credit-feature .movies form select {
+  outline: none;
+  padding: 5px 15px;
+  border: none;
+  border-right: 1px solid #020d18;
+  background-color: #233a50;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  color: white;
+  text-transform: uppercase;
+  font-family: "Dosis", sans-serif;
+  margin-bottom: 10px;
+}
+/**************************** End Credit Detail *************************/

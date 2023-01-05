@@ -206,17 +206,16 @@ function showMoviesCast(results) {
       displayCast = results.credits.cast.length;
     }
     for (let i = 0; i < displayCast; i++) {
-      var { name, profile_path, character } = results.credits.cast[i];
+      var { id, name, profile_path, character } = results.credits.cast[i];
       var cast = document.createElement("div");
       cast.classList.add("cast");
       cast.innerHTML = `
-                <a href=""><img src="${
-                  profile_path != null
-                    ? "https://www.themoviedb.org/t/p/w66_and_h66_face" +
-                      profile_path
-                    : "images/no-image.jpg"
-                }" alt="${name}"></a>
-                <a href=""><p class="name">${name}</p></a>
+                <a href="single-page-credits.html?"${id} target="_blank"><img src="${
+        profile_path != null
+          ? "https://www.themoviedb.org/t/p/w66_and_h66_face" + profile_path
+          : "images/no-image.jpg"
+      }" alt="${name}"></a>
+                <a href="single-page-credits.html?${id}" target="_blank"><p class="name">${name}</p></a>
                   <p class="character">${character}</p>
               `;
       castInfo.append(cast);
@@ -417,7 +416,6 @@ function showMoviesRecommendations(results) {
   } else {
     reviewLink.style.display = "none";
   }
-  console.log(relatedMoviesLink);
   relatedMoviesTotal.textContent = results.recommendations.results.length;
   var ids = [];
   if (results.recommendations.results.length > 0) {
